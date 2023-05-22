@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/22 20:16:21 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/23 00:05:10 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 enum e_token
 {
-	WORD = -1,
 	WHITE_SPACE = ' ',
 	NEW_LINE = '\n',
 	QOUTE = '\'',
@@ -34,17 +33,27 @@ enum e_token
 	PIPE_LINE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
+	WORD,
 	HERE_DOC,
 	DREDIR_OUT,
 	_NULL = '0',
 };
 
-typedef struct s_cmdl
+enum e_state
 {
-	char	*command;
-	char	*option;
-	char	*arg;
-}	t_cmdl;
+	IN_DQUOTE,
+	IN_QUOTE,
+	NON,
+}
 
+typedef struct s_element
+{
+	char			*content;
+	int				len;
+	enum e_token	type;
+	enum e_state	state;
+	t_element		*next;
+	t_element		*prev;
+}	t_element;
 
 #endif

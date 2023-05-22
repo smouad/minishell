@@ -8,8 +8,8 @@ RM = rm -rf
 
 FLAGS =  -lreadline
 
-BUILT = $(addprefix builtins/, ft_echo.c \
-								)
+# BUILT = $(addprefix builtins/,)
+# LEXER = $(addprefix builtins/,)
 
 SRC = minishell.c $(BUILT)\
 
