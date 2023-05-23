@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/23 00:05:10 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/23 17:28:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,39 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-enum e_token
+typedef enum e_token
 {
-	WHITE_SPACE = ' ',
+	SPACE = ' ',
 	NEW_LINE = '\n',
-	QOUTE = '\'',
-	DOUBLE_QUOTE = '\"',
-	ESCAPE = '\\',
-	ENV = '$',
+	QUOTE = '\'',
+	DQUOTE = '\"',
+	VAR = '$',
 	PIPE_LINE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
 	WORD,
 	HERE_DOC,
-	DREDIR_OUT,
-	_NULL = '0',
-};
+	REDIR_OUT,
+}	t_token;
+	// _NULL = '0',
+	// ESCAPE = '\\',
 
-enum e_state
+typedef enum e_state
 {
 	IN_DQUOTE,
 	IN_QUOTE,
-	NON,
-}
+	DEFAULT,
+	UNOWN,
+}	t_state;
 
-typedef struct s_element
+typedef struct s_token
 {
+	t_token			*prev;
 	char			*content;
 	int				len;
 	enum e_token	type;
 	enum e_state	state;
-	t_element		*next;
-	t_element		*prev;
-}	t_element;
+	t_token			*next;
+}	t_token;
 
 #endif
