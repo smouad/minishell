@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/23 17:28:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/23 22:41:07 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_UTILS_H
 # define HEADER_UTILS_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,20 +22,22 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+typedef struct s_elems t_elems;
+
 typedef enum e_token
 {
-	SPACE = ' ',
-	NEW_LINE = '\n',
 	QUOTE = '\'',
 	DQUOTE = '\"',
+	_SPACE = ' ',
 	VAR = '$',
-	PIPE_LINE = '|',
+	PIPE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
 	WORD,
 	HERE_DOC,
-	REDIR_OUT,
+	AREDIR_OUT,
 }	t_token;
+	// NEW_LINE = '\n',
 	// _NULL = '0',
 	// ESCAPE = '\\',
 
@@ -47,14 +49,14 @@ typedef enum e_state
 	UNOWN,
 }	t_state;
 
-typedef struct s_token
+typedef struct s_elems
 {
-	t_token			*prev;
+	t_elems			*prev;
 	char			*content;
 	int				len;
 	enum e_token	type;
 	enum e_state	state;
-	t_token			*next;
-}	t_token;
+	t_elems			*next;
+}	t_elems;
 
 #endif
