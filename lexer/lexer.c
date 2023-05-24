@@ -6,124 +6,11 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 00:06:07 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 17:32:27 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/24 17:42:38 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	is_space(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v'
-		|| c == '\r' || c == '\f')
-		return (1);
-	return (0);
-}
-
-int	special_char(char c)
-{
-	return (c == '\'' || c == '\"' || c == '<' || c == '>' || c == '|'
-		/*|| c == '$'*/ || is_space(c) || c == '\n' || c == '\0');
-}
-
-void	set_token_word(char *line, t_elems *elem, int *i)
-{
-	int		j;
-	int		start;
-	char	*word;
-
-	j = 0;
-	start = *i;
-	while (!special_char(line[start + j]))
-		j++;
-	word = ft_substr(line, start, j);
-	token_list_add(&elem, token_new(word, j, WORD, DEFAULT));
-	free(word);
-	*(i) += j - 1;
-}
-
-void	set_token_var(char *line, t_elems *elem, int *i)
-{
-	int		j;
-	int		start;
-	char	*var;
-
-	j = 0;
-	start = *i;
-	while (!special_char(line[start + j]))
-		j++;
-	var = ft_substr(line, start, j);
-	token_list_add(&elem, token_new(var, j, VAR, DEFAULT));
-	free(var);
-	*(i) += j;
-}
-
-void	set_token_redir(char *line, t_elems *elem, int *i)
-{
-	int	pos;
-
-	pos = *i;
-	if (line[pos] == '<')
-	{
-		if (line[pos + 1] == '<')
-		{
-			token_list_add(&elem, token_new("<<", 2, HERE_DOC, DEFAULT));
-			*(i) += 1;
-		}
-		else
-			token_list_add(&elem, token_new("<", 1, REDIR_IN, DEFAULT));
-	}
-	else if (line[pos] == '>')
-	{
-		if (line[pos + 1] == '>')
-		{
-			token_list_add(&elem, token_new(">>", 2, AREDIR_OUT, DEFAULT));
-			*(i) += 1;
-		}
-		else
-			token_list_add(&elem, token_new(">", 1, REDIR_OUT, DEFAULT));
-	}
-}
-
-
-// void	quote_state(t_elems **ptr)
-// {
-// 	ptr->state = IN_QUOTE;
-// 	ptr = ptr->next;
-// 	while (ptr->type != QUOTE)
-// 	{
-// 		ptr->state = IN_QUOTE;
-// 		ptr = ptr->next;
-// 		ptr->state = IN_QUOTE;
-// 	}
-// }
-// void	set_state(t_elems *elems)
-// {
-// 	t_elems	*ptr;
-
-// 	ptr = elems->next;
-// 	while (ptr)
-// 	{
-// 		if (ptr->type == DQUOTE)
-// 		{
-// 			ptr->state = IN_DQUOTE;
-// 			ptr = ptr->next;
-// 			while (ptr->type != DQUOTE)
-// 			{
-// 				ptr->state = IN_DQUOTE;
-// 				ptr = ptr->next;
-// 				ptr->state = IN_DQUOTE;
-// 			}
-// 		}
-// 		else if (ptr->type == QUOTE)
-// 		{
-// 			quote_state(&ptr);
-// 		}
-// 		ptr = ptr->next;
-// 	}
-// }
-
-
 
 t_elems	*lexer(char *line)
 {
@@ -151,8 +38,7 @@ t_elems	*lexer(char *line)
 			token_list_add(&elems, token_new("|", 1, PIPE, DEFAULT));
 		i++;
 	}
-	set_state(elems);
-	return (elems);
+	return (set_state(elems), elems);
 }
 
 void print_table(t_elems *lst) {

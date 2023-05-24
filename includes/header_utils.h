@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 16:28:32 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/24 17:47:32 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_elems t_elems;
+// typedef struct s_elems t_elems;
 
 typedef enum e_token
 {
@@ -50,12 +50,12 @@ typedef enum e_state
 
 typedef struct s_elems
 {
-	t_elems			*prev;
-	char			*content;
-	int				len;
-	enum e_token	type;
-	enum e_state	state;
-	t_elems			*next;
+	struct s_elems			*prev;
+	char					*content;
+	int						len;
+	enum e_token			type;
+	enum e_state			state;
+	struct s_elems			*next;
 }	t_elems;
 
 #endif
