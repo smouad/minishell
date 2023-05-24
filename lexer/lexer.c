@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 00:06:07 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/23 23:56:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/24 02:04:49 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	set_token_word(char *line, t_elems *elem, int *i)
 	start = *i;
 	while (!special_char(line[start + j]))
 		j++;
-	word = ft_substr(line, start, (start + j) + 1);
-	printf("%s\n", word);
+	word = ft_substr(line, start, j);
 	token_list_add(&elem, token_new(word, j, WORD, UNOWN));
+	printf("%d\n", j);
 	free(word);
 	*(i) += j;
 }
@@ -51,9 +51,10 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 
 	j = 0;
 	start = *i;
-	while (!special_char(line[start + j]))
+	while (!special_char(line[start + j]) && line[start + j] != '$')
 		j++;
-	var = ft_substr(line, start, (start + j) + 1);
+	var = ft_substr(line, start, j);
+	printf("%s\n", var);
 	token_list_add(&elem, token_new(var, j, VAR, UNOWN));
 	free(var);
 	*(i) += j;
@@ -67,18 +68,22 @@ void	*set_token_redir(char *line, t_elems *elem, int *i)
 	if (line[pos] == '<')
 	{
 		if (line[pos + 1] == '<')
+		{
 			token_list_add(&elem, token_new("<<", 2, HERE_DOC, UNOWN));
+			*(i) += 1;
+		}
 		else
 			token_list_add(&elem, token_new("<", 1, REDIR_IN, UNOWN));
-		*(i) += 1;
 	}
 	if (line[pos] == '>')
 	{
 		if (line[pos + 1] == '>')
-			token_list_add(&elem, token_new(">>", 2, HERE_DOC, UNOWN));
+		{
+			token_list_add(&elem, token_new(">>", 2, AREDIR_OUT, UNOWN));
+			*(i) += 1;
+		}
 		else
 			token_list_add(&elem, token_new(">", 1, REDIR_OUT, UNOWN));
-		*(i) += 1;
 	}
 }
 t_elems *lexer(char *line)
@@ -88,10 +93,10 @@ t_elems *lexer(char *line)
 
     while (line[i])
     {
-        if (line[i] == '$')
-            set_token_var(line, elems, &i);
-        else if (!special_char(line[i]))
+        if (!special_char(line[i]))
             set_token_word(line, elems, &i);
+        else if (line[i] == '$')
+            set_token_var(line, elems, &i);
         else if (line[i] == '>' || line[i] == '<')
             set_token_redir(line, elems, &i);
         else if (line[i] == '\'')
@@ -102,127 +107,163 @@ t_elems *lexer(char *line)
             token_list_add(&elems, token_new(" ", 1, SPACE, UNOWN));
         else if (line[i] == '|')
             token_list_add(&elems, token_new("|", 1, PIPE, UNOWN));
-
         i++;
     }
     return elems;
 }
 
-// t_elems	*lexer(char *line)
-// {
-// 	int		i;
-// 	t_token	token;
-// 	t_state	state;
-// 	t_elems *elems;
+void print_table(t_elems *lst) {
+    printf("%-10s | %-10s | %-10s | %-10s\n", "Content", "Len", "Type", "State");
+    printf("----------------------------------------\n");
 
-// 	i = 0;
-// 	elems = malloc(sizeof(t_elems));
-// 	while (line[i])
-// 	{
-// 		if (line[i] == '$')
-// 			set_token_var(line)
-// 		else if (!special_char(line[i]))
-// 			set_token_word(line, &i);
-// 		else if (line[i] == '>' || line[i] '<')
-// 			set_token_redir(line, &i);
-// 		else if (line[i] == '\'')
-// 			token_list_add(&elems, token_new("\'", 1, QUOTE, UNOWN));
-// 		else if (line[i] == '\'')
-// 			token_list_add(&elems, token_new("\"", 1, DQUOTE, UNOWN));
-// 		else if (is_space(line[i]))
-// 			token_list_add(&elems, token_new(" ", 1, SPACE, UNOWN));
-// 		else if (line[i] == '|')
-// 			token_list_add(&elems, token_new("|", 1, PIPE, UNOWN));
-// 	}
-// 	return (elems);
-// }
-// void print_token_table(t_elems *lst)
-// {
+    t_elems *current = lst;
+
+    if (current == NULL) {
+        printf("Token table is empty.\n");
+        return;
+    }
+
+    while (current != NULL) {
+        char* type_str;
+        char* state_str;
+
+        switch (current->type) {
+            case QUOTE:
+                type_str = "QUOTE";
+                break;
+            case DQUOTE:
+                type_str = "DQUOTE";
+                break;
+            case _SPACE:
+                type_str = "SPACE";
+                break;
+            case VAR:
+                type_str = "VAR";
+                break;
+            case PIPE:
+                type_str = "PIPE";
+                break;
+            case REDIR_IN:
+                type_str = "REDIR_IN";
+                break;
+            case REDIR_OUT:
+                type_str = "REDIR_OUT";
+                break;
+            case WORD:
+                type_str = "WORD";
+                break;
+            case HERE_DOC:
+                type_str = "HERE_DOC";
+                break;
+            case AREDIR_OUT:
+                type_str = "AREDIR_OUT";
+                break;
+            default:
+                type_str = "UNKNOWN";
+                break;
+        }
+
+        switch (current->state) {
+            case IN_DQUOTE:
+                state_str = "IN_DQUOTE";
+                break;
+            case IN_QUOTE:
+                state_str = "IN_QUOTE";
+                break;
+            case DEFAULT:
+                state_str = "DEFAULT";
+                break;
+            case UNOWN:
+                state_str = "UNOWN";
+                break;
+            default:
+                state_str = "UNKNOWN";
+                break;
+        }
+
+        // Check if content is NULL
+        const char* content_str = (current->content != NULL) ? current->content : "";
+
+        printf("%-10s | %-10d | %-10s | %-10s\n", content_str, current->len, type_str, state_str);
+
+        current = current->next;
+    }
+}
+
+
+
+// void print_table(t_elems *lst) {
 //     printf("%-10s | %-10s | %-10s | %-10s\n", "Content", "Len", "Type", "State");
 //     printf("----------------------------------------\n");
     
 //     t_elems *current = lst;
     
-//     while (current != NULL)
-//     {
-//         printf("%-10s | %-10c | %-10c | %-10c\n",
-//                current->content, current->len, current->type, current->state);
+//     while (current != NULL) {
+//         char type_str[10];
+//         char state_str[10];
+        
+//         switch (current->type) {
+//             case QUOTE:
+//                 snprintf(type_str, sizeof(type_str), "QUOTE");
+//                 break;
+//             case DQUOTE:
+//                 snprintf(type_str, sizeof(type_str), "DQUOTE");
+//                 break;
+//             case _SPACE:
+//                 snprintf(type_str, sizeof(type_str), "SPACE");
+//                 break;
+//             case VAR:
+//                 snprintf(type_str, sizeof(type_str), "VAR");
+//                 break;
+//             case PIPE:
+//                 snprintf(type_str, sizeof(type_str), "PIPE");
+//                 break;
+//             case REDIR_IN:
+//                 snprintf(type_str, sizeof(type_str), "REDIR_IN");
+//                 break;
+//             case REDIR_OUT:
+//                 snprintf(type_str, sizeof(type_str), "REDIR_OUT");
+//                 break;
+//             case WORD:
+//                 snprintf(type_str, sizeof(type_str), "WORD");
+//                 break;
+//             case HERE_DOC:
+//                 snprintf(type_str, sizeof(type_str), "HERE_DOC");
+//                 break;
+//             case AREDIR_OUT:
+//                 snprintf(type_str, sizeof(type_str), "AREDIR_OUT");
+//                 break;
+//             default:
+//                 snprintf(type_str, sizeof(type_str), "UNKNOWN");
+//                 break;
+//         }
+        
+//         switch (current->state) {
+//             case IN_DQUOTE:
+//                 snprintf(state_str, sizeof(state_str), "IN_DQUOTE");
+//                 break;
+//             case IN_QUOTE:
+//                 snprintf(state_str, sizeof(state_str), "IN_QUOTE");
+//                 break;
+//             case DEFAULT:
+//                 snprintf(state_str, sizeof(state_str), "DEFAULT");
+//                 break;
+//             case UNOWN:
+//                 snprintf(state_str, sizeof(state_str), "UNOWN");
+//                 break;
+//             default:
+//                 snprintf(state_str, sizeof(state_str), "UNKNOWN");
+//                 break;
+//         }
+        
+//         printf("%-10s | %-10d | %-10s | %-10s\n",
+//                current->content, current->len, type_str, state_str);
         
 //         current = current->next;
 //     }
 // }
-void print_table(t_elems *lst) {
-    printf("%-10s | %-10s | %-10s | %-10s\n", "Content", "Len", "Type", "State");
-    printf("----------------------------------------\n");
-    
-    t_elems *current = lst;
-    
-    while (current != NULL) {
-        char type_str[10];
-        char state_str[10];
-        
-        switch (current->type) {
-            case QUOTE:
-                snprintf(type_str, sizeof(type_str), "QUOTE");
-                break;
-            case DQUOTE:
-                snprintf(type_str, sizeof(type_str), "DQUOTE");
-                break;
-            case _SPACE:
-                snprintf(type_str, sizeof(type_str), "SPACE");
-                break;
-            case VAR:
-                snprintf(type_str, sizeof(type_str), "VAR");
-                break;
-            case PIPE:
-                snprintf(type_str, sizeof(type_str), "PIPE");
-                break;
-            case REDIR_IN:
-                snprintf(type_str, sizeof(type_str), "REDIR_IN");
-                break;
-            case REDIR_OUT:
-                snprintf(type_str, sizeof(type_str), "REDIR_OUT");
-                break;
-            case WORD:
-                snprintf(type_str, sizeof(type_str), "WORD");
-                break;
-            case HERE_DOC:
-                snprintf(type_str, sizeof(type_str), "HERE_DOC");
-                break;
-            case AREDIR_OUT:
-                snprintf(type_str, sizeof(type_str), "AREDIR_OUT");
-                break;
-            default:
-                snprintf(type_str, sizeof(type_str), "UNKNOWN");
-                break;
-        }
-        
-        switch (current->state) {
-            case IN_DQUOTE:
-                snprintf(state_str, sizeof(state_str), "IN_DQUOTE");
-                break;
-            case IN_QUOTE:
-                snprintf(state_str, sizeof(state_str), "IN_QUOTE");
-                break;
-            case DEFAULT:
-                snprintf(state_str, sizeof(state_str), "DEFAULT");
-                break;
-            case UNOWN:
-                snprintf(state_str, sizeof(state_str), "UNOWN");
-                break;
-            default:
-                snprintf(state_str, sizeof(state_str), "UNKNOWN");
-                break;
-        }
-        
-        printf("%-10s | %-10d | %-10s | %-10s\n",
-               current->content, current->len, type_str, state_str);
-        
-        current = current->next;
-    }
-}
 int main()
 {
-	t_elems *list = lexer("echo \"hello\" >> > <<< | $MOUAD");
+	t_elems *list = lexer("echo \"hello  $USER \" > file | grep h | cat << eof | cat >> file | echo 'done'");
 	print_table(list);
 }
