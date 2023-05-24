@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/23 22:41:07 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:28:32 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef enum e_state
 	IN_DQUOTE,
 	IN_QUOTE,
 	DEFAULT,
-	UNOWN,
 }	t_state;
 
 typedef struct s_elems

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/23 23:31:21 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/24 17:28:47 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_elems	*token_new(char *content, int len, t_token type, t_state state)
 	if (!elems)
 		return (NULL);
 	elems->prev = NULL;
-	elems->content = content;
+	elems->content = ft_strdup(content);
 	elems->len = len;
 	elems->type = type;
 	elems->state = state;
@@ -31,7 +31,6 @@ t_elems	*token_new(char *content, int len, t_token type, t_state state)
 void	token_list_add(t_elems **lst, t_elems *new)
 {
 	t_elems	*ptr;
-
 
 	if (!lst || !new)
 		return ;
