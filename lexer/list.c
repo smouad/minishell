@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 17:28:47 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/24 22:17:39 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	token_list_add(t_elems **lst, t_elems *new)
 }
 
 
-// void	token_list_free(t_elems *list)
-// {
-// 	t_elems	*tmp;
+void	token_list_free(t_elems *list)
+{
+	t_elems	*tmp;
 
-// 	tmp = list->head;
-// 	while (tmp)
-// 	{
-// 		free(tmp->content);
-// 		free(tmp);
-// 		tmp = tmp->next;
-// 	}
-// 	free(list);
-// }
+	tmp = list->head;
+	while (tmp)
+	{
+		free(tmp->content);
+		free(tmp);
+		tmp = tmp->next;
+	}
+	free(list);
+}
