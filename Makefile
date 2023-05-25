@@ -9,9 +9,16 @@ RM = rm -rf
 FLAGS =  -lreadline
 
 # BUILT = $(addprefix builtins/,)
-LEXER = $(addprefix lexer/, lexer.c list.c)
+LEXER = $(addprefix lexer/, lexer.c \
+							list.c \
+							lexer_utils.c \
+							state.c \
+							print_table.c)
 
-SRC = minishell.c $(LEXER)\
+PARSER = $(addprefix parser/, syntax_err.c \
+							)
+
+SRC = minishell.c $(LEXER) $(PARSER)\
 
 all : $(NAME) 
 

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:00:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 17:34:31 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/25 15:00:51 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 void	quote_state(t_elems **ptr)
 {
-	(*ptr)->state = IN_QUOTE;
 	*ptr = (*ptr)->next;
-	while ((*ptr)->type != QUOTE)
+	while ((*ptr)->type != QUOTE && (*ptr)->next != NULL)
 	{
 		(*ptr)->state = IN_QUOTE;
 		*ptr = (*ptr)->next;
-		(*ptr)->state = IN_QUOTE;
 	}
 }
 
 void	dquote_state(t_elems **ptr)
 {
-	(*ptr)->state = IN_DQUOTE;
 	*ptr = (*ptr)->next;
-	while ((*ptr)->type != DQUOTE)
+	while ((*ptr)->type != DQUOTE && (*ptr)->next != NULL)
 	{
 		(*ptr)->state = IN_DQUOTE;
 		*ptr = (*ptr)->next;
-		(*ptr)->state = IN_DQUOTE;
 	}
 }
 
@@ -41,7 +37,7 @@ void	set_state(t_elems *elems)
 	t_elems	*ptr;
 
 	ptr = elems->next;
-	while (ptr != NULL)
+	while (ptr != NULL && ptr->next != NULL)
 	{
 		if (ptr->type == DQUOTE)
 			dquote_state(&ptr);

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/22 20:26:07 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/25 17:11:31 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ int	main(void)
 			break ;
 		if (strlen(command) > 0)
 			add_history(command);
+		// print_table(lexer(command));
+		// closed_quotes(lexer(command));
+		redir_syntax(lexer(command));
+
 	}
 }
