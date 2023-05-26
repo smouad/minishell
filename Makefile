@@ -16,6 +16,7 @@ LEXER = $(addprefix lexer/, lexer.c \
 							print_table.c)
 
 PARSER = $(addprefix parser/, syntax_err.c \
+							parser.c\
 							)
 
 SRC = minishell.c $(LEXER) $(PARSER)\

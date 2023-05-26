@@ -1,32 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/27 00:52:49 by msodor           ###   ########.fr       */
+/*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
+/*   Updated: 2023/05/27 00:47:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-int	main(void)
-{
-	char	*command;
-	char	**command_line;
-
-	while (1)
-	{
-		command = readline(CYAN"minishell"RESET MAGENTA"[$]~>:"RESET);
-		if (command == NULL)
-			break ;
-		if (strlen(command) > 0)
-			add_history(command);
-		print_table(lexer(command));
-		// closed_quotes(lexer(command));
-		// redir_syntax(lexer(command));
-
-	}
-}

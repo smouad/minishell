@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:39:28 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/25 23:12:23 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/26 23:58:50 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ void	print_table_row(t_elems *elem)
 		content_str = "";
 	printf("| %-9s | %-9d | %-9s | %-9s |\n", \
 	content_str, elem->len, type_str, state_str);
-	printf("------------------------------------------------\n");
+	printf(BLUE"------------------------------------------------\n"RESET);
 }
 
 void	print_table(t_elems *lst)
 {
 	t_elems	*current;
 
-	printf("================================================\n");
-	printf("| %-9s | %-9s | %-9s | %-9s |\n", "Content", "Len", "Type", "State");
-	printf("================================================\n");
+	printf(BLUE"================================================\n"RESET);
+	printf(MAGENTA"| %-9s | %-9s | %-9s | %-9s |\n"RESET, "Content", "Len", "Type", "State");
+	printf(BLUE"================================================\n"RESET);
 
 	if (lst == NULL)
 	{

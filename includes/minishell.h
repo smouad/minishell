@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/26 17:03:54 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/27 00:44:06 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 /* -----:> LIST <:-----*/
 t_elems	*token_new(char *content, int len, t_token type, t_state state);
 void	token_list_add(t_elems **lst, t_elems *new);
+void	token_del(t_elems **head, t_elems *node);
 // void	token_list_free(t_elems *list);
 
 /* -----:> LEXER <:-----*/
@@ -51,5 +52,6 @@ void	print_table(t_elems *lst);
 /* -----:> SYNTAX_ERR <:-----*/
 void	quotes_syntax(t_elems *elems);
 void	redir_syntax(t_elems *elems);
+void	rm_extra_space(t_elems **elems);
 
 #endif
