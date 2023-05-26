@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/25 17:16:33 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/26 17:03:54 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /* -----:> LIST <:-----*/
 t_elems	*token_new(char *content, int len, t_token type, t_state state);
 void	token_list_add(t_elems **lst, t_elems *new);
-void	token_list_free(t_elems *list);
+// void	token_list_free(t_elems *list);
 
 /* -----:> LEXER <:-----*/
 int		is_space(char c);

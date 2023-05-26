@@ -6,16 +6,11 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/25 20:16:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/26 16:59:51 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	rm_extra_spaces(t_elems *elems)
-{
-	
-}
 
 void	quotes_syntax(t_elems *elems)
 {
