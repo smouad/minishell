@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/25 12:23:46 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/25 23:02:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_elems	*token_new(char *content, int len, t_token type, t_state state)
 	elems = malloc(sizeof(t_elems));
 	if (!elems)
 		return (NULL);
-	elems->prev = NULL;
+	// elems->prev = NULL;
 	elems->content = ft_strdup(content);
 	elems->len = len;
 	elems->type = type;
@@ -40,7 +40,7 @@ void	token_list_add(t_elems **lst, t_elems *new)
 		while (ptr->next != NULL)
 			ptr = ptr->next;
 		ptr->next = new;
-		new->prev = ptr;
+		// new->prev = ptr;
 	}
 	else
 		*lst = new;

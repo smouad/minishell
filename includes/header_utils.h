@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 17:47:32 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/25 23:01:59 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ typedef enum e_token
 	HERE_DOC,
 	AREDIR_OUT,
 }	t_token;
-	// NEW_LINE = '\n',
-	// _NULL = '0',
-	// ESCAPE = '\\',
 
 typedef enum e_state
 {
@@ -50,7 +47,7 @@ typedef enum e_state
 
 typedef struct s_elems
 {
-	struct s_elems			*prev;
+	// struct s_elems			*prev;
 	char					*content;
 	int						len;
 	enum e_token			type;

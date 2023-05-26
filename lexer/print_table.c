@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_table.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:39:28 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/25 14:54:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/25 23:12:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,18 @@ void	print_table_row(t_elems *elem)
 		content_str = elem->content;
 	else
 		content_str = "";
-	printf("%-10s | %-10d | %-10s | %-10s\n", \
+	printf("| %-9s | %-9d | %-9s | %-9s |\n", \
 	content_str, elem->len, type_str, state_str);
+	printf("------------------------------------------------\n");
 }
 
 void	print_table(t_elems *lst)
 {
 	t_elems	*current;
 
-	printf("%-10s | %-10s | %-10s | %-10s\n", "Content", "Len", "Type", "State");
-	printf("------------------------------------------------\n");
+	printf("================================================\n");
+	printf("| %-9s | %-9s | %-9s | %-9s |\n", "Content", "Len", "Type", "State");
+	printf("================================================\n");
 
 	if (lst == NULL)
 	{
