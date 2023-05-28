@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/27 00:44:06 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/28 23:35:30 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	print_table(t_elems *lst);
 /* -----:> SYNTAX_ERR <:-----*/
 void	quotes_syntax(t_elems *elems);
 void	redir_syntax(t_elems *elems);
-void	rm_extra_space(t_elems **elems);
+void	rm_extra(t_elems **elems);
+void	join_cmd(t_elems **elems);
+
 
 #endif
