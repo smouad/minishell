@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 16:23:25 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 23:50:25 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	set_token_word(char *line, t_elems *elem, int *i);
 void	set_token_redir(char *line, t_elems *elem, int *i);
 void	set_token_var(char *line, t_elems *elem, int *i);
 void	join_in_quote(t_elems **elems);
+void	type_cast(t_elems **elems);
 t_elems	*lexer(char *line);
 
 /* -----:> STATE <:-----*/

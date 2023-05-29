@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 00:06:07 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 15:02:13 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/30 00:01:15 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,20 @@ void	join_in_quote(t_elems **elems)
 			token_del(elems, head->next);
 			join_in_quote(&head);
 		}
+		head = head->next;
+	}
+}
+
+void	type_cast(t_elems **elems)
+{
+	t_elems	*head;
+
+	head = *elems;
+	while (head)
+	{
+		if ((head->state == IN_DQUOTE && head->type != VAR) \
+		|| head->state == IN_QUOTE)
+			head->type = WORD;
 		head = head->next;
 	}
 }
