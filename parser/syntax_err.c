@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 13:26:47 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 16:26:06 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,11 @@ void	rm_extra(t_elems **elems)
 	t_elems	*head;
 
 	head = *elems;
-	while (head)
-	{
-		if (head->type == DQUOTE || head->type == QUOTE)
-			token_del(elems, head);
-		head = head->next;
-	}
-}
-
-void	join_in_quote(t_elems **elems)
-{
-	t_elems	*head;
-
-	head = *elems;
 	while (head && head->next)
 	{
-		if (head->state == IN_DQUOTE && head->next->state == IN_DQUOTE \
-		&& head->next->type != VAR && head->type != VAR)
-		{
-			head->content = ft_strjoin(head->content, head->next->content);
-			head->len += head->next->len;
-			head->type = WORD;
-			token_del(elems, head->next);
-			join_in_quote(&head);
-		}
-		else if (head->state == IN_QUOTE && head->next->state == IN_QUOTE)
-		{
-			head->content = ft_strjoin(head->content, head->next->content);
-			head->len += head->next->len;
-			head->type = WORD;
-			token_del(elems, head->next);
-			join_in_quote(&head);
-		}
+		if (((head->type == DQUOTE || head->type == QUOTE) \
+		&& head->state == DEFAULT) || head->type == _SPACE)
+			token_del(elems, head);
 		head = head->next;
 	}
 }
@@ -59,7 +32,7 @@ void	join_cmd(t_elems **elems)
 
 	rm_extra(elems);
 	head = *elems;
-	while (head && head->next != NULL)
+	while (head && head->next)
 	{
 		if (head->type == WORD && head->next->type == WORD)
 		{

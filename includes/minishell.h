@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 12:25:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 16:23:25 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	token_del(t_elems **head, t_elems *node);
 
 /* -----:> LEXER <:-----*/
 int		is_space(char c);
+int		special_char(char c);
 void	set_token_word(char *line, t_elems *elem, int *i);
 void	set_token_redir(char *line, t_elems *elem, int *i);
-t_elems	*lexer(char *line);
-int		is_space(char c);
-int		special_char(char c);
 void	set_token_var(char *line, t_elems *elem, int *i);
+void	join_in_quote(t_elems **elems);
+t_elems	*lexer(char *line);
 
 /* -----:> STATE <:-----*/
 void	set_state(t_elems *elems);
@@ -54,7 +54,7 @@ void	quotes_syntax(t_elems *elems);
 void	redir_syntax(t_elems *elems);
 void	rm_extra(t_elems **elems);
 void	join_cmd(t_elems **elems);
-void	join_in_quote(t_elems **elems);
+
 
 
 

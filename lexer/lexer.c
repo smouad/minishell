@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 00:06:07 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 21:56:33 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 15:02:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	join_in_quote(t_elems **elems)
+{
+	t_elems	*head;
+
+	head = *elems;
+	while (head && head->next)
+	{
+		if (head->state == IN_DQUOTE && head->next->state == IN_DQUOTE \
+		&& head->next->type != VAR && head->type != VAR)
+		{
+			head->content = ft_strjoin(head->content, head->next->content);
+			head->len += head->next->len;
+			head->type = WORD;
+			token_del(elems, head->next);
+			join_in_quote(&head);
+		}
+		else if (head->state == IN_QUOTE && head->next->state == IN_QUOTE)
+		{
+			head->content = ft_strjoin(head->content, head->next->content);
+			head->len += head->next->len;
+			head->type = WORD;
+			token_del(elems, head->next);
+			join_in_quote(&head);
+		}
+		head = head->next;
+	}
+}
 
 t_elems	*lexer(char *line)
 {
@@ -38,5 +66,5 @@ t_elems	*lexer(char *line)
 			token_list_add(&elems, token_new("|", 1, PIPE, DEFAULT));
 		i++;
 	}
-	return (set_state(elems), elems);
+	return (set_state(elems), join_in_quote(&elems), elems);
 }
