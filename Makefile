@@ -6,7 +6,7 @@ CC = cc
 
 RM = rm -rf
 
-FLAGS =  -lreadline
+FLAGS =  -Wall -Wextra -Werror -lreadline
 
 # BUILT = $(addprefix builtins/,)
 LEXER = $(addprefix lexer/, lexer.c \
@@ -24,12 +24,13 @@ SRC = minishell.c $(LEXER) $(PARSER)\
 all : $(NAME) 
 
 $(NAME) : $(SRC) $(LIBFT)
-	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS) #-fsanitize=address
+	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS) #-fsanitize=address -g
 
 %.o : %.c
 			${CC} ${CFLAGS} -c $< -o $@
 
 $(LIBFT) :
 	make -C libft
-clean : 
+clean :
 	$(RM) $(NAME)
+re : clean all

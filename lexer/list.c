@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/28 23:45:42 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 16:43:05 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,20 @@ void	token_list_add(t_elems **lst, t_elems *new)
 		*lst = new;
 }
 
-void token_del(t_elems **head, t_elems *node) {
-    if (*head == NULL || node == NULL) {
-        return;
-    }
-    if (*head == node) {
-        *head = node->next;
-    }
-    if (node->next != NULL) {
-        node->next->prev = node->prev;
-    }
-    if (node->prev != NULL) {
-        node->prev->next = node->next;
-    }
-    else {
-        // node is the head of the list
-        *head = node->next;
-    }
-    free(node->content);
-    free(node);
+void	token_del(t_elems **head, t_elems *node)
+{
+	if (*head == NULL || node == NULL)
+		return ;
+	if (*head == node)
+		*head = node->next;
+	if (node->next != NULL)
+		node->next->prev = node->prev;
+	if (node->prev != NULL)
+		node->prev->next = node->next;
+	else
+		*head = node->next;
+	free(node->content);
+	free(node);
 }
 
 

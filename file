@@ -1,0 +1,15 @@
+total 56
+drwxr-xr-x  14 msodor  candidates    476 May 29 17:33 .
+drwxr-xr-x   9 msodor  candidates    306 May 29 14:48 ..
+drwxr-xr-x  13 msodor  candidates    442 May 29 16:32 .git
+drwxr-xr-x   3 msodor  candidates    102 May 29 11:57 .vscode
+-rw-r--r--   1 msodor  candidates    583 May 29 17:31 Makefile
+-rw-r--r--   1 msodor  candidates      0 May 29 17:33 file
+drwxr-xr-x   4 msodor  candidates    136 May 29 11:57 includes
+drwxr-xr-x   7 msodor  candidates    238 May 29 11:57 lexer
+drwxr-xr-x  48 msodor  candidates   1632 May 29 12:07 libft
+-rwxr-xr-x   1 msodor  candidates  18076 May 29 17:31 minishell
+-rw-r--r--   1 msodor  candidates   1255 May 29 17:29 minishell.c
+drwxr-xr-x   3 msodor  candidates    102 May 29 17:21 minishell.dSYM
+-rw-r--r--   1 msodor  candidates      0 May 29 16:40 mouad
+drwxr-xr-x   4 msodor  candidates    136 May 29 11:57 parser

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 16:26:06 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 17:34:15 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	rm_extra(t_elems **elems)
 	t_elems	*head;
 
 	head = *elems;
-	while (head && head->next)
+	while (head)
 	{
-		if (((head->type == DQUOTE || head->type == QUOTE) \
-		&& head->state == DEFAULT) || head->type == _SPACE)
+		if ((head->type == DQUOTE || head->type == QUOTE) \
+		&& head->state == DEFAULT)
 			token_del(elems, head);
 		head = head->next;
 	}
