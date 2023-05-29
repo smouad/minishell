@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:39:16 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/24 17:39:51 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 12:37:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 	var = ft_substr(line, start, j);
 	token_list_add(&elem, token_new(var, j, VAR, DEFAULT));
 	free(var);
-	*(i) += j;
+	*(i) += j - 1;
 }
 
 void	set_token_redir(char *line, t_elems *elem, int *i)

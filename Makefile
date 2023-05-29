@@ -24,7 +24,7 @@ SRC = minishell.c $(LEXER) $(PARSER)\
 all : $(NAME) 
 
 $(NAME) : $(SRC) $(LIBFT)
-	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS)
+	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS) -fsanitize=address
 
 %.o : %.c
 			${CC} ${CFLAGS} -c $< -o $@

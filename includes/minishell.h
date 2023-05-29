@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/28 23:35:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/29 12:25:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	quotes_syntax(t_elems *elems);
 void	redir_syntax(t_elems *elems);
 void	rm_extra(t_elems **elems);
 void	join_cmd(t_elems **elems);
+void	join_in_quote(t_elems **elems);
+
 
 
 #endif
