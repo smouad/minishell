@@ -3,45 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 23:29:27 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:09:31 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	rm_extra(t_elems **elems)
-{
-	t_elems	*head;
-
-	head = *elems;
-	while (head)
-	{
-		if ((head->type == DQUOTE || head->type == QUOTE) \
-		&& head->state == DEFAULT)
-			token_del(elems, head);
-		head = head->next;
-	}
-}
-
-void	join_cmd(t_elems **elems)
-{
-	t_elems	*head;
-
-	rm_extra(elems);
-	head = *elems;
-	while (head && head->next)
-	{
-		if (head->type == WORD && head->next->type == WORD)
-		{
-			head->content = ft_strjoin(head->content, head->next->content);
-			token_del(elems, head->next);
-		}
-		head = head->next;
-	}
-}
 
 // void	quotes_syntax(t_elems *elems)
 // {

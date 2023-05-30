@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/29 23:50:25 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:09:19 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,25 @@ void	token_list_add(t_elems **lst, t_elems *new);
 void	token_del(t_elems **head, t_elems *node);
 // void	token_list_free(t_elems *list);
 
+/* -----:> STATE <:-----*/
+void	set_state(t_elems *elems);
+void	dquote_state(t_elems **ptr);
+void	quote_state(t_elems **ptr);
+
 /* -----:> LEXER <:-----*/
 int		is_space(char c);
 int		special_char(char c);
 void	set_token_word(char *line, t_elems *elem, int *i);
 void	set_token_redir(char *line, t_elems *elem, int *i);
 void	set_token_var(char *line, t_elems *elem, int *i);
-void	join_in_quote(t_elems **elems);
-void	type_cast(t_elems **elems);
 t_elems	*lexer(char *line);
 
-/* -----:> STATE <:-----*/
-void	set_state(t_elems *elems);
-void	dquote_state(t_elems **ptr);
-void	quote_state(t_elems **ptr);
+/* -----:> ANALYSER <:-----*/
+void	join_in_quote(t_elems **elems);
+void	rm_quotes(t_elems **elems);
+void	join_cmd(t_elems **elems);
+void	type_cast(t_elems **elems);
+t_elems	*analyser(char *line);
 
 /* -----:> PRINT_TABLE <:-----*/
 char	*get_type_string(enum e_token type);
@@ -53,10 +58,5 @@ void	print_table(t_elems *lst);
 /* -----:> SYNTAX_ERR <:-----*/
 void	quotes_syntax(t_elems *elems);
 void	redir_syntax(t_elems *elems);
-void	rm_extra(t_elems **elems);
-void	join_cmd(t_elems **elems);
-
-
-
 
 #endif

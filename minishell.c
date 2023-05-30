@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/30 00:28:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/30 13:10:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(void)
 {
 	char	*command;
-	// char	**command_line;
+	t_elems	*elems;
 
 	while (1)
 	{
@@ -24,11 +24,7 @@ int	main(void)
 			break ;
 		if (strlen(command) > 0)
 			add_history(command);
-		t_elems *elems = lexer(command);
-		// rm_extra(&elems);
-		type_cast(&elems);
-		join_cmd(&elems);
+		elems = analyser(command);
 		print_table(elems);
-
 	}
 }

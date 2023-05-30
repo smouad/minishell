@@ -13,7 +13,8 @@ LEXER = $(addprefix lexer/, lexer.c \
 							list.c \
 							lexer_utils.c \
 							state.c \
-							print_table.c)
+							print_table.c \
+							analyser.c)
 
 PARSER = $(addprefix parser/, syntax_err.c \
 							parser.c\
@@ -24,7 +25,7 @@ SRC = minishell.c $(LEXER) $(PARSER)\
 all : $(NAME) 
 
 $(NAME) : $(SRC) $(LIBFT)
-	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS) #-fsanitize=address -g
+	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS) -fsanitize=address -g
 
 %.o : %.c
 			${CC} ${CFLAGS} -c $< -o $@
