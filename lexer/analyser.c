@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/30 16:03:14 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/31 10:27:10 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,22 @@ void	join_in_quote(t_elems **elems)
 
 void	rm_quotes(t_elems **elems)
 {
-	t_elems	*head;
+	t_elems	*current;
+	t_elems	*temp;
 
-	head = *elems;
-	while (head && head->next)
+	current = *elems;
+	temp = NULL;
+	while (current != NULL)
 	{
-		if ((head->type == DQUOTE || head->type == QUOTE) \
-		&& head->state == DEFAULT)
+		if ((current->type == DQUOTE || current->type == QUOTE) \
+		&& current->state == DEFAULT)
 		{
-			printf("here\n");
-			token_del(elems, head);
+			temp = current->next;
+			token_del(elems, current);
+			current = temp;
 		}
-		head = head->next;
+		else
+			current = current->next;
 	}
 }
 
@@ -73,6 +77,33 @@ void	rm_quotes(t_elems **elems)
 // 		head = head->next;
 // 	}
 // }
+void	join_cmd(t_elems **elems)
+{
+	t_elems	*current;
+	t_elems	*temp;
+	char	*new_content;
+
+	current = *elems;
+	temp = NULL;
+	rm_quotes(elems);
+	while (current != NULL && current->next != NULL)
+	{
+		if (current->type == WORD && current->next->type == WORD)
+		{
+			new_content = ft_strjoin(current->content, current->next->content);
+			free(current->content);
+			current->content = new_content;
+			// Delete the next node using the token_del function
+			temp = current->next;
+			current->next = current->next->next;
+			if (current->next != NULL)
+				current->next->prev = current;
+			free(temp);
+		}
+		else
+			current = current->next;
+	}
+}
 
 void	type_cast(t_elems **elems)
 {
@@ -93,8 +124,8 @@ t_elems	*analyser(char *line)
 	t_elems	*elems;
 
 	elems = lexer(line);
-	// join_cmd(&elems);
-	rm_quotes(&elems);
+	// rm_quotes(&elems);
+	join_cmd(&elems);
 	type_cast(&elems);
 	return (elems);
 }

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/30 16:05:17 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/31 09:52:04 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	token_del(t_elems **head, t_elems *node)
 		free(node->content);
 	free(node);
 }
-
-
 
 // void	token_list_free(t_elems *list)
 // {
