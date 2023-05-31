@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/31 10:27:10 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/31 13:02:03 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,6 @@ void	rm_quotes(t_elems **elems)
 	}
 }
 
-// void	join_cmd(t_elems **elems)
-// {
-// 	t_elems	*head;
-
-// 	head = *elems;
-// 	rm_quotes(elems);
-// 	while (head && head->next)
-// 	{
-// 		if (head->type == WORD && head->next->type == WORD)
-// 		{
-// 			head->content = ft_strjoin(head->content, head->next->content);
-// 			token_del(elems, head);
-// 		}
-// 		head = head->next;
-// 	}
-// }
 void	join_cmd(t_elems **elems)
 {
 	t_elems	*current;
@@ -85,6 +69,7 @@ void	join_cmd(t_elems **elems)
 
 	current = *elems;
 	temp = NULL;
+	type_cast(elems);
 	rm_quotes(elems);
 	while (current != NULL && current->next != NULL)
 	{
@@ -93,12 +78,8 @@ void	join_cmd(t_elems **elems)
 			new_content = ft_strjoin(current->content, current->next->content);
 			free(current->content);
 			current->content = new_content;
-			// Delete the next node using the token_del function
 			temp = current->next;
-			current->next = current->next->next;
-			if (current->next != NULL)
-				current->next->prev = current;
-			free(temp);
+			token_del(elems, current->next);
 		}
 		else
 			current = current->next;
@@ -124,8 +105,7 @@ t_elems	*analyser(char *line)
 	t_elems	*elems;
 
 	elems = lexer(line);
-	// rm_quotes(&elems);
+	quotes_syntax(elems);
 	join_cmd(&elems);
-	type_cast(&elems);
 	return (elems);
 }

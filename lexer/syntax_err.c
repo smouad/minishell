@@ -6,30 +6,30 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/30 13:09:31 by msodor           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:43:24 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// void	quotes_syntax(t_elems *elems)
-// {
-// 	int	dcount;
-// 	int	count;
+void	quotes_syntax(t_elems *elems)
+{
+	int	dcount;
+	int	count;
 
-// 	count = 0;
-// 	dcount = 0;
-// 	while (elems)
-// 	{
-// 		if (elems->type == DQUOTE)
-// 			dcount++;
-// 		else if (elems->type == QUOTE)
-// 			count++;
-// 		elems = elems->next;
-// 	}
-// 	if ((count % 2) != 0 || (dcount % 2) != 0)
-// 		printf("syntax error: unclosed quotes.\n");
-// }
+	count = 0;
+	dcount = 0;
+	while (elems)
+	{
+		if (elems->type == DQUOTE)
+			dcount++;
+		else if (elems->type == QUOTE)
+			count++;
+		elems = elems->next;
+	}
+	if ((count % 2) != 0 || (dcount % 2) != 0)
+		printf("syntax error: unclosed quotes.\n");
+}
 
 // void	redir_syntax(t_elems *elems)
 // {
