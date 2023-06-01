@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/01 20:13:09 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/01 22:19:15 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * quotes_syntax - function that checks for proper quote usage in a token list
+ * @elems: a pointer to the head of the token list
+ */
 void	quotes_syntax(t_elems *elems)
 {
 	int	dcount;
@@ -31,6 +35,10 @@ void	quotes_syntax(t_elems *elems)
 		printf("syntax error: unclosed quotes.\n");
 }
 
+/**
+ * redir_syntax - function that checks for proper redirection usage in a token list
+ * @elems: a pointer to the head of the token list
+ */
 void	redir_syntax(t_elems *elems)
 {
 	while (elems && elems->next)
@@ -47,6 +55,10 @@ void	redir_syntax(t_elems *elems)
 	}
 }
 
+/**
+ * pipe_syntax - function that checks for proper pipe usage in a token list
+ * @elems: a pointer to the head of the token list
+ */
 void	pipe_syntax(t_elems *elems)
 {
 	while (elems && elems->next)

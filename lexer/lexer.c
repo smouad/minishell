@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 00:06:07 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/30 13:07:50 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/01 22:26:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * lexer - a function that tokenizes a given input string and builds a token list
+ * @line: a pointer to the input string to be tokenized
+ *
+ * This function processes the input string and identifies tokens such as variables,
+ * words, redirections, pipe symbols, and quotes. It also handles special characters
+ * and creates a token list that represents the structure of the input string.
+ *
+ * The function returns a token list, which can be further processed by other functions
+ * in the lexer or parser.
+ */
 t_elems	*lexer(char *line)
 {
 	int		i;

@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   analyser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/01 20:16:44 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/01 22:17:41 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * join_in_quote - function that concatenates elements in the token list that are in a quote state
+ * @elems: a pointer to a pointer to the head element of the token list
+ */
 void	join_in_quote(t_elems **elems)
 {
 	t_elems	*head;
@@ -40,6 +44,10 @@ void	join_in_quote(t_elems **elems)
 	}
 }
 
+/**
+ * rm_quotes - function that removes quote and double-quote elements from the token list
+ * @elems: a pointer to a pointer to the head element of the token list
+ */
 void	rm_quotes(t_elems **elems)
 {
 	t_elems	*current;
@@ -61,6 +69,10 @@ void	rm_quotes(t_elems **elems)
 	}
 }
 
+/**
+ * rm_spaces - function that removes space elements from the token list
+ * @elems: a pointer to a pointer to the head element of the token list
+ */
 void	rm_spaces(t_elems **elems)
 {
 	t_elems	*current;
@@ -81,14 +93,19 @@ void	rm_spaces(t_elems **elems)
 	}
 }
 
+
+/**
+ * join_cmd - function that concatenates adjacent elements in the token list that are of type WORD
+ * @elems: a pointer to a pointer to the head element of the token list
+ */
 void	join_cmd(t_elems **elems)
 {
 	t_elems	*current;
-	t_elems	*temp;
+	// t_elems	*temp;
 	char	*new_content;
 
 	current = *elems;
-	temp = NULL;
+	// temp = NULL;
 	type_cast(elems);
 	rm_quotes(elems);
 	while (current != NULL && current->next != NULL)
@@ -98,7 +115,7 @@ void	join_cmd(t_elems **elems)
 			new_content = ft_strjoin(current->content, current->next->content);
 			free(current->content);
 			current->content = new_content;
-			temp = current->next;
+			// temp = current->next;
 			token_del(elems, current->next);
 		}
 		else
@@ -106,6 +123,10 @@ void	join_cmd(t_elems **elems)
 	}
 }
 
+/**
+ * type_cast - function that sets the type of elements in a token list
+ * @elems: a pointer to the head of the token list
+ */
 void	type_cast(t_elems **elems)
 {
 	t_elems	*head;
