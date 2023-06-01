@@ -15,6 +15,7 @@ LEXER = $(addprefix lexer/, lexer.c \
 							state.c \
 							print_table.c \
 							analyser.c \
+							analyser_utils.c \
 							syntax_err.c)
 
 PARSER = $(addprefix parser/,  \

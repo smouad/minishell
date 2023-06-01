@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/01 12:25:22 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/01 20:19:12 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	type_cast(t_elems **elems);
 void	rm_spaces(t_elems **elems);
 t_elems	*analyser(char *line);
 
+/* -----:> SYNTAX_ERR <:-----*/
+void	quotes_syntax(t_elems *elems);
+void	redir_syntax(t_elems *elems);
+void	pipe_syntax(t_elems *elems);
+
 /* -----:> PRINT_TABLE <:-----*/
 char	*get_type_string(enum e_token type);
 char	*get_state_string(enum e_state state);
@@ -55,9 +60,5 @@ void	print_table(t_elems *lst);
 /* ******************************************** */
 /* ----------------:> PARSER <:---------------- */
 /* ******************************************** */
-
-/* -----:> SYNTAX_ERR <:-----*/
-void	quotes_syntax(t_elems *elems);
-void	redir_syntax(t_elems *elems);
 
 #endif
