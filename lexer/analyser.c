@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/31 13:02:03 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:56 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,26 @@ void	rm_quotes(t_elems **elems)
 	{
 		if ((current->type == DQUOTE || current->type == QUOTE) \
 		&& current->state == DEFAULT)
+		{
+			temp = current->next;
+			token_del(elems, current);
+			current = temp;
+		}
+		else
+			current = current->next;
+	}
+}
+
+void	rm_spaces(t_elems **elems)
+{
+	t_elems	*current;
+	t_elems	*temp;
+
+	current = *elems;
+	temp = NULL;
+	while (current != NULL)
+	{
+		if (current->type == _SPACE)
 		{
 			temp = current->next;
 			token_del(elems, current);
@@ -107,5 +127,6 @@ t_elems	*analyser(char *line)
 	elems = lexer(line);
 	quotes_syntax(elems);
 	join_cmd(&elems);
+	rm_spaces(&elems);
 	return (elems);
 }

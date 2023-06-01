@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/30 13:09:19 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/01 12:25:22 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	join_in_quote(t_elems **elems);
 void	rm_quotes(t_elems **elems);
 void	join_cmd(t_elems **elems);
 void	type_cast(t_elems **elems);
+void	rm_spaces(t_elems **elems);
 t_elems	*analyser(char *line);
 
 /* -----:> PRINT_TABLE <:-----*/
