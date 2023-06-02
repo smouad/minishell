@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/01 22:23:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/02 01:03:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,16 @@ void	token_del(t_elems **head, t_elems *node)
  * token_list_free - function that frees the memory used by a token list
  * @list: a pointer to the head of the token list
  */
-void	token_list_free(t_elems *list)
-{
-	t_elems	*tmp;
+// void	token_list_free(t_elems *list)
+// {
+// 	t_elems	*tmp;
 
-	tmp = list->head;
-	while (tmp)
-	{
-		free(tmp->content);
-		free(tmp);
-		tmp = tmp->next;
-	}
-	free(list);
-}
+// 	tmp = list;
+// 	while (tmp)
+// 	{
+// 		free(tmp->content);
+// 		free(tmp);
+// 		tmp = tmp->next;
+// 	}
+// 	free(list);
+// }
