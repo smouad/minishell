@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/02 01:03:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/06 22:21:51 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_elems	*token_new(char *content, int len, t_token type, t_state state)
 	elems = malloc(sizeof(t_elems));
 	if (!elems)
 		return (NULL);
-	elems->prev = NULL;
 	elems->content = ft_strdup(content);
 	elems->len = len;
 	elems->type = type;
@@ -53,7 +52,6 @@ void	token_list_add(t_elems **lst, t_elems *new)
 		while (ptr->next != NULL)
 			ptr = ptr->next;
 		ptr->next = new;
-		new->prev = ptr;
 	}
 	else
 		*lst = new;
@@ -64,37 +62,42 @@ void	token_list_add(t_elems **lst, t_elems *new)
  * @head: a pointer to the head of the token list
  * @node: a pointer to the token element to be deleted
  */
-void	token_del(t_elems **head, t_elems *node)
+void token_del(t_elems **head, t_elems *node)
 {
-	if (*head == NULL || node == NULL)
-		return ;
-	if (*head == node)
+	t_elems *current;
+
+	current = *head;
+	if (*head == NULL)
+		return;
+	if (node == *head)
+	{
 		*head = node->next;
-	if (node->next != NULL)
-		node->next->prev = node->prev;
-	if (node->prev != NULL)
-		node->prev->next = node->next;
-	else
-		*head = node->next;
-	if (node->content != NULL)
 		free(node->content);
-	free(node);
+		free(node);
+		return;
+	}
+	if (current->next == node)
+	{
+		current->next = node->next;
+		free(node->content);
+		free(node);
+	}
 }
 
 /**
  * token_list_free - function that frees the memory used by a token list
  * @list: a pointer to the head of the token list
  */
-// void	token_list_free(t_elems *list)
-// {
-// 	t_elems	*tmp;
+void token_list_free(t_elems *head)
+{
+    t_elems *current;
 
-// 	tmp = list;
-// 	while (tmp)
-// 	{
-// 		free(tmp->content);
-// 		free(tmp);
-// 		tmp = tmp->next;
-// 	}
-// 	free(list);
-// }
+	current = head;
+    while (current != NULL)
+	{
+        free(current->content);
+        free(current);
+        current = current->next;
+    }
+	free(head);
+}

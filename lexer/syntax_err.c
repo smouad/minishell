@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/03 15:39:04 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/06 22:11:20 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	redir_syntax(t_elems *elems)
 			|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
 			&& elems->next == NULL)
 		{
-			printf("syntax error near unexpected token `\\n'");
+			printf("syntax error near unexpected token `\\n'\n");
 			return ;
 		}
 	}
