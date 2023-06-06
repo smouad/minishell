@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/02 02:16:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/03 15:39:04 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ void	redir_syntax(t_elems *elems)
 			|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
 			&& elems->next->type != WORD)
 		{
-			printf("syntax error: near unexpected token `%s'\n", \
+			printf("syntax error near unexpected token `%s'\n", \
 			elems->next->content);
-			break ;
+			return ;
 		}
 		elems = elems->next;
 		if ((elems->type == REDIR_IN || elems->type == REDIR_OUT \
 			|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
 			&& elems->next == NULL)
 		{
-			printf("syntax error: near unexpected token `\\n'");
-			break ;
+			printf("syntax error near unexpected token `\\n'");
+			return ;
 		}
 	}
 }
@@ -68,19 +68,24 @@ void	redir_syntax(t_elems *elems)
  */
 void	pipe_syntax(t_elems *elems)
 {
+	if (elems->next->type == PIPE)
+	{
+		printf("parse error near `|'\n");
+		return ;
+	}
 	while (elems && elems->next)
 	{
 		if (elems->type == PIPE && elems->next->type == PIPE)
 		{
-			printf("syntax error: near unexpected token `%s'\n", \
+			printf("syntax error near unexpected token `%s'\n", \
 			elems->next->content);
-			break ;
+			return ;
 		}
 		elems = elems->next;
 		if (elems->next == NULL && elems->type == PIPE)
 		{
-			printf("syntax error: near unexpected token `\\n'");
-			break ;
+			printf("syntax error near unexpected token `\\n'\n");
+			return ;
 		}
 	}
 }

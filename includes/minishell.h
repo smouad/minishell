@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/02 01:42:07 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/04 11:38:42 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	print_table(t_elems *lst);
 /* ----------------:> PARSER <:---------------- */
 /* ******************************************** */
 
-void	cmd_nbr(t_elems *elems);
-t_parser	*parser(t_elems *elems);
+// void	cmd_nbr(t_elems *elems);
+// t_parser	*parser(t_elems *elems);
 
 #endif
