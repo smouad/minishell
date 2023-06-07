@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 14:44:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:21:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(void)
 			elems = analyser(command);
 			print_table(elems);
 		}
-		// cmd_nbr(elems);
-
+		init_cmds(elems);
 	}
 }

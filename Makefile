@@ -20,6 +20,8 @@ LEXER = $(addprefix lexer/, lexer.c \
 
 PARSER = $(addprefix parser/,  \
 							parser.c\
+							cmd_list.c\
+							redir_list.c\
 							)
 
 SRC = minishell.c $(LEXER) $(PARSER)\

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 14:50:27 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:18:48 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,32 @@ typedef struct s_elems
 	struct s_elems			*next;
 }	t_elems;
 
-// typedef struct s_cmd
-// {
-// 	char	*cmd;
-// 	char	**args;
-// }	t_cmd;
+typedef struct s_redir
+{
+	char			*file;
+	t_token			type;
+	struct s_redir	*next;
+}	t_redir;
 
-// typedef struct s_parser
-// {
-// 	t_cmd	cmds;
-// 	int		cmd_nbr;
-// }	t_parser;
+typedef struct s_args
+{
+	char			*arg;
+	struct s_args	*next;
+}	t_args;
+
+typedef struct s_cmd
+{
+	char			*cmd;
+	t_args			*args;
+	t_redir			*redir;
+	int				argc;
+	struct s_cmd	*next;
+}	t_cmd;
+
+typedef struct s_parser
+{
+	t_cmd	*cmds;
+	int		cmd_nbr;
+}	t_parser;
+
 #endif
