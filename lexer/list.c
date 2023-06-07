@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 14:11:28 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 23:10:40 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,16 @@ void	token_del(t_elems **head, t_elems *node)
  * token_list_free - function that frees the memory used by a token list
  * @list: a pointer to the head of the token list
  */
-void	token_list_free(t_elems *head)
-{
-	t_elems	*current;
+// void	token_list_free(t_elems *head)
+// {
+// 	t_elems	*current;
 
-	current = head;
-	while (current != NULL)
-	{
-		free(current->content);
-		free(current);
-		current = current->next;
-	}
-	free(head);
-}
+// 	current = head;
+// 	while (current != NULL)
+// 	{
+// 		free(current->content);
+// 		free(current);
+// 		current = current->next;
+// 	}
+// 	free(head);
+// }

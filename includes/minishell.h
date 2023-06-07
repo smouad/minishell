@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 18:33:39 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/08 00:20:40 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_elems		*analyser(char *line);
 int			quotes_syntax(t_elems *elems);
 int			redir_syntax(t_elems *elems);
 int			pipe_syntax(t_elems *elems);
+int			is_redir(t_elems *elems);
 
 /* -----:> PRINT_TABLE <:-----*/
 char		*get_type_string(enum e_token type);
@@ -70,7 +71,7 @@ void		redir_del(t_redir **head, t_redir *node);
 void		redir_list_free(t_redir *head);
 
 /* -----:> LIST CMD <:-----*/
-t_cmd		*cmd_new(char *cmd, t_args *args, t_redir *redir, int argc);
+t_cmd		*cmd_new(char *cmd, char **args, t_redir *redir, int argc);
 void		cmd_list_add(t_cmd **lst, t_cmd *new);
 void		cmd_del(t_cmd **head, t_cmd *node);
 void		cmd_list_free(t_cmd *head);

@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 14:36:40 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/08 00:30:59 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	is_redir(t_elems *elems)
+{
+	if (elems->type == REDIR_IN || elems->type == REDIR_OUT \
+	|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
+		return (1);
+	return (0);
+}
 
 /**
  * quotes_syntax - function that checks for proper quote usage in a token list
@@ -47,18 +55,15 @@ int	redir_syntax(t_elems *elems)
 {
 	while (elems && elems->next)
 	{
-		if ((elems->type == REDIR_IN || elems->type == REDIR_OUT \
-			|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
-			&& elems->next->type != WORD)
+		if (is_redir(elems)	&& elems->next->type != WORD \
+		&& elems->next->type != VAR)
 		{
 			printf("syntax error near unexpected token `%s'\n", \
 			elems->next->content);
 			return (1);
 		}
 		elems = elems->next;
-		if ((elems->type == REDIR_IN || elems->type == REDIR_OUT \
-			|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
-			&& elems->next == NULL)
+		if (is_redir(elems) && elems->next == NULL)
 		{
 			printf("syntax error near unexpected token `\\n'\n");
 			return (1);
