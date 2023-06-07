@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/06 22:03:56 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:50:27 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef enum e_state
 
 typedef struct s_elems
 {
-	// struct s_elems			*prev;
 	char					*content;
 	int						len;
 	enum e_token			type;
@@ -63,25 +62,15 @@ typedef struct s_elems
 	struct s_elems			*next;
 }	t_elems;
 
-// typedef struct s_redir
-// {
-// 	cahr			*fd;
-// 	int				type;
-// 	struct s_redir	*next;
-// }
-
 // typedef struct s_cmd
 // {
-// 	char			*cmd;
-// 	char			**args;
-// 	t_redir			*redir;
-// 	int				argc;
-// 	struct s_cmd	*next;
+// 	char	*cmd;
+// 	char	**args;
 // }	t_cmd;
 
 // typedef struct s_parser
 // {
-// 	t_cmd	*cmds;
+// 	t_cmd	cmds;
 // 	int		cmd_nbr;
 // }	t_parser;
 #endif

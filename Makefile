@@ -34,6 +34,12 @@ $(NAME) : $(SRC) $(LIBFT)
 
 $(LIBFT) :
 	make -C libft
+
 clean :
+	make clean -C libft
+
+fclean :
 	$(RM) $(NAME)
-re : clean all
+	make fclean -C libft
+
+re : fclean all

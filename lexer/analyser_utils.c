@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   analyser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/02 01:19:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:22:20 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * join_in_quote - function that concatenates elements in the token list that are in a quote state
+ * join_in_quote - function that concatenates elements in the token list
+ * that are in a quote state
  * @elems: a pointer to a pointer to the head element of the token list
  */
 void	join_in_quote(t_elems **elems)
@@ -45,7 +46,7 @@ void	join_in_quote(t_elems **elems)
 }
 
 /**
- * rm_quotes - function that removes quote and double-quote elements from the token list
+ * rm_quotes - removes quote and double-quote elements from the token list
  * @elems: a pointer to a pointer to the head element of the token list
  */
 void	rm_quotes(t_elems **elems)
@@ -93,29 +94,27 @@ void	rm_spaces(t_elems **elems)
 	}
 }
 
-
 /**
- * join_cmd - function that concatenates adjacent elements in the token list that are of type WORD
+ * join_cmd - function that concatenates adjacent elements
+ * in the token list that are of type WORD
  * @elems: a pointer to a pointer to the head element of the token list
  */
 void	join_cmd(t_elems **elems)
 {
 	t_elems	*current;
-	// t_elems	*temp;
 	char	*new_content;
 
 	current = *elems;
-	// temp = NULL;
 	type_cast(elems);
 	rm_quotes(elems);
-	while (current != NULL && current->next != NULL)
+	while (current && current->next)
 	{
 		if (current->type == WORD && current->next->type == WORD)
 		{
 			new_content = ft_strjoin(current->content, current->next->content);
 			free(current->content);
 			current->content = new_content;
-			// temp = current->next;
+			current->len = ft_strlen(new_content);
 			token_del(elems, current->next);
 		}
 		else

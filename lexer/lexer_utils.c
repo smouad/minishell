@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:39:16 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/01 22:02:43 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:57:08 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ int	is_space(char c)
 }
 
 /**
- * special_char - function that checks if @c is a special character or white-space character
+ * special_char - checks if @c is a special character or white-space character
  * @c: the character to check
  *
- * Return: the ASCII value of the character if it is a special or white-space character, otherwise 0
+ * Return: the ASCII value of the character if it is a special
+ * or white-space character, otherwise 0
  */
 int	special_char(char c)
 {
@@ -39,7 +40,8 @@ int	special_char(char c)
 }
 
 /**
- * set_token_word - function that extracts a word from the input string and adds it to the token list
+ * set_token_word - function that extracts a word from the input string
+ * and adds it to the token list
  * @line: the input string
  * @elem: a pointer to the token list
  * @i: a pointer to the current index of the input string
@@ -61,7 +63,8 @@ void	set_token_word(char *line, t_elems *elem, int *i)
 }
 
 /**
- * set_token_var - function that extracts a variable from the input string and adds it to the token list
+ * set_token_var - function that extracts a variable from the input string
+ * and adds it to the token list
  * @line: the input string
  * @elem: a pointer to the token list
  * @i: a pointer to the current index of the input string
@@ -83,7 +86,8 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 }
 
 /**
- * set_token_redir - function that extracts a redirection symbol from the input string and adds it to the token list
+ * set_token_redir - function that extracts a redirection symbol
+ * from the input string and adds it to the token list
  * @line: the input string
  * @elem: a pointer to the token list
  * @i: a pointer to the current index of the input string

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/04 11:38:42 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:41:04 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	rm_spaces(t_elems **elems);
 t_elems	*analyser(char *line);
 
 /* -----:> SYNTAX_ERR <:-----*/
-void	quotes_syntax(t_elems *elems);
-void	redir_syntax(t_elems *elems);
-void	pipe_syntax(t_elems *elems);
+int		quotes_syntax(t_elems *elems);
+int		redir_syntax(t_elems *elems);
+int		pipe_syntax(t_elems *elems);
 
 /* -----:> PRINT_TABLE <:-----*/
 char	*get_type_string(enum e_token type);
@@ -61,7 +61,7 @@ void	print_table(t_elems *lst);
 /* ----------------:> PARSER <:---------------- */
 /* ******************************************** */
 
-// void	cmd_nbr(t_elems *elems);
+void	cmd_nbr(t_elems *elems);
 // t_parser	*parser(t_elems *elems);
 
 #endif

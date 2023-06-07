@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/06 22:21:51 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/07 14:11:28 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,22 @@ void	token_list_add(t_elems **lst, t_elems *new)
  * @head: a pointer to the head of the token list
  * @node: a pointer to the token element to be deleted
  */
-void token_del(t_elems **head, t_elems *node)
+void	token_del(t_elems **head, t_elems *node)
 {
-	t_elems *current;
+	t_elems	*current;
 
 	current = *head;
 	if (*head == NULL)
-		return;
+		return ;
 	if (node == *head)
 	{
 		*head = node->next;
 		free(node->content);
 		free(node);
-		return;
+		return ;
 	}
+	while (current->next != NULL && current->next != node)
+		current = current->next;
 	if (current->next == node)
 	{
 		current->next = node->next;
@@ -88,16 +90,16 @@ void token_del(t_elems **head, t_elems *node)
  * token_list_free - function that frees the memory used by a token list
  * @list: a pointer to the head of the token list
  */
-void token_list_free(t_elems *head)
+void	token_list_free(t_elems *head)
 {
-    t_elems *current;
+	t_elems	*current;
 
 	current = head;
-    while (current != NULL)
+	while (current != NULL)
 	{
-        free(current->content);
-        free(current);
-        current = current->next;
-    }
+		free(current->content);
+		free(current);
+		current = current->next;
+	}
 	free(head);
 }
