@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 23:55:29 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:33:43 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ t_cmd	*cmd_new(char *cmd, char **args, t_redir *redir, int argc)
 	t_cmd	*cmds;
 
 	cmds = malloc(sizeof(t_cmd));
-	if (!cmd)
+	if (!cmds)
 		return (NULL);
 	cmds->cmd = cmd;
 	cmds->args = args;
+	args = (char **)malloc(sizeof(char **) * argc);
 	cmds->redir = redir;
 	cmds->argc = argc;
 	cmds->next = NULL;
@@ -89,16 +90,16 @@ void	cmd_del(t_cmd **head, t_cmd *node)
  * cmd_list_free - function that frees the memory used by a cmd list
  * @list: a pointer to the head of the cmd list
  */
-// void	cmd_list_free(t_cmd *head)
-// {
-// 	t_cmd	*current;
+void	cmd_list_free(t_cmd *head)
+{
+	t_cmd	*current;
 
-// 	current = head;
-// 	while (current != NULL)
-// 	{
-// 		free(current->cmd);
-// 		free(current);
-// 		current = current->next;
-// 	}
-// 	free(head);
-// }
+	current = head;
+	while (current != NULL)
+	{
+		free(current->cmd);
+		free(current);
+		current = current->next;
+	}
+	free(head);
+}

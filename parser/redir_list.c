@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:57:02 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 23:11:05 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/08 15:01:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_redir	*redir_new(char *file, t_token type)
  * @lst: a pointer to the head of the redir list
  * @new: a pointer to the new redir element
  */
-void	redir_list_add(t_redir **lst, t_redir *new)
+void	redir_add(t_redir **lst, t_redir *new)
 {
 	t_redir	*ptr;
 
