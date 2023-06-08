@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/08 19:50:18 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/08 21:50:40 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,52 @@ t_parser	*init_cmds(t_elems *elems)
 	return (parser);
 }
 
-void set_redir(t_parser *parser, t_elems *elems)
+void	rm_redir(t_elems **elems)
 {
-	t_elems *current = elems;
-	t_redir *new_redir;
-	t_cmd *cmds;
+	t_elems	*current;
+	t_elems	*tmp;
 
+	current = *elems;
+	tmp = NULL;
+	while (current)
+	{
+		if (is_redir(current))
+		{
+			tmp = current->next->next;
+			token_del(elems, current->next);
+			token_del(elems, current);
+			current = tmp;
+		}
+		else
+			current = current->next;
+	}
+}
+
+void	set_redir(t_parser *parser, t_elems *elems)
+{
+	t_elems	*current;
+	t_redir	*new_redir;
+	t_cmd	*cmds;
+
+	current = elems;
 	cmds = parser->cmds;
 	while (cmds)
 	{
-		while (current && current->next && current->type != PIPE)
+		current = current->next;
+		while (elems && current && current->type != PIPE)
 		{
 			if (is_redir(current))
 			{
 				new_redir = redir_new(current->next->content, current->type);
 				redir_add(&cmds->redir, new_redir);
 				current = current->next->next;
+				continue ;
 			}
-				printf("%s\n", cmds->redir->file);
 			current = current->next;
 		}
-		current = current->next;
 		cmds = cmds->next;
-		printf("---------------\n");
 	}
+	rm_redir(&elems);
 }
 
-
+void	set_cmd_args()

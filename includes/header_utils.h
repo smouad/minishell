@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/08 15:56:40 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/08 21:50:14 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,6 @@ typedef struct s_redir
 	t_token			type;
 	struct s_redir	*next;
 }	t_redir;
-
-typedef struct s_args
-{
-	char			*arg;
-	struct s_args	*next;
-}	t_args;
 
 typedef struct s_cmd
 {
