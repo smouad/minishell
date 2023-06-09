@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/08 19:42:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/09 10:34:22 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void		print_table(t_elems *lst);
 void		cmd_nbr(t_elems *elems, t_parser *parser);
 t_parser	*init_cmds(t_elems *elems);
 void 		set_redir(t_parser *parser, t_elems *elems);
+void	set_env(t_elems *elems);
+void	set_cmd_args(t_parser *parser, t_elems *elems);
+
 
 /* -----:> LIST REDIR <:-----*/
 t_redir		*redir_new(char *file, t_token type);

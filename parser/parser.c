@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/08 21:50:40 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/09 11:27:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	set_redir(t_parser *parser, t_elems *elems)
 	while (cmds)
 	{
 		current = current->next;
-		while (elems && current && current->type != PIPE)
+		while (current && current->type != PIPE)
 		{
 			if (is_redir(current))
 			{
@@ -101,4 +101,48 @@ void	set_redir(t_parser *parser, t_elems *elems)
 	rm_redir(&elems);
 }
 
-void	set_cmd_args()
+void	set_env(t_elems *elems)
+{
+	char	*value;
+
+	while (elems)
+	{
+		if (elems->type == VAR)
+		{
+			value = getenv(elems->content + 1);
+			free(elems->content);
+			elems->content = NULL;
+			if (value)
+				elems->content = ft_strdup(value);
+			else
+				elems->content = ft_strdup("");
+		}
+		elems = elems->next;
+	}
+}
+
+void	set_cmd_args(t_parser *parser, t_elems *elems)
+{
+	t_elems	*current;
+	t_cmd	*cmds;
+	int		i;
+
+	current = elems;
+	cmds = parser->cmds;
+	while (cmds)
+	{
+		current = current->next;
+		cmds->cmd = ft_strdup(current->content);
+		current = current->next;
+		i = 0;
+		while (i < cmds->argc && current && current->type != PIPE)
+		{
+			printf("========= %d\n", cmds->argc );
+			// cmds->args[i] = ft_strdup(current->content);
+			printf("arg%d ====> \n", i/*, cmds->args[i]*/);
+			i++;
+			current = current->next;
+		}
+		cmds = cmds->next;
+	}
+}
