@@ -8,7 +8,7 @@ RM = rm -rf
 
 FLAGS =  -Wall -Wextra -Werror -lreadline
 
-# BUILT = $(addprefix builtins/,)
+
 LEXER = $(addprefix lexer/, lexer.c \
 							list.c \
 							lexer_utils.c \
@@ -23,12 +23,15 @@ PARSER = $(addprefix parser/,  \
 							cmd_list.c\
 							redir_list.c\
 							)
+BUILT = $(addprefix builtins/,  \
+							echo.c\
+							)
 
-SRC = minishell.c $(LEXER) $(PARSER)\
+SRC = minishell.c $(LEXER) $(PARSER) $(BUILT)\
 
 all : $(NAME) 
 
-$(NAME) : $(SRC) $(LIBFT)
+$(NAME) : $(SRC) $(LIBFT) 
 	$(CC)  $(SRC) -o $(NAME) $(LIBFT) $(FLAGS) -fsanitize=address -g
 
 %.o : %.c
