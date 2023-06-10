@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/09 11:24:46 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/10 00:53:46 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 t_cmd	*cmd_new(char *cmd, char **args, t_redir *redir, int argc)
 {
 	t_cmd	*cmds;
-	int		i;
 
 	cmds = malloc(sizeof(t_cmd));
 	if (!cmds)
@@ -30,9 +29,8 @@ t_cmd	*cmd_new(char *cmd, char **args, t_redir *redir, int argc)
 	cmds->cmd = cmd;
 	cmds->args = args;
 	args = (char **)malloc(sizeof(char *) * argc);
-	i = 0;
-	while (i < argc)
-		args[i++] = NULL;
+	if (!args)
+		return (NULL);
 	cmds->redir = redir;
 	cmds->argc = argc;
 	cmds->next = NULL;
