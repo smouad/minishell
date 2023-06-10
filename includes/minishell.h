@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/09 10:34:22 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/10 11:31:59 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 t_elems		*token_new(char *content, int len, t_token type, t_state state);
 void		token_list_add(t_elems **lst, t_elems *new);
 void		token_del(t_elems **head, t_elems *node);
-// void	token_list_free(t_elems *list);
+void	token_list_free(t_elems *list);
 
 /* -----:> STATE <:-----*/
 void		set_state(t_elems *elems);
@@ -66,6 +66,7 @@ t_parser	*init_cmds(t_elems *elems);
 void 		set_redir(t_parser *parser, t_elems *elems);
 void	set_env(t_elems *elems);
 void	set_cmd_args(t_parser *parser, t_elems *elems);
+t_parser	*init_parser(t_elems *elems);
 
 
 /* -----:> LIST REDIR <:-----*/
@@ -75,7 +76,7 @@ void		redir_del(t_redir **head, t_redir *node);
 void		redir_list_free(t_redir *head);
 
 /* -----:> LIST CMD <:-----*/
-t_cmd		*cmd_new(char *cmd, char **args, t_redir *redir, int argc);
+t_cmd		*cmd_new(char *cmd, t_redir *redir, int argc);
 void		cmd_list_add(t_cmd **lst, t_cmd *new);
 void		cmd_del(t_cmd **head, t_cmd *node);
 void		cmd_list_free(t_cmd *head);

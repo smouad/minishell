@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/10 01:08:29 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/10 11:33:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_parser	*init_cmds(t_elems *elems)
 			elems = elems->next;
 		}
 		cms = &parser->cmds;
-		cmd_list_add(cms, cmd_new(NULL, NULL, NULL, argc));
+		cmd_list_add(cms, cmd_new(NULL, NULL, argc));
 	}
 	return (parser);
 }
@@ -129,21 +129,32 @@ void	set_cmd_args(t_parser *parser, t_elems *elems)
 
 	current = elems;
 	cmds = parser->cmds;
+
 	while (cmds)
 	{
 		current = current->next;
 		cmds->cmd = ft_strdup(current->content);
-			printf(" +++++ %s ++++++\n"/**/,cmds->cmd);
 		current = current->next;
 		i = 0;
 		while (i < cmds->argc && current && current->type != PIPE)
 		{
-			printf("========= %d\n", cmds->argc );
-			char *mouad = ft_strdup(current->content);
-			printf("arg%d ====> %s\n", i/**/,mouad);
+			cmds->args[i] = ft_strdup(current->content);
 			i++;
 			current = current->next;
 		}
+		cmds->args[i] = NULL;
 		cmds = cmds->next;
 	}
+	token_list_free(elems);
+}
+
+t_parser	*init_parser(t_elems *elems)
+{
+	t_parser *parser;
+
+	parser = init_cmds(elems);
+	set_redir(parser, elems);
+	set_env(elems);
+	set_cmd_args(parser, elems);
+	return (parser);
 }

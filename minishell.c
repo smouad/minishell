@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/09 11:27:25 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/10 11:31:47 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,20 @@ int	main(void)
 		{
 			elems = analyser(command);
 		}
-		parser = init_cmds(elems);
-		set_redir(parser, elems);
-		set_env(elems);
-		set_cmd_args(parser, elems);
-		// int i;
-		// while (parser->cmds)
-		// {
-		// 	i = 0;
-		// 	printf("command ==========================");
-		// 	printf("cmd ====> %s\n", parser->cmds->cmd);
-		// 	while(parser->cmds->args[i] && i < parser->cmds->argc)
-		// 	{
-		// 		printf("arg%d ====> %s\n", i, parser->cmds->args[i]);
-		// 		i++;
-		// 	}
-		// 	parser->cmds = parser->cmds->next;
-		// }
-		print_table(elems);
+		parser = init_parser(elems);
+		int i;
+		while (parser->cmds)
+		{
+			i = 0;
+			printf("command ==========================\n");
+			printf("cmd ====> %s\n", parser->cmds->cmd);
+			while(parser->cmds->args[i] && i < parser->cmds->argc)
+			{
+				printf("arg%d ====> %s\n", i, parser->cmds->args[i]);
+				i++;
+			}
+			parser->cmds = parser->cmds->next;
+		}
+		// print_table(elems);
 	}
 }

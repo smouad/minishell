@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/10 00:53:46 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/10 10:52:48 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @state: the cmd state
  * Return: a pointer to the newly created cmd element
  */
-t_cmd	*cmd_new(char *cmd, char **args, t_redir *redir, int argc)
+t_cmd	*cmd_new(char *cmd, t_redir *redir, int argc)
 {
 	t_cmd	*cmds;
 
@@ -27,9 +27,8 @@ t_cmd	*cmd_new(char *cmd, char **args, t_redir *redir, int argc)
 	if (!cmds)
 		return (NULL);
 	cmds->cmd = cmd;
-	cmds->args = args;
-	args = (char **)malloc(sizeof(char *) * argc);
-	if (!args)
+	cmds->args = (char **)malloc(sizeof(char *) * argc);
+	if (!cmds->args)
 		return (NULL);
 	cmds->redir = redir;
 	cmds->argc = argc;
