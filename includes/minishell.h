@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/10 19:48:23 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/11 01:02:38 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void		cmd_list_free(t_cmd *head);
 
 /* -----:> BUILTINS <:-----*/
 int		is_option(char *str);
-void	ft_echo(t_parser *parser);
+void	ft_echo(t_cmd *cmds);
 
 #endif
