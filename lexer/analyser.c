@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/11 15:25:20 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:05:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_elems	*analyser(char *line)
 	elems = lexer(line);
 	if (quotes_syntax(elems))
 		return (NULL);
+	set_env(elems);
 	join_cmd(&elems);
 	rm_spaces(&elems);
 	if (redir_syntax(elems))

@@ -25,6 +25,7 @@ PARSER = $(addprefix parser/,  \
 							)
 BUILT = $(addprefix builtins/,  \
 							echo.c\
+							builtins.c\
 							)
 
 SRC = minishell.c $(LEXER) $(PARSER) $(BUILT)\
@@ -39,7 +40,8 @@ $(NAME) : $(SRC) $(LIBFT)
 
 $(LIBFT) :
 	make -C libft
-
+run : all
+	./minishell
 clean :
 	make clean -C libft
 

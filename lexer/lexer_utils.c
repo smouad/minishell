@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:39:16 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 12:57:08 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/12 11:32:59 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_space(char c)
 int	special_char(char c)
 {
 	return (c == '\'' || c == '\"' || c == '<' || c == '>' || c == '|'
-		/*|| c == '$'*/ || is_space(c) || c == '\n' || c == '\0');
+		|| c == '$' || is_space(c) || c == '\n' || c == '\0');
 }
 
 /**
@@ -73,16 +73,18 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 {
 	int		j;
 	int		start;
+	int		skip;
 	char	*var;
 
 	j = 0;
 	start = *i;
-	while (!special_char(line[start + j]))
+	skip = start + 1;
+	while (ft_isalnum(line[skip + j]) || line[skip + j] == '_')
 		j++;
-	var = ft_substr(line, start, j);
-	token_list_add(&elem, token_new(var, j, VAR, DEFAULT));
+	var = ft_substr(line, start, j + 1);
+	token_list_add(&elem, token_new(var, j + 1, VAR, DEFAULT));
 	free(var);
-	*(i) += j - 1;
+	*(i) += j;
 }
 
 /**

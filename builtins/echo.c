@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:31:44 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/11 01:06:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/12 12:59:47 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_option(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] != '-')
+	if (str[i] != '-' || ft_strlen(str) == 1)
 		return (1);
 	i++;
 	while (str[i])
@@ -45,7 +45,7 @@ void	ft_echo(t_cmd *cmds)
 	{
 		printf("%s", cmds->args[i]);
 		i++;
-		if (cmds->args[i] != NULL && ft_strlen(cmds->args[i]))
+		if (cmds->args[i] != NULL && cmds->args[i][0])
 			printf(" ");
 	}
 	if (trigger != 1)
