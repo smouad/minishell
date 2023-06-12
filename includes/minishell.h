@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/12 10:29:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/12 22:20:31 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,11 @@ void		cmd_list_free(t_cmd *head);
 /* *********************************************** */
 
 /* -----:> BUILTINS <:-----*/
-void		builtins(t_cmd *cmds);
+void		builtins(t_cmd *cmds, char **env);
 int			is_option(char *str);
 void		ft_echo(t_cmd *cmds);
+void		ft_env(t_cmd *cmd, char **env);
+void		ft_pwd(t_cmd *cmd);
+void	ft_cd(t_cmd *cmd);
 
 #endif

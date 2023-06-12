@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/12 12:48:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/12 21:13:17 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 

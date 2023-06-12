@@ -26,6 +26,9 @@ PARSER = $(addprefix parser/,  \
 BUILT = $(addprefix builtins/,  \
 							echo.c\
 							builtins.c\
+							env.c\
+							pwd.c\
+							cd.c\
 							)
 
 SRC = minishell.c $(LEXER) $(PARSER) $(BUILT)\

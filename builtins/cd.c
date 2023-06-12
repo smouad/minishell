@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/12 22:21:09 by msodor           ###   ########.fr       */
+/*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
+/*   Updated: 2023/06/12 22:30:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	builtins(t_cmd *cmds, char **env)
+void	ft_cd(t_cmd *cmd)
 {
-	if (cmds->cmd[0])
+	if (!cmd->args[0])
+		return ;
+	if (cmd->args[0] && !cmd->args[1])
 	{
-		if (ft_strncmp(cmds->cmd, "echo", ft_strlen(cmds->cmd)) == 0)
-			ft_echo(cmds);
-		else if (ft_strncmp(cmds->cmd, "env", ft_strlen(cmds->cmd)) == 0)
-			ft_env(cmds, env);
-		else if (ft_strncmp(cmds->cmd, "pwd", ft_strlen(cmds->cmd)) == 0)
-			ft_pwd(cmds);
-		else if (ft_strncmp(cmds->cmd, "cd", ft_strlen(cmds->cmd)) == 0)
-			ft_cd(cmds);
+		if (chdir(cmd->args[0]) != 0)
+			printf("cd: no such file or directory: %s\n", cmd->args[0]);
 	}
-
+	else
+		printf("cd: string not in pwd: %s\n", cmd->args[0]);
 }
