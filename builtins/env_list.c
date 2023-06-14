@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:58:54 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/14 20:20:49 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/14 20:58:06 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	env_list_add(t_env **env, t_env *new)
 	if (*env)
 	{
 		ptr = *env;
-		printf("TTTT1 %s\n", (*env)->value);
-		printf("TTTT0 %s\n", (char *)ptr->value);
 		while (ptr->next != NULL)
 			ptr = ptr->next;
 		ptr->next = new;
