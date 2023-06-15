@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/14 20:10:20 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/15 16:59:48 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,10 @@ int	main(int ac, char **av, char **env)
 		if (strlen(command) > 0)
 			add_history(command);
 		elems = analyser(command);
-		if (elems == NULL)
+		if (elems->next == NULL)
 			continue ;
 		parser = init_parser(elems);
-		t_env *env_list = get_env(env);
-		while (env_list && env_list->next)
-		{
-			env_list = env_list->next;
-			printf("%s=%s\n", env_list->key, env_list->value);
-		}
-		// builtins(parser->cmds, env_list);
+		parser->env = get_env(env);
+		builtins(parser->cmds, parser->env);
 	}
 }

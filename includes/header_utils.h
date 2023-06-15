@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/14 18:32:23 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/15 15:03:53 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_env
 
 typedef struct s_parser
 {
-	t_env	*env_list;
+	t_env	*env;
 	t_cmd	*cmds;
 	int		cmd_nbr;
 }	t_parser;

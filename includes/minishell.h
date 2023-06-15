@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/14 18:49:43 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/15 16:59:45 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		cmd_list_free(t_cmd *head);
 /* *********************************************** */
 
 /* -----:> ENV <:-----*/
-t_env		*env_new(char *key, char *value);
+t_env		*env_new(char *line);
 void		env_list_add(t_env **env, t_env *new);
 
 /* -----:> BUILTINS <:-----*/
@@ -94,9 +94,11 @@ void		builtins(t_cmd *cmds, t_env *env);
 int			is_option(char *str);
 void		ft_echo(t_cmd *cmds);
 t_env		*get_env(char **env);
-t_env		*env_new(char *key, char *value);
 void		ft_env(t_cmd *cmd, t_env *env);
 void		ft_pwd(t_cmd *cmd);
 void		ft_cd(t_cmd *cmd);
+/*export*/
+void	ft_export(t_cmd *cmd, t_env *env);
+int		exist(char *var, t_env *env);
 
 #endif
