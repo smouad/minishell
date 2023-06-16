@@ -3,47 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 13:11:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 19:31:35 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	set_value(char *var, t_env *env)
+void	set_value(char *var, t_env *env)
 {
-	int		index;
-	char	*key;
-	
-	index = ft_strchr(var, '=');
-	if (index != -1)
+	t_env *new_env;
+	t_env *tmp;
+
+	new_env = env_new(var);
+	tmp = env;
+	while (tmp && tmp->next && new_env->value)
 	{
-		key = ft_substr(var, 0, index);
-		while (env)
+		tmp = tmp->next;
+		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key)))
 		{
-			env = env->next;
-			if (!ft_strncmp(key, env->key, ft_strlen(env->key)))
-			{
-				free(env->value);
-				env->value = ft_substr(key, index + 1, ft_strlen(var) - index);
-				return (1);
-			}
+			free(tmp->value);
+			tmp->value = new_env->value;
+			return ;
 		}
-		return (-1);
 	}
-	else
+	tmp = env;
+	while (tmp && tmp->next && !new_env->value)
 	{
-		while (env)
-		{
-			env = env->next;
-			if (!ft_strncmp(var, env->key, ft_strlen(env->key)))
-				return (1);
-		}
-		return (-1);
+		tmp = tmp->next;
+		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key)))
+			return ;
 	}
-		
+	env_list_add(&tmp, new_env);
+	return ;
 }
 
 void	ft_export(t_cmd *cmd, t_env *env)
@@ -62,13 +56,9 @@ void	ft_export(t_cmd *cmd, t_env *env)
 				
 		}
 	}
-	else
+	while (cmd->args[i])
 	{
-		while (cmd->args[i])
-		{
-			if (set_value(cmd->args[i], env) == -1)
-				env_list_add(&env, env_new(cmd->args[i]));
-			i++;
-		}
+		set_value(cmd->args[i], env);
+		i++;
 	}
 }
