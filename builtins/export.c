@@ -6,11 +6,34 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 19:31:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 20:12:00 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	is_correct(char *word)
+{
+	int i;
+
+	i = 0;
+	if (!ft_isalpha(word[i]))
+	{
+		printf("export: `%s': not a valid identifier\n", word);
+		return (0);
+	}
+	i++;
+	while (word[i] && word[i] != '=')
+	{
+		if (!ft_isalnum(word[i]) && word[i] != '_')
+		{
+			printf("export: `%s': not a valid identifier\n", word);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
 
 void	set_value(char *var, t_env *env)
 {
@@ -53,9 +76,15 @@ void	ft_export(t_cmd *cmd, t_env *env)
 				printf("declare -x %s=\"%s\"\n", env->key, env->value);
 			else
 				printf("declare -x %s\n", env->key);
-				
 		}
 	}
+	while (cmd->args[i])
+	{
+		if (!is_correct(cmd->args[i]))
+			return ;
+		i++;
+	}
+	i = 0;
 	while (cmd->args[i])
 	{
 		set_value(cmd->args[i], env);

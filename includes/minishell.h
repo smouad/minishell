@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 19:31:26 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 20:19:38 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void		ft_cd(t_cmd *cmd);
 /*export*/
 void		ft_export(t_cmd *cmd, t_env *env);
 void		set_value(char *var, t_env *env);
+int			is_correct(char *word);
 
 #endif
