@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   header_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/15 15:03:53 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 12:30:03 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_UTILS_H
 # define HEADER_UTILS_H
 
-# include "../libft/libft.h"
+# include "../tools/libft.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
