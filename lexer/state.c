@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:00:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/07 12:39:50 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 10:54:54 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	quote_state(t_elems **ptr)
 	while ((*ptr)->type != QUOTE && (*ptr)->next != NULL)
 	{
 		(*ptr)->state = IN_QUOTE;
+		(*ptr)->type = WORD;
 		*ptr = (*ptr)->next;
 	}
 }

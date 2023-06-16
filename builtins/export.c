@@ -6,45 +6,50 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/15 17:26:00 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 11:52:17 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	exist(char *var, t_env *env)
+int	do_env(char *var, t_env *env)
 {
-	int	i;
-	int	index;
-
+	int		index;
+	char	*key;
+	
 	index = ft_strchr(var, '=');
 	if (index != -1)
 	{
-		i = 0;
+		key = ft_substr(var, 0, index);
 		while (env)
 		{
-			if (ft_strncmp(env->key, var, index) == 0)
-				return (i);
+			if (!ft_strncmp(var, env->key, ft_strlen(env->key)))
+			{
+				free(env->value);
+				env->value = ft_substr(var, index + 1, ft_strlen(var) - index);
+				return (1);
+			}
 			env = env->next;
-			i++;
 		}
+		return (-1);
 	}
 	else
 	{
-		i = 0;
 		while (env)
 		{
-			if (!ft_strncmp(env->key, var, ft_strlen(env->key)))
-				return (i);
 			env = env->next;
-			i++;
+			if (!ft_strncmp(var, env->key, ft_strlen(env->key)))
+				return (1);
 		}
+		return (-1);
 	}
-	return (-1);
+		
 }
 
 void	ft_export(t_cmd *cmd, t_env *env)
 {
+	int	i = 0;
+
 	if (!cmd->args[0])
 	{
 		while (env && env->next)
@@ -57,10 +62,13 @@ void	ft_export(t_cmd *cmd, t_env *env)
 				
 		}
 	}
-	else if (cmd->args[0] && !cmd->args[1])
-	{
-		env_list_add(&env, env_new(cmd->args[0]));
-	}
 	else
-		printf("export: incorrect number of argumments\n");
+	{
+		while (cmd->args[i])
+		{
+			if (do_env(cmd->args[i], env) == -1)
+				env_list_add(&env, env_new(cmd->args[i]));
+			i++;
+		}
+	}
 }

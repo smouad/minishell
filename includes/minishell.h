@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/15 17:25:48 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 11:25:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		ft_env(t_cmd *cmd, t_env *env);
 void		ft_pwd(t_cmd *cmd);
 void		ft_cd(t_cmd *cmd);
 /*export*/
-void	ft_export(t_cmd *cmd, t_env *env);
-int		exist(char *var, t_env *env);
+void		ft_export(t_cmd *cmd, t_env *env);
+int		do_env(char *var, t_env *env);
 
 #endif
