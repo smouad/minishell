@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 20:19:38 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 10:34:17 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ void		ft_cd(t_cmd *cmd);
 void		ft_export(t_cmd *cmd, t_env *env);
 void		set_value(char *var, t_env *env);
 int			is_correct(char *word);
+void		env_del(t_env **head, t_env *node);
+void		ft_unset(t_cmd *cmd, t_env **env);
 
 #endif

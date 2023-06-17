@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 20:12:00 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 10:53:34 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_value(char *var, t_env *env)
 	while (tmp && tmp->next && new_env->value)
 	{
 		tmp = tmp->next;
-		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key)))
+		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key) + 1))
 		{
 			free(tmp->value);
 			tmp->value = new_env->value;
@@ -56,7 +56,7 @@ void	set_value(char *var, t_env *env)
 	while (tmp && tmp->next && !new_env->value)
 	{
 		tmp = tmp->next;
-		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key)))
+		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key) + 1))
 			return ;
 	}
 	env_list_add(&tmp, new_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/15 17:25:47 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 10:50:55 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ void	builtins(t_cmd *cmds, t_env *env)
 {
 	if (cmds->cmd[0] && env)
 	{
-		if (ft_strncmp(cmds->cmd, "echo", 4) == 0)
+		if (!ft_strncmp(cmds->cmd, "echo", ft_strlen(cmds->cmd) + 1))
 			ft_echo(cmds);
-		else if (ft_strncmp(cmds->cmd, "env", 3) == 0)
+		else if (!ft_strncmp(cmds->cmd, "env", ft_strlen(cmds->cmd) + 1))
 			ft_env(cmds, env);
-		else if (ft_strncmp(cmds->cmd, "pwd", 3) == 0)
+		else if (!ft_strncmp(cmds->cmd, "pwd", ft_strlen(cmds->cmd) + 1))
 			ft_pwd(cmds);
-		else if (ft_strncmp(cmds->cmd, "cd", 2) == 0)
+		else if (!ft_strncmp(cmds->cmd, "cd", ft_strlen(cmds->cmd) + 1))
 			ft_cd(cmds);
-		else if (ft_strncmp(cmds->cmd, "export", 6) == 0)
+		else if (!ft_strncmp(cmds->cmd, "export", ft_strlen(cmds->cmd) + 1))
 			ft_export(cmds, env);
+		else if (!ft_strncmp(cmds->cmd, "unset", ft_strlen(cmds->cmd) + 1))
+			ft_unset(cmds, &env);
 	}
 
 }

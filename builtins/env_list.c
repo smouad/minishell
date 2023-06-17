@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:58:54 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/15 15:07:34 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/16 21:33:16 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,33 @@ t_env	*env_new(char *line)
 	env->next = NULL;
 	return (env);
 }
+void	env_del(t_env **head, t_env *node)
+{
+	t_env	*current;
 
+	current = *head;
+	if (*head == NULL)
+		return ;
+	if (node == *head)
+	{
+		*head = node->next;
+		free(node->key);
+		if (node->value)
+			free(node->value);
+		free(node);
+		return ;
+	}
+	while (current->next != NULL && current->next != node)
+		current = current->next;
+	if (current->next == node)
+	{
+		current->next = node->next;
+		free(node->key);
+		if (node->value)
+			free(node->value);
+		free(node);
+	}
+}
 void	env_list_add(t_env **env, t_env *new)
 {
 	t_env	*ptr;
