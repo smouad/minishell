@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 10:59:04 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 17:24:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
  * checking for redirection syntax, and checking for pipe syntax.
  * Return: returns a token list that represents the modified input string.
  */
-t_elems	*analyser(char *line)
+t_elems	*analyser(char *line, t_env *env)
 {
 	t_elems	*elems;
 
 	elems = lexer(line);
 	if (quotes_syntax(elems))
 		return (NULL);
-	set_env(elems);
+	set_env(elems, env);
 	join_cmd(&elems);
 	rm_spaces(&elems);
 	if (redir_syntax(elems))

@@ -32,6 +32,7 @@ PARSER = $(addprefix parser/,  \
 							parser.c\
 							cmd_list.c\
 							redir_list.c\
+							parser_utils.c\
 							)
 BUILT = $(addprefix builtins/,  \
 							echo.c\

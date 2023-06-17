@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 10:34:17 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 17:52:28 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		rm_quotes(t_elems **elems);
 void		join_cmd(t_elems **elems);
 void		type_cast(t_elems **elems);
 void		rm_spaces(t_elems **elems);
-t_elems		*analyser(char *line);
+t_elems		*analyser(char *line, t_env *env);
 
 /* -----:> SYNTAX_ERR <:-----*/
 int			quotes_syntax(t_elems *elems);
@@ -62,12 +62,12 @@ void		print_table(t_elems *lst);
 /* ----------------:> PARSER <:---------------- */
 /* ******************************************** */
 void		cmd_nbr(t_elems *elems, t_parser *parser);
+char		*turn_env(char *var, t_env *env);
 t_parser	*init_cmds(t_elems *elems);
-void 		set_redir(t_parser *parser, t_elems *elems);
-void		set_env(t_elems *elems);
+void		set_redir(t_parser *parser, t_elems *elems);
+void		set_env(t_elems *elems, t_env *env);
 void		set_cmd_args(t_parser *parser, t_elems *elems);
 t_parser	*init_parser(t_elems *elems);
-
 
 /* -----:> LIST REDIR <:-----*/
 t_redir		*redir_new(char *file, t_token type);

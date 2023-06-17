@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 10:50:55 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 17:57:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void	builtins(t_cmd *cmds, t_env *env)
 		else if (!ft_strncmp(cmds->cmd, "unset", ft_strlen(cmds->cmd) + 1))
 			ft_unset(cmds, &env);
 	}
-
 }

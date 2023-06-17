@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/16 10:47:48 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 17:37:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (strlen(command) > 0)
 			add_history(command);
-		elems = analyser(command);
-
+		elems = analyser(command, env_lst);
 		if (elems->next == NULL)
 			continue ;
 		parser = init_parser(elems);

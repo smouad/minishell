@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 10:53:34 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 17:58:56 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_correct(char *word)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_isalpha(word[i]))
@@ -37,8 +37,8 @@ int	is_correct(char *word)
 
 void	set_value(char *var, t_env *env)
 {
-	t_env *new_env;
-	t_env *tmp;
+	t_env	*new_env;
+	t_env	*tmp;
 
 	new_env = env_new(var);
 	tmp = env;
@@ -65,7 +65,7 @@ void	set_value(char *var, t_env *env)
 
 void	ft_export(t_cmd *cmd, t_env *env)
 {
-	int	i = 0;
+	int	i;
 
 	if (!cmd->args[0])
 	{
@@ -78,6 +78,7 @@ void	ft_export(t_cmd *cmd, t_env *env)
 				printf("declare -x %s\n", env->key);
 		}
 	}
+	i = 0;
 	while (cmd->args[i])
 	{
 		if (!is_correct(cmd->args[i]))
@@ -86,8 +87,5 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	}
 	i = 0;
 	while (cmd->args[i])
-	{
-		set_value(cmd->args[i], env);
-		i++;
-	}
+		set_value(cmd->args[i++], env);
 }

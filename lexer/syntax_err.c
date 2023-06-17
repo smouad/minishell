@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/08 00:30:59 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:17:03 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	redir_syntax(t_elems *elems)
 {
 	while (elems && elems->next)
 	{
-		if (is_redir(elems)	&& elems->next->type != WORD \
+		if (is_redir(elems) && elems->next->type != WORD \
 		&& elems->next->type != VAR)
 		{
 			printf("syntax error near unexpected token `%s'\n", \
