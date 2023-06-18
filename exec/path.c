@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/18 14:11:45 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/18 15:01:54 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ char	**list_to_array(t_env *env)
 	}
 	array[i] = NULL;
 	return (array);
+}
+
+void	exec_cmd(t_cmd *cmd)
+{
+	
 }
