@@ -34,6 +34,9 @@ PARSER = $(addprefix parser/,  \
 							redir_list.c\
 							parser_utils.c\
 							)
+EXEC = $(addprefix exec/,  \
+							path.c\
+							)
 BUILT = $(addprefix builtins/,  \
 							echo.c\
 							builtins.c\
