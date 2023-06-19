@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 13:39:09 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:11:41 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_parser	*init_cmds(t_elems *elems)
 			elems = elems->next;
 		}
 		cms = &parser->cmds;
-		cmd_list_add(cms, cmd_new(NULL, NULL, argc));
+		cmd_list_add(cms, cmd_new(NULL, argc));
 	}
 	return (parser);
 }

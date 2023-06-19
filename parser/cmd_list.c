@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 16:14:59 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:10:50 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
  * @state: the cmd state
  * Return: a pointer to the newly created cmd element
  */
-t_cmd	*cmd_new(char *cmd, t_redir *redir, int argc)
+t_cmd	*cmd_new(t_redir *redir, int argc)
 {
 	t_cmd	*cmds;
 
 	cmds = malloc(sizeof(t_cmd));
 	if (!cmds)
 		return (NULL);
-	cmds->cmd = cmd;
+	cmds->cmd = NULL;
 	cmds->args = (char **)malloc(sizeof(char *) * argc);
 	cmds->full_cmd = (char **)malloc(sizeof(char *) * (argc + 2));
 	if (!cmds->args || !cmds->full_cmd)

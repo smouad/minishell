@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 16:34:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:32:09 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,25 @@ void	set_cmd_args(t_parser *parser, t_elems *elems)
 
 	current = elems;
 	cmds = parser->cmds;
+	current = current->next;
 	while (cmds)
 	{
 		i = 0;
-		current = current->next;
-		cmds->cmd = ft_strdup(current->content);
-		cmds->full_cmd[i] = ft_strdup(current->content);
-		current = current->next;
 		while (i < cmds->argc && current && current->type != PIPE)
 		{
-			cmds->args[i] = ft_strdup(current->content);
-			cmds->full_cmd[i + 1] = ft_strdup(current->content);
-			i++;
-			current = current->next;
+			if (i == 0)
+			{
+				cmds->cmd = ft_strdup(current->content);
+				cmds->full_cmd[i] = ft_strdup(current->content);
+				current = current->next;
+			}
+			if (current)
+			{
+				cmds->args[i] = ft_strdup(current->content);
+				cmds->full_cmd[i + 1] = ft_strdup(current->content);
+				i++;
+				current = current->next;
+			}
 		}
 		cmds->args[i] = NULL;
 		cmds->full_cmd[i + 1] = NULL;

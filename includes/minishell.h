@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 14:24:21 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:11:28 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		redir_del(t_redir **head, t_redir *node);
 void		redir_list_free(t_redir *head);
 
 /* -----:> LIST CMD <:-----*/
-t_cmd		*cmd_new(char *cmd, t_redir *redir, int argc);
+t_cmd		*cmd_new(t_redir *redir, int argc);
 void		cmd_list_add(t_cmd **lst, t_cmd *new);
 void		cmd_del(t_cmd **head, t_cmd *node);
 void		cmd_list_free(t_cmd *head);
