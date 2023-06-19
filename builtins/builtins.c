@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 17:57:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 15:12:15 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	builtins(t_cmd *cmds, t_env *env)
 			ft_export(cmds, env);
 		else if (!ft_strncmp(cmds->cmd, "unset", ft_strlen(cmds->cmd) + 1))
 			ft_unset(cmds, &env);
+		else
+			exec_cmd(cmds, env);
 	}
 }

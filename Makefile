@@ -48,7 +48,7 @@ BUILT = $(addprefix builtins/,  \
 							unset.c\
 							)
 
-SRC = minishell.c $(LEXER) $(PARSER) $(BUILT) $(TOOLS)\
+SRC = minishell.c $(LEXER) $(PARSER) $(BUILT) $(TOOLS) $(EXEC)\
 
 OBJ	= ${SRC:.c=.o}
 

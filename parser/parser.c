@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 17:56:53 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:34:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,20 @@ void	set_cmd_args(t_parser *parser, t_elems *elems)
 	cmds = parser->cmds;
 	while (cmds)
 	{
+		i = 0;
 		current = current->next;
 		cmds->cmd = ft_strdup(current->content);
+		cmds->full_cmd[i] = ft_strdup(current->content);
 		current = current->next;
-		i = 0;
 		while (i < cmds->argc && current && current->type != PIPE)
 		{
 			cmds->args[i] = ft_strdup(current->content);
+			cmds->full_cmd[i + 1] = ft_strdup(current->content);
 			i++;
 			current = current->next;
 		}
 		cmds->args[i] = NULL;
+		cmds->full_cmd[i + 1] = NULL;
 		cmds = cmds->next;
 	}
 	token_list_free(elems);

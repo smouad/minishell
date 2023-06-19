@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/18 15:01:54 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:17:34 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	is_path(char *cmd)
 
 char	**get_path(t_env *env)
 {
+	env = env->next;
 	while (env)
 	{
-		if (!ft_strncmp("PATH", env->key, 5))
+		if (!ft_strcmp("PATH", env->key))
 		{
 			return (ft_split(env->value, ':'));
 			break ;
@@ -55,6 +56,7 @@ char	**list_to_array(t_env *env)
 	l_size = list_size(env);
 	array = (char **)malloc(l_size * sizeof(char *));
 	env = env->next;
+	i = 0;
 	while (env && i < l_size)
 	{
 		array[i] = ft_strjoin(env->key, "=");
@@ -66,7 +68,27 @@ char	**list_to_array(t_env *env)
 	return (array);
 }
 
-void	exec_cmd(t_cmd *cmd)
+void	exec_cmd(t_cmd *cmd, t_env *env_list)
 {
-	
+	char	*cmd_path;
+	char	**env;
+	char	**path;
+	int		id;
+	int		i;
+
+	env = list_to_array(env_list);
+	path = get_path(env_list);
+	id = fork();
+	if (id == 0)
+	{
+		i = 0;
+		while (path[i])
+		{
+			cmd_path = ft_strjoin(path[i], ft_strjoin("/", cmd->cmd));
+			execve(cmd_path, cmd->full_cmd, env);
+			i++;
+		}
+		exit(1);
+	}
+	waitpid(id, NULL, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 18:11:41 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 13:40:16 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_cmd
 {
 	char			*cmd;
 	char			**args;
+	char			**full_cmd;
 	t_redir			*redir;
 	int				argc;
 	struct s_cmd	*next;

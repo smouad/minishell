@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/10 10:52:48 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:14:59 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_cmd	*cmd_new(char *cmd, t_redir *redir, int argc)
 		return (NULL);
 	cmds->cmd = cmd;
 	cmds->args = (char **)malloc(sizeof(char *) * argc);
-	if (!cmds->args)
+	cmds->full_cmd = (char **)malloc(sizeof(char *) * (argc + 2));
+	if (!cmds->args || !cmds->full_cmd)
 		return (NULL);
 	cmds->redir = redir;
 	cmds->argc = argc;

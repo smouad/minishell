@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/18 14:15:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 14:24:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ int			is_path(char *cmd);
 char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
+void		exec_cmd(t_cmd *cmd, t_env *env_list);
 
 #endif
