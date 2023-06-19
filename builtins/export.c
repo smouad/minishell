@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 17:58:56 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 20:26:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_correct(char *word)
 	int	i;
 
 	i = 0;
-	if (!ft_isalpha(word[i]))
+	if (!ft_isalpha(word[i]) && word[i] != '_')
 	{
 		printf("export: `%s': not a valid identifier\n", word);
 		return (0);
@@ -83,9 +83,8 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	{
 		if (!is_correct(cmd->args[i]))
 			return ;
+		else
+			set_value(cmd->args[i], env);
 		i++;
 	}
-	i = 0;
-	while (cmd->args[i])
-		set_value(cmd->args[i++], env);
 }

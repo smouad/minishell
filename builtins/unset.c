@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 19:27:22 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 13:49:40 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/19 20:24:18 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 	while (cmd->args[i])
 	{
 		tmp = (*env)->next;
+		if (!is_correct(cmd->args[i]))
+			return ;
 		while (tmp)
 		{
 			if (!ft_strncmp(cmd->args[i], tmp->key, \
