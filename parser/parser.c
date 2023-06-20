@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 18:32:09 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/06/20 14:23:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,36 +49,42 @@ void	set_env(t_elems *elems, t_env *env)
 	}
 }
 
+void	set_help(t_cmd *cmds, t_elems *elems)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds->argc && elems && elems->type != PIPE)
+	{
+		if (i == 0)
+		{
+			cmds->cmd = ft_strdup(elems->content);
+			cmds->full_cmd[i] = ft_strdup(elems->content);
+			elems = elems->next;
+		}
+		if (elems)
+		{
+			cmds->args[i] = ft_strdup(elems->content);
+			cmds->full_cmd[i + 1] = ft_strdup(elems->content);
+			i++;
+			elems = elems->next;
+		}
+	}
+	cmds->args[i] = NULL;
+	cmds->full_cmd[i + 1] = NULL;
+}
+
 void	set_cmd_args(t_parser *parser, t_elems *elems)
 {
 	t_elems	*current;
 	t_cmd	*cmds;
-	int		i;
 
 	current = elems;
 	cmds = parser->cmds;
 	current = current->next;
 	while (cmds)
 	{
-		i = 0;
-		while (i < cmds->argc && current && current->type != PIPE)
-		{
-			if (i == 0)
-			{
-				cmds->cmd = ft_strdup(current->content);
-				cmds->full_cmd[i] = ft_strdup(current->content);
-				current = current->next;
-			}
-			if (current)
-			{
-				cmds->args[i] = ft_strdup(current->content);
-				cmds->full_cmd[i + 1] = ft_strdup(current->content);
-				i++;
-				current = current->next;
-			}
-		}
-		cmds->args[i] = NULL;
-		cmds->full_cmd[i + 1] = NULL;
+		set_help(cmds, current);
 		cmds = cmds->next;
 	}
 	token_list_free(elems);
