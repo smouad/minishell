@@ -46,6 +46,7 @@ BUILT = $(addprefix builtins/,  \
 							env_list.c\
 							export.c\
 							unset.c\
+							exit.c\
 							)
 
 SRC = minishell.c $(LEXER) $(PARSER) $(BUILT) $(TOOLS) $(EXEC)\

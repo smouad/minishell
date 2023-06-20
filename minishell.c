@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 18:33:28 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/06/20 14:49:33 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 		command = readline(CYAN"minishell"RESET MAGENTA"[$]~>:"RESET);
 		if (command == NULL)
 			break ;
-		if (strlen(command) > 0)
+		if (ft_strlen(command) > 0)
 			add_history(command);
 		elems = analyser(command, env_lst);
 		if (!elems || !elems->next)
