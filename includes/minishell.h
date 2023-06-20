@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/20 14:49:06 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/20 15:16:42 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_env		*get_env(char **env);
 void		ft_env(t_cmd *cmd, t_env *env);
 void		ft_pwd(t_cmd *cmd);
 void		ft_cd(t_cmd *cmd);
-void		ft_exit(void);
+void		ft_exit(t_cmd *cmd);
 /*export*/
 void		ft_export(t_cmd *cmd, t_env *env);
 void		set_value(char *var, t_env *env);
