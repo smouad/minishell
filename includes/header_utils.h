@@ -6,14 +6,13 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 13:40:16 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:12:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_UTILS_H
 # define HEADER_UTILS_H
 
-# include "../tools/libft.h"
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -32,6 +31,8 @@
 # define CYAN    "\033[36m"
 # define WHITE   "\033[37m"
 # define RESET   "\033[0m"
+
+# define EXIT_STAT 0
 
 typedef enum e_token
 {

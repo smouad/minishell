@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 16:17:34 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:09:45 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	exec_cmd(t_cmd *cmd, t_env *env_list)
 			execve(cmd_path, cmd->full_cmd, env);
 			i++;
 		}
-		exit(1);
+		printf("minishell: %s: command not found\n", cmd->cmd);
+		exit(127);
 	}
 	waitpid(id, NULL, 0);
 }

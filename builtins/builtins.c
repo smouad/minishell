@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/20 15:16:56 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/06/21 15:39:39 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	builtins(t_cmd *cmds, t_env *env)
 		else if (!ft_strcmp(cmds->cmd, "pwd"))
 			ft_pwd(cmds);
 		else if (!ft_strcmp(cmds->cmd, "cd"))
-			ft_cd(cmds);
+			ft_cd(cmds, env);
 		else if (!ft_strcmp(cmds->cmd, "export"))
 			ft_export(cmds, env);
 		else if (!ft_strcmp(cmds->cmd, "unset"))

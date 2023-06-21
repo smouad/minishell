@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/20 14:23:13 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:43:14 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*turn_env(char *var, t_env *env)
 		if (!ft_strncmp(var, env->key, ft_strlen(var) + 1))
 		{
 			if (env->value)
-				return (env->value);
+				return (ft_strdup(env->value));
 			else
 				break ;
 		}
@@ -37,13 +37,20 @@ void	set_env(t_elems *elems, t_env *env)
 	{
 		if (elems->type == VAR)
 		{
-			value = turn_env(elems->content + 1, env);
-			free(elems->content);
-			elems->content = NULL;
-			if (value)
-				elems->content = ft_strdup(value);
+			if (ft_strcmp(elems->content + 1, "?") == 0)
+			{
+				free(elems->content);
+				elems->content = ft_itoa(EXIT_STAT);
+			}
 			else
-				elems->content = ft_strdup("");
+			{
+				value = turn_env(elems->content + 1, env);
+				free(elems->content);
+				if (value)
+					elems->content = ft_strdup(value);
+				else
+					elems->content = ft_strdup("");
+			}
 		}
 		elems = elems->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 20:26:29 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 12:53:41 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,11 @@ void	ft_export(t_cmd *cmd, t_env *env)
 	while (cmd->args[i])
 	{
 		if (!is_correct(cmd->args[i]))
-			return ;
+			i++;
 		else
+		{
 			set_value(cmd->args[i], env);
-		i++;
+			i++;
+		}
 	}
 }

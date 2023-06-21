@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/20 15:16:42 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/06/21 17:17:26 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 # define MINISHELL_H
 
 # include "header_utils.h"
+
+int			ft_isalnum(int c);
+int			ft_isalpha(int c);
+int			ft_isdigit(int c);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+int			ft_strchr(const char *str, int c);
+size_t		ft_strlen(const char *str);
+int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int			ft_strcmp(const char *s1, const char *s2);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		**ft_split(char const *s, char c);
+char		*ft_strdup(const char *s1);
+char		*ft_itoa(int n);
 
 /* ******************************************* */
 /* ----------------:> LEXER <:---------------- */
@@ -96,7 +109,7 @@ void		ft_echo(t_cmd *cmds);
 t_env		*get_env(char **env);
 void		ft_env(t_cmd *cmd, t_env *env);
 void		ft_pwd(t_cmd *cmd);
-void		ft_cd(t_cmd *cmd);
+void		ft_cd(t_cmd *cmd, t_env *env);
 void		ft_exit(t_cmd *cmd);
 /*export*/
 void		ft_export(t_cmd *cmd, t_env *env);
