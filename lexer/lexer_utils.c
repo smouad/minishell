@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:39:16 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 17:41:12 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 19:47:42 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 	start = *i;
 	skip = start + 1;
 	while (ft_isalnum(line[skip + j]) || line[skip + j] == '_' \
-	|| line[skip + j] == '?')
+	|| (line[skip + j] == '?' && j == 0))
 		j++;
 	var = ft_substr(line, start, j + 1);
 	token_list_add(&elem, token_new(var, j + 1, VAR, DEFAULT));

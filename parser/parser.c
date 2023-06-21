@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 17:43:14 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 19:47:22 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_env(t_elems *elems, t_env *env)
 			if (ft_strcmp(elems->content + 1, "?") == 0)
 			{
 				free(elems->content);
-				elems->content = ft_itoa(EXIT_STAT);
+				elems->content = ft_itoa(0);
 			}
 			else
 			{

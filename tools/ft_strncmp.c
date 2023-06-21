@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:35:03 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 15:11:16 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 19:48:59 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
 int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 {

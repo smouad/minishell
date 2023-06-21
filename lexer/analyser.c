@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 17:42:46 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/21 19:47:27 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,4 @@ t_elems	*analyser(char *line, t_env *env)
 		return (NULL);
 	return (elems);
 }
+
