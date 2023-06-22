@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 19:46:45 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 17:13:02 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void		rm_quotes(t_elems **elems);
 void		join_cmd(t_elems **elems);
 void		type_cast(t_elems **elems);
 void		rm_spaces(t_elems **elems);
-t_elems		*analyser(char *line, t_env *env);
+t_elems		*analyser(char *line, t_parser *parser);
 
 /* -----:> SYNTAX_ERR <:-----*/
-int			quotes_syntax(t_elems *elems);
-int			redir_syntax(t_elems *elems);
-int			pipe_syntax(t_elems *elems);
+int			quotes_syntax(t_elems *elems, t_parser *parser);
+int			redir_syntax(t_elems *elems, t_parser *parser);
+int			pipe_syntax(t_elems *elems, t_parser *parser);
 int			is_redir(t_elems *elems);
 
 /* -----:> PRINT_TABLE <:-----*/
@@ -78,7 +78,7 @@ void		cmd_nbr(t_elems *elems, t_parser *parser);
 char		*turn_env(char *var, t_env *env);
 void    	init_cmds(t_elems *elems, t_parser *parser);
 void		set_redir(t_parser *parser, t_elems *elems);
-void		set_env(t_elems *elems, t_env *env);
+void		set_env(t_elems *elems, t_parser *parser);
 void		set_cmd_args(t_parser *parser, t_elems *elems);
 void    	init_parser(t_elems *elems, t_parser *parser);
 
@@ -103,12 +103,12 @@ t_env		*env_new(char *line);
 void		env_list_add(t_env **env, t_env *new);
 
 /* -----:> BUILTINS <:-----*/
-void		builtins(t_cmd *cmds, t_env *env);
+void		builtins(t_cmd *cmds, t_parser *parser);
 int			is_option(char *str);
-void		ft_echo(t_cmd *cmds);
+void		ft_echo(t_parser *parser);
 t_env		*get_env(char **env);
-void		ft_env(t_cmd *cmd, t_env *env);
-void		ft_pwd(t_cmd *cmd);
+void		ft_env(t_cmd *cmd, t_parser *parser);
+void		ft_pwd(t_parser *parser);
 void		ft_cd(t_cmd *cmd, t_env *env);
 void		ft_exit(t_cmd *cmd);
 /*export*/

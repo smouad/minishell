@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:31:44 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/12 12:59:47 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 16:58:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,28 @@ int	is_option(char *str)
 	return (0);
 }
 
-void	ft_echo(t_cmd *cmds)
+void	ft_echo(t_parser *parser)
 {
-	int	i;
-	int	trigger;
+	int		i;
+	int		trigger;
+	t_cmd	*cmd;
 
 	i = 0;
+	cmd = parser->cmds;
 	trigger = 0;
-	while (cmds->args[i] && is_option(cmds->args[i]) == 0)
+	while (cmd->args[i] && is_option(cmd->args[i]) == 0)
 	{
 		trigger = 1;
 		i++;
 	}
-	while (cmds->args[i])
+	while (cmd->args[i])
 	{
-		printf("%s", cmds->args[i]);
+		printf("%s", cmd->args[i]);
 		i++;
-		if (cmds->args[i] != NULL && cmds->args[i][0])
+		if (cmd->args[i] != NULL && cmd->args[i][0])
 			printf(" ");
 	}
 	if (trigger != 1)
 		printf("\n");
+	parser->exit_s = 0;
 }

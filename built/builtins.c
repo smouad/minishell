@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 15:39:39 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 17:07:55 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	builtins(t_cmd *cmds, t_env *env)
+void	builtins(t_cmd *cmd, t_parser *parser)
 {
-	if (cmds->cmd != NULL && env)
+	if (cmd->cmd != NULL && parser->env)
 	{
-		if (!ft_strcmp(cmds->cmd, "echo"))
-			ft_echo(cmds);
-		else if (!ft_strcmp(cmds->cmd, "env"))
-			ft_env(cmds, env);
-		else if (!ft_strcmp(cmds->cmd, "pwd"))
-			ft_pwd(cmds);
-		else if (!ft_strcmp(cmds->cmd, "cd"))
-			ft_cd(cmds, env);
-		else if (!ft_strcmp(cmds->cmd, "export"))
-			ft_export(cmds, env);
-		else if (!ft_strcmp(cmds->cmd, "unset"))
-			ft_unset(cmds, &env);
-		else if (!ft_strcmp(cmds->cmd, "exit"))
-			ft_exit(cmds);
-		else
-			exec_cmd(cmds, env);
+		if (!ft_strcmp(cmd->cmd, "echo"))
+			ft_echo(parser);
+		else if (!ft_strcmp(cmd->cmd, "env"))
+			ft_env(cmd, parser);
+		else if (!ft_strcmp(cmd->cmd, "pwd"))
+			ft_pwd(parser);
+		// else if (!ft_strcmp(cmd->cmd, "cd"))
+		// 	ft_cd(cmd, parser);
+		// else if (!ft_strcmp(cmd->cmd, "export"))
+		// 	ft_export(cmd, parser);
+		// else if (!ft_strcmp(cmd->cmd, "unset"))
+		// 	ft_unset(cmd, &parser);
+		// else if (!ft_strcmp(cmd->cmd, "exit"))
+		// 	ft_exit(cmd);
+		// else
+		// 	exec_cmd(cmd, parser);
 	}
 }

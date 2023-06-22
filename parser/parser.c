@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 19:47:22 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 16:49:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*turn_env(char *var, t_env *env)
 	return (ft_strdup(""));
 }
 
-void	set_env(t_elems *elems, t_env *env)
+void	set_env(t_elems *elems, t_parser *parser)
 {
 	char	*value;
 
@@ -40,11 +40,11 @@ void	set_env(t_elems *elems, t_env *env)
 			if (ft_strcmp(elems->content + 1, "?") == 0)
 			{
 				free(elems->content);
-				elems->content = ft_itoa(0);
+				elems->content = ft_itoa(parser->exit_s);
 			}
 			else
 			{
-				value = turn_env(elems->content + 1, env);
+				value = turn_env(elems->content + 1, parser->env);
 				free(elems->content);
 				if (value)
 					elems->content = ft_strdup(value);

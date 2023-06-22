@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 17:55:32 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 16:54:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_redir(t_elems *elems)
  * quotes_syntax - function that checks for proper quote usage in a token list
  * @elems: a pointer to the head of the token list
  */
-int	quotes_syntax(t_elems *elems)
+int	quotes_syntax(t_elems *elems, t_parser *parser)
 {
 	int	dcount;
 	int	count;
@@ -42,7 +42,7 @@ int	quotes_syntax(t_elems *elems)
 	if ((count % 2) != 0 || (dcount % 2) != 0)
 	{
 		printf("syntax error: unclosed quotes.\n");
-		return (1);
+		return (parser->exit_s = 2, 1);
 	}
 	return (0);
 }
@@ -51,7 +51,7 @@ int	quotes_syntax(t_elems *elems)
  * redir_syntax - checks for proper redirection usage in a token list
  * @elems: a pointer to the head of the token list
  */
-int	redir_syntax(t_elems *elems)
+int	redir_syntax(t_elems *elems, t_parser *parser)
 {
 	while (elems && elems->next)
 	{
@@ -60,13 +60,13 @@ int	redir_syntax(t_elems *elems)
 		{
 			printf("syntax error near unexpected token `%s'\n", \
 			elems->next->content);
-			return (1);
+			return (parser->exit_s =2, 1);
 		}
 		elems = elems->next;
 		if (is_redir(elems) && elems->next == NULL)
 		{
 			printf("syntax error near unexpected token `\\n'\n");
-			return (1);
+			return (parser->exit_s =2, 1);
 		}
 	}
 	return (0);
@@ -76,7 +76,7 @@ int	redir_syntax(t_elems *elems)
  * pipe_syntax - function that checks for proper pipe usage in a token list
  * @elems: a pointer to the head of the token list
  */
-int	pipe_syntax(t_elems *elems)
+int	pipe_syntax(t_elems *elems, t_parser *parser)
 {
 	t_elems	*head;
 
@@ -86,19 +86,19 @@ int	pipe_syntax(t_elems *elems)
 		if (head->next->type == PIPE)
 		{
 			printf("parse error near `|'\n");
-			return (1);
+			return (parser->exit_s = 2, 1);
 		}
 		if (elems->type == PIPE && elems->next->type == PIPE)
 		{
 			printf("syntax error near unexpected token `%s'\n", \
 			elems->next->content);
-			return (1);
+			return (parser->exit_s =2, 1);
 		}
 		elems = elems->next;
 		if (elems->next == NULL && elems->type == PIPE)
 		{
 			printf("syntax error near unexpected token `\\n'\n");
-			return (1);
+			return (parser->exit_s =2, 1);
 		}
 	}
 	return (0);

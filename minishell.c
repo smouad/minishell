@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 19:48:02 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 17:03:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int	main(int ac, char **av, char **env)
 	char		*command;
 	t_elems		*elems;
 	t_parser	*parser;
-	t_env		*env_lst;
 
 	(void)av;
 	parser = malloc(sizeof(t_parser));
 	if (ac != 1 || !env)
 		return (1);
-	env_lst = get_env(env);
+	parser->env = get_env(env);
 	while (1)
 	{
 		command = readline(CYAN"minishell"RESET MAGENTA"[$]~>:"RESET);
@@ -31,10 +30,10 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (ft_strlen(command) > 0)
 			add_history(command);
-		elems = analyser(command, env_lst);
+		elems = analyser(command, parser);
 		if (!elems || !elems->next)
 			continue ;
 		init_parser(elems, parser);
-		builtins(parser->cmds, env_lst);
+		builtins(parser->cmds, parser);
 	}
 }

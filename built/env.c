@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 20:30:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 17:57:32 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 17:06:24 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ t_env	*get_env(char **env)
 	return (lst);
 }
 
-void	ft_env(t_cmd *cmd, t_env *env)
+void	ft_env(t_cmd *cmd, t_parser *parser)
 {
+	t_env	*env;
+	
+	env = parser->env;
 	if (!cmd->args[0])
 	{
 		while (env && env->next)
@@ -35,7 +38,11 @@ void	ft_env(t_cmd *cmd, t_env *env)
 			if (env->value)
 				printf("%s=%s\n", env->key, env->value);
 		}
+		parser->exit_s = 0;
 	}
 	else
+	{
 		printf("env: incorrect number of argumments\n");
+		parser->exit_s = 1;	
+	}
 }
