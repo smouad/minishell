@@ -76,11 +76,11 @@ void		print_table(t_elems *lst);
 /* ******************************************** */
 void		cmd_nbr(t_elems *elems, t_parser *parser);
 char		*turn_env(char *var, t_env *env);
-t_parser	*init_cmds(t_elems *elems);
+void    	init_cmds(t_elems *elems, t_parser *parser);
 void		set_redir(t_parser *parser, t_elems *elems);
 void		set_env(t_elems *elems, t_env *env);
 void		set_cmd_args(t_parser *parser, t_elems *elems);
-t_parser	*init_parser(t_elems *elems);
+void    	init_parser(t_elems *elems, t_parser *parser);
 
 /* -----:> LIST REDIR <:-----*/
 t_redir		*redir_new(char *file, t_token type);

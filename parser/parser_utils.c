@@ -24,14 +24,12 @@ void	cmd_nbr(t_elems *elems, t_parser *parser)
 	}
 }
 
-t_parser	*init_cmds(t_elems *elems)
+void	init_cmds(t_elems *elems, t_parser *parser)
 {
-	t_parser	*parser;
 	int			i;
 	int			argc;
 	t_cmd		**cms;
 
-	parser = malloc(sizeof(t_parser));
 	cmd_nbr(elems, parser);
 	i = 0;
 	while (i++ < parser->cmd_nbr)
@@ -50,7 +48,6 @@ t_parser	*init_cmds(t_elems *elems)
 		cms = &parser->cmds;
 		cmd_list_add(cms, cmd_new(NULL, argc));
 	}
-	return (parser);
 }
 
 void	rm_redir(t_elems **elems)

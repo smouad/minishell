@@ -97,12 +97,9 @@ void	set_cmd_args(t_parser *parser, t_elems *elems)
 	token_list_free(elems);
 }
 
-t_parser	*init_parser(t_elems *elems)
+void	init_parser(t_elems *elems, t_parser *parser)
 {
-	t_parser	*parser;
-
-	parser = init_cmds(elems);
+	init_cmds(elems, parser);
 	set_redir(parser, elems);
 	set_cmd_args(parser, elems);
-	return (parser);
 }

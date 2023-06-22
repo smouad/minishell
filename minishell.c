@@ -20,6 +20,7 @@ int	main(int ac, char **av, char **env)
 	t_env		*env_lst;
 
 	(void)av;
+	parser = malloc(sizeof(t_parser));
 	if (ac != 1 || !env)
 		return (1);
 	env_lst = get_env(env);
@@ -33,7 +34,7 @@ int	main(int ac, char **av, char **env)
 		elems = analyser(command, env_lst);
 		if (!elems || !elems->next)
 			continue ;
-		parser = init_parser(elems);
+		init_parser(elems, parser);
 		builtins(parser->cmds, env_lst);
 	}
 }
