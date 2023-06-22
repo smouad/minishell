@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 16:46:21 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/22 23:41:52 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	go_home(t_env *env)
 	free(home);
 }
 
-void	ft_cd(t_cmd *cmd, t_env *env)
+void	ft_cd(t_cmd *cmd, t_parser *parser)
 {
 	char	cwd[1024];
 	char	*owd;
@@ -52,21 +52,27 @@ void	ft_cd(t_cmd *cmd, t_env *env)
 	getcwd(cwd, 1024);
 	owd = ft_strjoin("OLDPWD=", cwd);
 	if (!cmd->args[0])
-		go_home(env);
+		go_home(parser->env);
 	else if (cmd->args[0] && !cmd->args[1])
 	{
 		if (chdir(cmd->args[0]) == 0)
 		{
 			env_cwd = get_wd_env();
-			set_value(env_cwd, env);
-			set_value(owd, env);
+			set_value(env_cwd, parser->env);
+			set_value(owd, parser->env);
 			free(env_cwd);
+			parser->exit_s = 0;
 		}
 		else
-			printf("minishell: cd: no such file or directory: \
-			%s\n", cmd->args[0]);
+		{
+			printf("cd: no such file or directory: %s\n", cmd->args[0]);
+			parser->exit_s = 1;
+		}
 		free(owd);
 	}
 	else
-		printf("minishell: cd: string not in pwd: %s\n", cmd->args[0]);
+	{
+		printf("cd: too many arguments\n");
+		parser->exit_s = 1;
+	}
 }

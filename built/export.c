@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 18:49:08 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 00:06:31 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,42 @@ void	set_value(char *var, t_env *env)
 	env_list_add(&tmp, new_env);
 	return ;
 }
-
-void	ft_export(t_cmd *cmd, t_env *env)
+void	print_export(t_env *env)
 {
-	int	i;
+	while (env && env->next)
+	{
+		env = env->next;
+		if (env->value)
+			printf("declare -x %s=\"%s\"\n", env->key, env->value);
+		else
+			printf("declare -x %s\n", env->key);
+	}
+}
 
+void	ft_export(t_cmd *cmd, t_parser *parser)
+{
+	int		i;
+	int		trig;
+
+	trig = 0;
 	if (!cmd->args[0])
 	{
-		while (env && env->next)
-		{
-			env = env->next;
-			if (env->value)
-				printf("declare -x %s=\"%s\"\n", env->key, env->value);
-			else
-				printf("declare -x %s\n", env->key);
-		}
+		print_export(parser->env);
+		parser->exit_s = 0;
 	}
 	i = 0;
 	while (cmd->args[i])
 	{
 		if (!is_correct(cmd->args[i]))
-			i++;
-		else
 		{
-			set_value(cmd->args[i], env);
+			trig = 1;	
 			i++;
 		}
+		else
+		{
+			set_value(cmd->args[i], parser->env);
+			i++;
+		}
+		parser->exit_s = trig;
 	}
 }
