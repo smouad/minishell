@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 17:09:45 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:18:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**list_to_array(t_env *env)
 	return (array);
 }
 
-void	exec_cmd(t_cmd *cmd, t_env *env_list)
+void	exec_cmd(t_parser *parser)
 {
 	char	*cmd_path;
 	char	**env;
@@ -76,19 +76,19 @@ void	exec_cmd(t_cmd *cmd, t_env *env_list)
 	int		id;
 	int		i;
 
-	env = list_to_array(env_list);
-	path = get_path(env_list);
+	env = list_to_array(parser->env);
+	path = get_path(parser->env);
 	id = fork();
 	if (id == 0)
 	{
 		i = 0;
 		while (path[i])
 		{
-			cmd_path = ft_strjoin(path[i], ft_strjoin("/", cmd->cmd));
-			execve(cmd_path, cmd->full_cmd, env);
+			cmd_path = ft_strjoin(path[i], ft_strjoin("/", parser->cmds->cmd));
+			execve(cmd_path, parser->cmds->full_cmd, env);
 			i++;
 		}
-		printf("minishell: %s: command not found\n", cmd->cmd);
+		printf("minishell: %s: command not found\n", parser->cmds->cmd);
 		exit(127);
 	}
 	waitpid(id, NULL, 0);

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 13:43:29 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:19:33 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_env		*get_env(char **env);
 void		ft_env(t_cmd *cmd, t_parser *parser);
 void		ft_pwd(t_parser *parser);
 void		ft_cd(t_cmd *cmd, t_parser *parser);
-void		ft_exit(t_cmd *cmd, t_parser *parser);
+void		ft_exit(t_parser *parser);
 /*export*/
 void		ft_export(t_cmd *cmd, t_parser *parser);
 void		set_value(char *var, t_env *env);
@@ -123,6 +123,6 @@ int			is_path(char *cmd);
 char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
-void		exec_cmd(t_cmd *cmd, t_env *env_list);
+void		exec_cmd(t_parser *parser);
 
 #endif
