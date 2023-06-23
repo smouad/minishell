@@ -6,12 +6,17 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/22 16:54:13 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 00:32:30 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * is_redir - checks if a token is a redirection
+ * @elems: a pointer to the token
+ * Return: 1 if it is a redirection, 0 otherwise
+ */
 int	is_redir(t_elems *elems)
 {
 	if (elems->type == REDIR_IN || elems->type == REDIR_OUT \

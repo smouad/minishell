@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/19 18:10:50 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/06/24 00:32:52 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,3 @@ void	cmd_del(t_cmd **head, t_cmd *node)
 		free(node);
 	}
 }
-
-/**
- * cmd_list_free - function that frees the memory used by a cmd list
- * @list: a pointer to the head of the cmd list
- */
-// void	cmd_list_free(t_cmd *head)
-// {
-// 	t_cmd	*current;
-
-// 	current = head;
-// 	while (current != NULL)
-// 	{
-// 		free(current->cmd);
-// 		free(current);
-// 		current = current->next;
-// 	}
-// 	free(head);
-// }

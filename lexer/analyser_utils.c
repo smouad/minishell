@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   analyser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 17:00:25 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 21:36:52 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * is_joinable - function that checks if two adjacent elements
+ * in the token list can be concatenated
+ * @elems: a pointer to a pointer to the head element of the token list
+ *
+ * Return: 1 if the two elements can be concatenated, otherwise it returns 0.
+ */
+int	is_joinable(t_elems *elems)
+{
+	if ((elems->state == IN_DQUOTE && elems->next->state == IN_DQUOTE \
+		&& elems->next->type != VAR && elems->type != VAR) || \
+		(elems->state == IN_QUOTE && elems->next->state == IN_QUOTE))
+		return (1);
+	return (0);
+}
 /**
  * join_in_quote - function that concatenates elements in the token list
  * that are in a quote state
@@ -20,22 +35,16 @@
 void	join_in_quote(t_elems **elems)
 {
 	t_elems	*head;
+	char	*new;
 
 	head = *elems;
 	while (head && head->next)
 	{
-		if (head->state == IN_DQUOTE && head->next->state == IN_DQUOTE \
-		&& head->next->type != VAR && head->type != VAR)
+		if (is_joinable(head))
 		{
-			head->content = ft_strjoin(head->content, head->next->content);
-			head->len += head->next->len;
-			head->type = WORD;
-			token_del(elems, head->next);
-			join_in_quote(&head);
-		}
-		else if (head->state == IN_QUOTE && head->next->state == IN_QUOTE)
-		{
-			head->content = ft_strjoin(head->content, head->next->content);
+			new = ft_strjoin(head->content, head->next->content);
+			free(head->content);
+			head->content = new;
 			head->len += head->next->len;
 			head->type = WORD;
 			token_del(elems, head->next);
@@ -110,10 +119,8 @@ void	join_cmd(t_elems **elems)
 	current = current->next;
 	while (current && current->next)
 	{
-		if ((current->type == WORD && \
-		(current->next->type == WORD || current->next->type == VAR)) || \
-		(current->type == VAR && \
-		(current->next->type == WORD || current->next->type == VAR)))
+		if ((current->type == WORD || current->type == VAR) &&\
+		(current->next->type == WORD || current->next->type == VAR))
 		{
 			new_content = ft_strjoin(current->content, current->next->content);
 			free(current->content);

@@ -6,10 +6,9 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:07:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 17:46:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 21:09:43 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    free_cmds

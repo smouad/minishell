@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:57:02 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/08 15:01:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 00:37:11 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,3 @@ void	redir_del(t_redir **head, t_redir *node)
 	}
 }
 
-/**
- * redir_list_free - function that frees the memory used by a redir list
- * @list: a pointer to the head of the redir list
- */
-// void	redir_list_free(t_redir *head)
-// {
-// 	t_redir	*current;
-
-// 	current = head;
-// 	while (current != NULL)
-// 	{
-// 		free(current->file);
-// 		free(current);
-// 		current = current->next;
-// 	}
-// 	free(head);
-// }

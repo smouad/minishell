@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 15:19:33 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 22:38:06 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,12 @@ char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
 void		exec_cmd(t_parser *parser);
+/*cleanup*/
+void		free_parser(t_parser *parser);
+void		free_env(t_env *env);
+void		free_cmd(t_cmd *cmd);
+void		free_redir(t_redir *redir);
+void		free_all(t_parser *parser);
+void        free_array(char **array);
 
 #endif

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 19:47:25 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 00:36:47 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * cmd_nbr - count the number of cmds
+ * @elems: the list of elems
+ * @path: the path of the cmd
+ */
 void	cmd_nbr(t_elems *elems, t_parser *parser)
 {
 	parser->cmds = NULL;
@@ -24,6 +29,11 @@ void	cmd_nbr(t_elems *elems, t_parser *parser)
 	}
 }
 
+/**
+ * cmd_list_add - add a new cmd to the list
+ * @elems: the list of elems
+ * @path: the path of the cmd
+ */
 void	init_cmds(t_elems *elems, t_parser *parser)
 {
 	int			i;

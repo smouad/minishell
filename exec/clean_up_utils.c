@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_up.c                                         :+:      :+:    :+:   */
+/*   clean_up_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:29:24 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 16:40:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 00:31:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 
 void	free_array(char **array)
 {
@@ -43,7 +44,7 @@ void	free_redir_list(t_redir *redir)
 	}
 }
 
-void	free_list(t_env *env)
+void	free_env_list(t_env *env)
 {
 	t_env	*tmp;
 
@@ -59,9 +60,6 @@ void	free_list(t_env *env)
 
 void	free_cmd(t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
 	free(cmd->cmd);
 	free_array(cmd->args);
 	free_array(cmd->full_cmd);
@@ -82,8 +80,8 @@ void	free_cmd_list(t_cmd *cmd)
 
 void	free_parser(t_parser *parser)
 {
-	free_list(parser->env);
-	free_cmd_list(parser->cmd);
+	free_env_list(parser->env);
+	free_cmd_list(parser->cmds);
 	free(parser);
 }
 
