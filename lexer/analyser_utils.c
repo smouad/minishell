@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/17 18:02:44 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 17:00:25 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	join_cmd(t_elems **elems)
 	current = *elems;
 	type_cast(elems);
 	rm_quotes(elems);
+	current = current->next;
 	while (current && current->next)
 	{
 		if ((current->type == WORD && \

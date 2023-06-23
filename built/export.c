@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 00:06:31 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 17:45:53 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	set_value(char *var, t_env *env)
 	env_list_add(&tmp, new_env);
 	return ;
 }
+
 void	print_export(t_env *env)
 {
 	while (env && env->next)
@@ -90,7 +91,7 @@ void	ft_export(t_cmd *cmd, t_parser *parser)
 	{
 		if (!is_correct(cmd->args[i]))
 		{
-			trig = 1;	
+			trig = 1;
 			i++;
 		}
 		else

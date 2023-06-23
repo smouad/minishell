@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 20:30:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/22 17:06:24 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 17:46:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*get_env(char **env)
 void	ft_env(t_cmd *cmd, t_parser *parser)
 {
 	t_env	*env;
-	
+
 	env = parser->env;
 	if (!cmd->args[0])
 	{
@@ -43,6 +43,6 @@ void	ft_env(t_cmd *cmd, t_parser *parser)
 	else
 	{
 		printf("env: incorrect number of argumments\n");
-		parser->exit_s = 1;	
+		parser->exit_s = 1;
 	}
 }
