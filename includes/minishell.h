@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 00:15:25 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 13:43:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "header_utils.h"
 
+int	        ft_atoi(const char *str);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -110,7 +111,7 @@ t_env		*get_env(char **env);
 void		ft_env(t_cmd *cmd, t_parser *parser);
 void		ft_pwd(t_parser *parser);
 void		ft_cd(t_cmd *cmd, t_parser *parser);
-void		ft_exit(t_cmd *cmd);
+void		ft_exit(t_cmd *cmd, t_parser *parser);
 /*export*/
 void		ft_export(t_cmd *cmd, t_parser *parser);
 void		set_value(char *var, t_env *env);

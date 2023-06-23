@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:59:01 by msodor            #+#    #+#             */
-/*   Updated: 2022/10/13 09:46:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/23 13:41:08 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
 int	ft_atoi(const char *str)
 {
