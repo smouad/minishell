@@ -4,7 +4,7 @@ CC = cc
 
 RM = rm -rf
 
-FLAGS =  -Wall -Wextra -Werror -lreadline -fsanitize=address -g
+FLAGS =  -Wall -Wextra -Werror -lreadline #-fsanitize=address -g
 
 TOOLS	= $(addprefix tools/,	ft_split.c ft_strjoin.c ft_strncmp.c ft_strlen.c ft_strchr.c ft_strdup.c\
 								ft_substr.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_itoa.c ft_atoi.c)
