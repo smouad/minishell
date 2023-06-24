@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 17:46:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 15:39:27 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_elems	*analyser(char *line, t_parser *parser)
 	set_env(elems, parser);
 	join_cmd(&elems);
 	rm_spaces(&elems);
-	if (redir_syntax(elems, parser))
-		return (NULL);
 	if (pipe_syntax(elems, parser))
+		return (NULL);
+	if (redir_syntax(elems, parser))
 		return (NULL);
 	return (elems);
 }

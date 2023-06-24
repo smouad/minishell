@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 00:32:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 15:39:18 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,17 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
 		if (is_redir(elems) && elems->next->type != WORD \
 		&& elems->next->type != VAR)
 		{
-			printf("syntax error near unexpected token `%s'\n", \
-			elems->next->content);
-			return (parser->exit_s =2, 1);
+			write(2, " syntax error near unexpected token \n", 37);
+			write(2, "`", 1);
+			write(2, elems->next->content, ft_strlen(elems->next->content));
+			write(2, "\'\n", 2);
+			return (parser->exit_s = 2, 1);
 		}
 		elems = elems->next;
 		if (is_redir(elems) && elems->next == NULL)
 		{
-			printf("syntax error near unexpected token `\\n'\n");
-			return (parser->exit_s =2, 1);
+			write(2, " syntax error near unexpected token `newline'\n", 46);
+			return (parser->exit_s = 2, 1);
 		}
 	}
 	return (0);
@@ -83,27 +85,26 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
  */
 int	pipe_syntax(t_elems *elems, t_parser *parser)
 {
-	t_elems	*head;
-
-	head = elems;
 	while (elems && elems->next)
 	{
-		if (head->next->type == PIPE)
+		if (elems->next->type == PIPE)
 		{
-			printf("parse error near `|'\n");
+			write(2, " syntax error near unexpected token `|'\n", 40);
 			return (parser->exit_s = 2, 1);
 		}
 		if (elems->type == PIPE && elems->next->type == PIPE)
 		{
-			printf("syntax error near unexpected token `%s'\n", \
-			elems->next->content);
-			return (parser->exit_s =2, 1);
+			write(2, "syntax error near unexpected token \n", 40);
+			write(2, "`", 1);
+			write(2, elems->next->content, ft_strlen(elems->next->content));
+			write(2, "\'\n", 2);
+			return (parser->exit_s = 2, 1);
 		}
 		elems = elems->next;
 		if (elems->next == NULL && elems->type == PIPE)
 		{
-			printf("syntax error near unexpected token `\\n'\n");
-			return (parser->exit_s =2, 1);
+			write(2, "syntax error near unexpected token `newline'\n", 45);
+			return (parser->exit_s = 2, 1);
 		}
 	}
 	return (0);

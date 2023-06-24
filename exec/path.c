@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 23:12:13 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 14:27:14 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**list_to_array(t_env *env)
 	return (array);
 }
 
-char 	*get_cmd_path(t_parser *parser)
+char	*get_cmd_path(t_parser *parser)
 {
 	char	*cmd_path;
 	char	**path;
@@ -89,6 +89,7 @@ char 	*get_cmd_path(t_parser *parser)
 	parser->exit_s = 127;
 	return (NULL);
 }
+
 void	exec_cmd(t_parser *parser)
 {
 	char	*cmd_path;

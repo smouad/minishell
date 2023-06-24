@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/22 16:49:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 12:39:19 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	set_env(t_elems *elems, t_parser *parser)
 	{
 		if (elems->type == VAR)
 		{
+			if (ft_strlen(elems->content) == 1)
+				return ;
 			if (ft_strcmp(elems->content + 1, "?") == 0)
 			{
 				free(elems->content);

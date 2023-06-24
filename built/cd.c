@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/22 23:41:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 13:18:55 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_cd(t_cmd *cmd, t_parser *parser)
 	owd = ft_strjoin("OLDPWD=", cwd);
 	if (!cmd->args[0])
 		go_home(parser->env);
-	else if (cmd->args[0] && !cmd->args[1])
+	else
 	{
 		if (chdir(cmd->args[0]) == 0)
 		{
@@ -65,14 +65,9 @@ void	ft_cd(t_cmd *cmd, t_parser *parser)
 		}
 		else
 		{
-			printf("cd: no such file or directory: %s\n", cmd->args[0]);
+			printf("cd: %s:no such file or directory\n", cmd->args[0]);
 			parser->exit_s = 1;
 		}
 		free(owd);
-	}
-	else
-	{
-		printf("cd: too many arguments\n");
-		parser->exit_s = 1;
 	}
 }
