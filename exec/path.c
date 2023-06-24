@@ -6,15 +6,15 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 14:27:14 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 00:41:20 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_path(char *cmd)
+int	is_file(char *cmd)
 {
-	if (cmd[0] == '/')
+	if (cmd[0] == '/' || cmd[0] == '.')
 		return (1);
 	return (0);
 }
@@ -67,8 +67,42 @@ char	**list_to_array(t_env *env)
 	array[i] = NULL;
 	return (array);
 }
-
+void	put_error(char *cmd, char *error)
+{
+	write(2, "minishell: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, error, ft_strlen(error));
+	write(2, "\n", 1);
+}
 char	*get_cmd_path(t_parser *parser)
+{
+	t_cmd 		*cmd;
+	struct stat	buf;
+
+	cmd = parser->cmds;
+	if (is_file(cmd->cmd))
+	{
+		if (access(cmd->cmd, F_OK) == 0 && stat(cmd->cmd, &buf) == 0)
+		{
+			if (S_ISDIR(buf.st_mode))
+			{
+				put_error(cmd->cmd, ": Is a directory");
+				return (parser->exit_s = 126, NULL);
+			}
+			return (cmd->cmd);
+		}
+		put_error(cmd->cmd, ": No such file or directory");
+		return (parser->exit_s = 127, NULL);
+	}
+	else
+	{
+		if (if_not_path(parser))
+			return (if_not_path(parser));
+	}
+	return (NULL);
+}
+
+char	*if_not_path(t_parser *parser)
 {
 	char	*cmd_path;
 	char	**path;
@@ -80,30 +114,36 @@ char	*get_cmd_path(t_parser *parser)
 	{
 		cmd_path = ft_strjoin(path[i], ft_strjoin("/", parser->cmds->cmd));
 		if (access(cmd_path, F_OK) == 0)
+		{
+			free_array(path);
 			return (cmd_path);
+		}
 		free(cmd_path);
 		i++;
 	}
 	free_array(path);
-	printf("minishell: %s: command not found\n", parser->cmds->cmd);
+	put_error(parser->cmds->cmd, ": command not found");
 	parser->exit_s = 127;
 	return (NULL);
 }
 
 void	exec_cmd(t_parser *parser)
 {
-	char	*cmd_path;
 	char	**env;
-	int		id;
 	int		status;
+	int		id;
 
 	env = list_to_array(parser->env);
-	id = fork();
-	cmd_path = get_cmd_path(parser);
-	if (id == 0 && cmd_path)
+	if (!get_cmd_path(parser))
 	{
-		execve(cmd_path, parser->cmds->full_cmd, env);
-		free(cmd_path);
+		free_array(env);
+		return ;
+	}
+	id = fork();
+	if (id == 0)
+	{
+		execve(get_cmd_path(parser), parser->cmds->full_cmd, env);
+		free_array(env);
 		parser->exit_s = 0;
 		exit(parser->exit_s);
 	}

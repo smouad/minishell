@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 22:38:06 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 23:46:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,12 @@ int			is_correct(char *word);
 void		env_del(t_env **head, t_env *node);
 void		ft_unset(t_cmd *cmd, t_parser *parser);
 /*exec*/
-int			is_path(char *cmd);
+int			is_file(char *cmd);
 char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
 void		exec_cmd(t_parser *parser);
+char	    *if_not_path(t_parser *parser);
 /*cleanup*/
 void		free_parser(t_parser *parser);
 void		free_env(t_env *env);

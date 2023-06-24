@@ -6,11 +6,18 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 15:39:18 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 00:51:09 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	put_syntax_err(char *elem)
+{
+	write(2, "minishell: syntax error near unexpected token `", 47);
+	write(2, elem, ft_strlen(elem));
+	write(2, "'\n", 2);
+}
 
 /**
  * is_redir - checks if a token is a redirection
@@ -46,7 +53,8 @@ int	quotes_syntax(t_elems *elems, t_parser *parser)
 	}
 	if ((count % 2) != 0 || (dcount % 2) != 0)
 	{
-		printf("syntax error: unclosed quotes.\n");
+		write(2, "minishell: ", 11);
+		write(2, "syntax error: unclosed quotes.\n", 31);
 		return (parser->exit_s = 2, 1);
 	}
 	return (0);
@@ -63,10 +71,7 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
 		if (is_redir(elems) && elems->next->type != WORD \
 		&& elems->next->type != VAR)
 		{
-			write(2, " syntax error near unexpected token \n", 37);
-			write(2, "`", 1);
-			write(2, elems->next->content, ft_strlen(elems->next->content));
-			write(2, "\'\n", 2);
+			put_syntax_err(elems->next->content);
 			return (parser->exit_s = 2, 1);
 		}
 		elems = elems->next;
@@ -85,25 +90,22 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
  */
 int	pipe_syntax(t_elems *elems, t_parser *parser)
 {
+	if (elems->next && elems->next->type == PIPE)
+	{
+		put_syntax_err(elems->next->content);
+		return (parser->exit_s = 2, 1);
+	}
 	while (elems && elems->next)
 	{
-		if (elems->next->type == PIPE)
-		{
-			write(2, " syntax error near unexpected token `|'\n", 40);
-			return (parser->exit_s = 2, 1);
-		}
 		if (elems->type == PIPE && elems->next->type == PIPE)
 		{
-			write(2, "syntax error near unexpected token \n", 40);
-			write(2, "`", 1);
-			write(2, elems->next->content, ft_strlen(elems->next->content));
-			write(2, "\'\n", 2);
+			put_syntax_err(elems->next->content);
 			return (parser->exit_s = 2, 1);
 		}
 		elems = elems->next;
 		if (elems->next == NULL && elems->type == PIPE)
 		{
-			write(2, "syntax error near unexpected token `newline'\n", 45);
+			put_syntax_err(elems->content);
 			return (parser->exit_s = 2, 1);
 		}
 	}

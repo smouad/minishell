@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 17:45:53 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 19:03:06 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	is_correct(char *word)
 	i = 0;
 	if (!ft_isalpha(word[i]) && word[i] != '_')
 	{
-		printf("export: `%s': not a valid identifier\n", word);
+		write(2, "export: `", 9);
+		write(2, word, ft_strlen(word));
+		write(2, "': not a valid identifier\n", 26);
 		return (0);
 	}
 	i++;
@@ -27,7 +29,9 @@ int	is_correct(char *word)
 	{
 		if (!ft_isalnum(word[i]) && word[i] != '_')
 		{
-			printf("export: `%s': not a valid identifier\n", word);
+			write(2, "export: `", 9);
+			write(2, word, ft_strlen(word));
+			write(2, "': not a valid identifier\n", 26);
 			return (0);
 		}
 		i++;

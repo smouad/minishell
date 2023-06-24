@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 13:18:55 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 19:07:39 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void	ft_cd(t_cmd *cmd, t_parser *parser)
 		}
 		else
 		{
-			printf("cd: %s:no such file or directory\n", cmd->args[0]);
+			write(2, "cd: ", 4);
+			write(2, cmd->args[0], ft_strlen(cmd->args[0]));
+			write(2, ": ", 2);
+			write(2, "No such file or directory\n", 26);
 			parser->exit_s = 1;
 		}
 		free(owd);

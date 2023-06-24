@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:44:03 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 13:32:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:24:55 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	arg_not_digit(char *arg)
 		if (!ft_isdigit(arg[i]))
 		{
 			printf("exit\n");
-			printf("exit: numeric argument required\n");
+			write(2, "exit: ", 6);
+			write(2, arg, ft_strlen(arg));
+			write(2, ": numeric argument required\n", 28);
 			return (1);
 		}
 		i++;
@@ -42,11 +44,12 @@ void	ft_exit(t_parser *parser)
 	else
 	{
 		if (arg_not_digit(parser->cmds->args[0]))
-			parser->exit_s = 255;
+			parser->exit_s = 2;
 		else if (parser->cmds->args[1])
 		{
 			printf("exit\n");
-			printf("exit: too many arguments\n");
+			write(2, "exit: ", 6);
+			write(2, "too many arguments\n", 19);
 			parser->exit_s = 1;
 			return ;
 		}
