@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 15:39:12 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 11:50:44 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	init_cmds(t_elems *elems, t_parser *parser)
 	{
 		argc = 0;
 		elems = elems->next;
+		if (ft_strcmp(elems->content, "") == 0)
+			elems = elems->next;
 		while (elems && elems->type != PIPE && argc++ >= 0)
 		{
 			if (is_redir(elems))

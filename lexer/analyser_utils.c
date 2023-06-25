@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 21:36:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 11:42:44 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,36 +97,6 @@ void	rm_spaces(t_elems **elems)
 			temp = current->next;
 			token_del(elems, current);
 			current = temp;
-		}
-		else
-			current = current->next;
-	}
-}
-
-/**
- * join_cmd - function that concatenates adjacent elements
- * in the token list that are of type WORD
- * @elems: a pointer to a pointer to the head element of the token list
- */
-void	join_cmd(t_elems **elems)
-{
-	t_elems	*current;
-	char	*new_content;
-
-	current = *elems;
-	type_cast(elems);
-	rm_quotes(elems);
-	current = current->next;
-	while (current && current->next)
-	{
-		if ((current->type == WORD || current->type == VAR) &&\
-		(current->next->type == WORD || current->next->type == VAR))
-		{
-			new_content = ft_strjoin(current->content, current->next->content);
-			free(current->content);
-			current->content = new_content;
-			current->len = ft_strlen(new_content);
-			token_del(elems, current->next);
 		}
 		else
 			current = current->next;

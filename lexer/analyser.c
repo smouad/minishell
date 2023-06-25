@@ -6,11 +6,41 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 22:30:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 11:42:34 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/**
+ * join_cmd - function that concatenates adjacent elements
+ * in the token list that are of type WORD
+ * @elems: a pointer to a pointer to the head element of the token list
+ */
+void	join_cmd(t_elems **elems)
+{
+	t_elems	*current;
+	char	*new_content;
+
+	current = *elems;
+	type_cast(elems);
+	rm_quotes(elems);
+	current = current->next;
+	while (current && current->next)
+	{
+		if ((current->type == WORD || current->type == VAR) &&\
+		(current->next->type == WORD || current->next->type == VAR))
+		{
+			new_content = ft_strjoin(current->content, current->next->content);
+			free(current->content);
+			current->content = new_content;
+			current->len = ft_strlen(new_content);
+			token_del(elems, current->next);
+		}
+		else
+			current = current->next;
+	}
+}
 
 /**
  * analyser - processes a given input string and returns a token list

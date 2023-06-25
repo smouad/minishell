@@ -6,12 +6,16 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 00:51:09 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 11:40:27 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * put_syntax_err - function that prints a syntax error message
+ * @elem: a pointer to the token
+ */
 void	put_syntax_err(char *elem)
 {
 	write(2, "minishell: syntax error near unexpected token `", 47);
@@ -77,7 +81,8 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
 		elems = elems->next;
 		if (is_redir(elems) && elems->next == NULL)
 		{
-			write(2, " syntax error near unexpected token `newline'\n", 46);
+			write(2, "minishell: ", 11);
+			write(2, "syntax error near unexpected token `newline'\n", 46);
 			return (parser->exit_s = 2, 1);
 		}
 	}
