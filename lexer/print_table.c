@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_table.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:39:28 by msodor            #+#    #+#             */
-/*   Updated: 2023/05/26 23:58:50 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 15:38:19 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,18 @@ void	print_table(t_elems *lst)
 	t_elems	*current;
 
 	printf(BLUE"================================================\n"RESET);
-	printf(MAGENTA"| %-9s | %-9s | %-9s | %-9s |\n"RESET, "Content", "Len", "Type", "State");
+	printf(MAGENTA"| %-9s | %-9s | %-9s | %-9s |\n"RESET, \
+	"Content", "Len", "Type", "State");
 	printf(BLUE"================================================\n"RESET);
-
 	if (lst == NULL)
 	{
 		printf("Token table is empty.\n");
 		return ;
 	}
-
 	current = lst->next;
-
 	while (current != NULL)
 	{
 		print_table_row(current);
 		current = current->next;
 	}
 }
-

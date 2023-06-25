@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 19:07:39 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 15:38:45 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void	go_home(t_env *env)
 	free(home);
 }
 
+void	cd_put_error(char *str, t_parser *parser)
+{
+	write(2, "cd: ", 4);
+	write(2, str, ft_strlen(str));
+	write(2, ": ", 2);
+	write(2, "No such file or directory\n", 26);
+	parser->exit_s = 1;
+}
+
 void	ft_cd(t_cmd *cmd, t_parser *parser)
 {
 	char	cwd[1024];
@@ -64,13 +73,7 @@ void	ft_cd(t_cmd *cmd, t_parser *parser)
 			parser->exit_s = 0;
 		}
 		else
-		{
-			write(2, "cd: ", 4);
-			write(2, cmd->args[0], ft_strlen(cmd->args[0]));
-			write(2, ": ", 2);
-			write(2, "No such file or directory\n", 26);
-			parser->exit_s = 1;
-		}
+			cd_put_error(cmd->args[0], parser);
 		free(owd);
 	}
 }

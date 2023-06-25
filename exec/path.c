@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 00:41:20 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 15:41:10 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	**list_to_array(t_env *env)
 	array[i] = NULL;
 	return (array);
 }
+
 void	put_error(char *cmd, char *error)
 {
 	write(2, "minishell: ", 11);
@@ -74,9 +75,10 @@ void	put_error(char *cmd, char *error)
 	write(2, error, ft_strlen(error));
 	write(2, "\n", 1);
 }
+
 char	*get_cmd_path(t_parser *parser)
 {
-	t_cmd 		*cmd;
+	t_cmd		*cmd;
 	struct stat	buf;
 
 	cmd = parser->cmds;

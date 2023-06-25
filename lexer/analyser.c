@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 11:42:34 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 15:39:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	join_cmd(t_elems **elems)
 	current = current->next;
 	while (current && current->next)
 	{
-		if ((current->type == WORD || current->type == VAR) &&\
+		if ((current->type == WORD || current->type == VAR) && \
 		(current->next->type == WORD || current->next->type == VAR))
 		{
 			new_content = ft_strjoin(current->content, current->next->content);

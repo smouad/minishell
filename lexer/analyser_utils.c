@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 11:42:44 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 15:34:44 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	is_joinable(t_elems *elems)
 		return (1);
 	return (0);
 }
+
 /**
  * join_in_quote - function that concatenates elements in the token list
  * that are in a quote state

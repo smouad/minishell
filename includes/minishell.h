@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 23:46:21 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 15:40:24 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "header_utils.h"
 
-int	        ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -77,11 +77,11 @@ void		print_table(t_elems *lst);
 /* ******************************************** */
 void		cmd_nbr(t_elems *elems, t_parser *parser);
 char		*turn_env(char *var, t_env *env);
-void    	init_cmds(t_elems *elems, t_parser *parser);
+void		init_cmds(t_elems *elems, t_parser *parser);
 void		set_redir(t_parser *parser, t_elems *elems);
 void		set_env(t_elems *elems, t_parser *parser);
 void		set_cmd_args(t_parser *parser, t_elems *elems);
-void    	init_parser(t_elems *elems, t_parser *parser);
+void		init_parser(t_elems *elems, t_parser *parser);
 
 /* -----:> LIST REDIR <:-----*/
 t_redir		*redir_new(char *file, t_token type);
@@ -124,13 +124,13 @@ char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
 void		exec_cmd(t_parser *parser);
-char	    *if_not_path(t_parser *parser);
+char		*if_not_path(t_parser *parser);
 /*cleanup*/
 void		free_parser(t_parser *parser);
 void		free_env(t_env *env);
 void		free_cmd(t_cmd *cmd);
 void		free_redir(t_redir *redir);
 void		free_all(t_parser *parser);
-void        free_array(char **array);
+void		free_array(char **array);
 
 #endif
