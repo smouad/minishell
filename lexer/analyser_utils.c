@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 15:34:44 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 18:52:12 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ void	rm_spaces(t_elems **elems)
 
 	current = *elems;
 	temp = NULL;
+	current = current->next;
 	while (current != NULL)
 	{
-		if (current->type == _SPACE)
+		if (current->type == _SPACE || ft_strlen(current->content) == 0)
 		{
 			temp = current->next;
 			token_del(elems, current);

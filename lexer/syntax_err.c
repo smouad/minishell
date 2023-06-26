@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 13:49:58 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/25 16:58:55 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
 		if (is_redir(elems) && elems->next == NULL)
 		{
 			write(2, "minishell: ", 11);
-			write(2, "syntax error near unexpected token `newline'\n", 46);
+			write(2, "syntax error near unexpected token `newline'\n", 45);
 			return (parser->exit_s = 2, 1);
 		}
 	}
