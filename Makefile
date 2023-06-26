@@ -17,9 +17,9 @@ LEXER	= $(addprefix lexer/,	lexer.c list.c lexer_utils.c state.c \
 
 PARSER	= $(addprefix parser/,	parser.c cmd_list.c redir_list.c parser_utils.c)
 
-EXEC	= $(addprefix exec/,	path.c clean_up_utils.c)#exec.c exec_utils.c)
+EXEC	= $(addprefix exec/,	path.c clean_up_utils.c execute_cmd.c)#exec.c exec_utils.c)
 
-BUILT	= $(addprefix built/,	echo.c builtins.c env.c pwd.c cd.c \
+BUILT	= $(addprefix exec/built/,	echo.c env.c pwd.c cd.c \
 								env_list.c export.c unset.c exit.c)
 
 SRC = minishell.c $(LEXER) $(PARSER) $(BUILT) $(TOOLS) $(EXEC)\

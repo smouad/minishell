@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 15:41:10 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 11:40:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,14 @@ char	*get_cmd_path(t_parser *parser)
 	{
 		if (access(cmd->cmd, F_OK) == 0 && stat(cmd->cmd, &buf) == 0)
 		{
+			if (access(cmd->cmd, X_OK) == -1)
+			{
+				put_error(cmd->cmd, ": Permission denied");
+				return (parser->exit_s = 126, NULL);
+			}
 			if (S_ISDIR(buf.st_mode))
 			{
-				put_error(cmd->cmd, ": Is a directory");
+				put_error(cmd->cmd, ": is a directory");
 				return (parser->exit_s = 126, NULL);
 			}
 			return (cmd->cmd);
@@ -96,12 +101,7 @@ char	*get_cmd_path(t_parser *parser)
 		put_error(cmd->cmd, ": No such file or directory");
 		return (parser->exit_s = 127, NULL);
 	}
-	else
-	{
-		if (if_not_path(parser))
-			return (if_not_path(parser));
-	}
-	return (NULL);
+	return (if_not_path(parser));
 }
 
 char	*if_not_path(t_parser *parser)

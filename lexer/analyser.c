@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 18:58:46 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 11:30:41 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_elems	*analyser(char *line, t_parser *parser)
 	t_elems	*elems;
 
 	elems = lexer(line);
+	// print_table(elems);
 	if (quotes_syntax(elems, parser))
 		return (NULL);
 	set_env(elems, parser);

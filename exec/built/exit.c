@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:44:03 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 22:24:55 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:58:56 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	arg_not_digit(char *arg)
 {
@@ -44,7 +44,7 @@ void	ft_exit(t_parser *parser)
 	else
 	{
 		if (arg_not_digit(parser->cmds->args[0]))
-			parser->exit_s = 2;
+			parser->exit_s = 255;
 		else if (parser->cmds->args[1])
 		{
 			printf("exit\n");

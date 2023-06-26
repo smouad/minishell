@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 20:30:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 17:46:23 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:58:52 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_env	*get_env(char **env)
 {

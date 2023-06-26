@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 19:27:22 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 13:20:27 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:59:09 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	do_unset(char *arg, t_env *env)
 {

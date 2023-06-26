@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 20:58:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 13:12:45 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:59:05 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_pwd(t_parser *parser)
 {

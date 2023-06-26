@@ -6,11 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:31:44 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/23 17:46:17 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:58:43 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_option(char *str)
 {
