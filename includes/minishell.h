@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 15:40:24 by msodor           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:50:42 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,12 @@ void		free_cmd(t_cmd *cmd);
 void		free_redir(t_redir *redir);
 void		free_all(t_parser *parser);
 void		free_array(char **array);
+
+
+
+
+
+int	execute_all(t_parser *parser);
+void	exec_cmd_list(t_parser *parser);
 
 #endif
