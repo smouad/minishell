@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 00:06:07 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 15:39:33 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:13:05 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ t_elems	*lexer(char *line)
 	t_elems	*elems;
 
 	i = 0;
-	elems = malloc(sizeof(t_elems));
-	elems->next = NULL;
+	elems = token_new("", 0, _SPACE, DEFAULT);
 	while (line[i])
 	{
 		if (line[i] == '$')

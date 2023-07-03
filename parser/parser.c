@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/30 13:45:48 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:17:07 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ void	set_env(t_elems *elems, t_parser *parser)
 void	set_cmd_args(t_parser *parser, t_elems *elems)
 {
 	t_cmd	*cmds;
+	int		i;
 
 	cmds = parser->cmds;
-	int	i;
-
 	while (cmds)
 	{
 		i = 0;
@@ -89,7 +88,6 @@ void	set_cmd_args(t_parser *parser, t_elems *elems)
 		cmds->full_cmd[i + 1] = NULL;
 		cmds = cmds->next;
 	}
-	token_list_free(elems);
 }
 
 void	init_parser(t_elems *elems, t_parser *parser)
@@ -97,4 +95,5 @@ void	init_parser(t_elems *elems, t_parser *parser)
 	init_cmds(elems, parser);
 	set_redir(parser, elems);
 	set_cmd_args(parser, elems);
+	token_list_free(elems);
 }

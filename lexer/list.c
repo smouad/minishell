@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 11:16:41 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:14:18 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	token_list_free(t_elems *head)
 	{
 		current = head;
 		head = head->next;
+		free(current->content);
 		free(current);
 	}
 	free(head);

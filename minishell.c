@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/30 13:46:04 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:18:00 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		init_parser(elems, parser);
 		builtins(parser->cmds, parser);
+		free_cmd(parser->cmds);
 	}
 }

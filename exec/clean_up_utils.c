@@ -6,12 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:29:24 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 00:31:13 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/03 16:08:30 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 void	free_array(char **array)
 {
