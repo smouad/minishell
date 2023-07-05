@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:33:05 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 14:17:29 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char		**turn_env(char *var, t_env *env);
 void		init_cmds(t_elems *elems, t_parser *parser);
 void		set_redir(t_parser *parser, t_elems *elems);
 void		set_env(t_elems *elems, t_parser *parser);
-void		set_cmd_args(t_parser *parser, t_elems *elems);
+void		set_cmd_args(t_cmd *cmds, t_elems *elems);
 void		init_parser(t_elems *elems, t_parser *parser);
 
 /* -----:> LIST REDIR <:-----*/
