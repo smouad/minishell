@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/28 18:50:42 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 10:19:04 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t		ft_strlen(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
-char		**ft_split(char const *s, char c);
+char		**ft_split(char const *s, char *c);
 char		*ft_strdup(const char *s1);
 char		*ft_itoa(int n);
 
@@ -38,6 +38,7 @@ t_elems		*token_new(char *content, int len, t_token type, t_state state);
 void		token_list_add(t_elems **lst, t_elems *new);
 void		token_del(t_elems **head, t_elems *node);
 void		token_list_free(t_elems *list);
+void		token_list_insert(t_elems **node, t_elems *new);
 
 /* -----:> STATE <:-----*/
 void		set_state(t_elems *elems);
@@ -76,7 +77,7 @@ void		print_table(t_elems *lst);
 /* ----------------:> PARSER <:---------------- */
 /* ******************************************** */
 void		cmd_nbr(t_elems *elems, t_parser *parser);
-char		*turn_env(char *var, t_env *env);
+char		**turn_env(char *var, t_env *env);
 void		init_cmds(t_elems *elems, t_parser *parser);
 void		set_redir(t_parser *parser, t_elems *elems);
 void		set_env(t_elems *elems, t_parser *parser);
@@ -132,12 +133,8 @@ void		free_cmd(t_cmd *cmd);
 void		free_redir(t_redir *redir);
 void		free_all(t_parser *parser);
 void		free_array(char **array);
-
-
-
-
-
-int	execute_all(t_parser *parser);
-void	exec_cmd_list(t_parser *parser);
+/*exec_all*/
+int			execute_all(t_parser *parser);
+void		exec_cmd_list(t_parser *parser);
 
 #endif

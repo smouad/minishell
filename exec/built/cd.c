@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 13:58:38 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 09:38:45 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	go_home(t_env *env)
 {
 	char	cwd[1024];
 	char	*owd;
-	char	*home;
+	char	**home;
 	char	*env_cwd;
 
 	getcwd(cwd, 1024);
 	owd = ft_strjoin("OLDPWD=", cwd);
 	home = turn_env("HOME", env);
-	if (chdir(home) == 0)
+	if (chdir(home[0]) == 0)
 	{
 		env_cwd = get_wd_env();
 		set_value(env_cwd, env);
@@ -40,7 +40,7 @@ void	go_home(t_env *env)
 		free(env_cwd);
 	}
 	free(owd);
-	free(home);
+	free_array(home);
 }
 
 void	cd_put_error(char *str, t_parser *parser)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:29:33 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/21 19:48:42 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/04 14:31:52 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static	size_t	count_words(const char *str, char c)
+static	size_t	count_words(const char *str, char *c)
 {
 	size_t	i;
 	size_t	count;
@@ -21,17 +21,17 @@ static	size_t	count_words(const char *str, char c)
 	count = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] == c)
+		while (str[i] && ft_strchr(c, str[i]) >= 0)
 			i++;
 		if (str[i] != '\0')
 			count++;
-		while (str[i] && str[i] != c)
+		while (str[i] && ft_strchr(c, str[i]) == -1)
 			i++;
 	}
 	return (count);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *c)
 {
 	char	**split;
 	size_t	start;
@@ -48,10 +48,10 @@ char	**ft_split(char const *s, char c)
 	i = -1;
 	while (++i < count_words(s, c))
 	{
-		while (s[start] == c)
+		while (ft_strchr(c, s[start]) >= 0)
 			start++;
 		end = start;
-		while (s[end] != c && s[end])
+		while (ft_strchr(c, s[end]) == -1 && s[end])
 			end++;
 		split[i] = ft_substr(s, start, (end - start));
 		start = end;

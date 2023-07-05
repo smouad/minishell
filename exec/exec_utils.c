@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/03 16:00:48 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/04 13:15:27 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**get_path(t_env *env)
 	{
 		if (!ft_strcmp("PATH", env->key))
 		{
-			return (ft_split(env->value, ':'));
+			return (ft_split(env->value, ":"));
 			break ;
 		}
 		env = env->next;

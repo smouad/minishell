@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/03 16:14:18 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 09:28:23 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,50 @@ void	token_del(t_elems **head, t_elems *node)
 		free(node);
 	}
 }
+
+/**
+ * token_list_insert - function that inserts a new token element in a token list
+ * @head: a pointer to the head of the token list
+ * @node: a pointer to the token element after which the new token element
+ * should be inserted
+ * @new: a pointer to the new token element
+ */
+void	token_list_insert(t_elems **node, t_elems *new)
+{
+	t_elems	*current;
+
+	current = *node;
+	if ((*node) == NULL)
+		return ;
+	if ((*node)->next == NULL)
+	{
+		(*node)->next = new;
+		return ;
+	}
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new;
+}
+// {
+// 	t_elems	*current;
+
+// 	current = *head;
+// 	if (*head == NULL)
+// 		return ;
+// 	if (node == *head)
+// 	{
+// 		new->next = node->next;
+// 		node->next = new;
+// 		return ;
+// 	}
+// 	while (current->next != NULL && current->next != node)
+// 		current = current->next;
+// 	if (current->next == node)
+// 	{
+// 		new->next = node->next;
+// 		node->next = new;
+// 	}
+// }
 
 /**
  * token_list_free - function that frees the memory used by a token list

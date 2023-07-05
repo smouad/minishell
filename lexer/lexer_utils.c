@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:39:16 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 11:29:34 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/04 13:10:49 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 	while (ft_isalnum(line[skip + j]) || line[skip + j] == '_' \
 	|| (line[skip + j] == '?' && j == 0))
 	{
-		if (line[skip + j] == '?' && j == 0)
+		if ((line[skip + j] == '?' || ft_isdigit(line[skip + j])) && j == 0)
 		{
 			j++;
 			break ;
