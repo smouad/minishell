@@ -6,12 +6,17 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:58:54 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 13:58:48 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:54:56 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * env_new - function that creates a new environment variable node
+ * @line: The line containing the environment variable (key=value)
+ * Return: A pointer to the newly created t_env node
+ */
 t_env	*env_new(char *line)
 {
 	t_env	*env;
@@ -35,6 +40,12 @@ t_env	*env_new(char *line)
 	return (env);
 }
 
+/**
+ * env_del - deletes an environment variable node from the linked list
+ * @head: A pointer to the head of the linked list
+ * @node: The node to be deleted
+ * Return: void
+ */
 void	env_del(t_env **head, t_env *node)
 {
 	t_env	*current;
@@ -63,6 +74,12 @@ void	env_del(t_env **head, t_env *node)
 	}
 }
 
+/**
+ * env_list_add - adds a new environment variable node to the end of the list
+ * @env: A pointer to the head of the linked list
+ * @new: The new node to be added
+ * Return: void
+ */
 void	env_list_add(t_env **env, t_env *new)
 {
 	t_env	*ptr;

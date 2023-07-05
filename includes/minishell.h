@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 10:19:04 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:33:05 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,11 @@ void		init_parser(t_elems *elems, t_parser *parser);
 t_redir		*redir_new(char *file, t_token type);
 void		redir_add(t_redir **lst, t_redir *new);
 void		redir_del(t_redir **head, t_redir *node);
-void		redir_list_free(t_redir *head);
 
 /* -----:> LIST CMD <:-----*/
 t_cmd		*cmd_new(t_redir *redir, int argc);
 void		cmd_list_add(t_cmd **lst, t_cmd *new);
 void		cmd_del(t_cmd **head, t_cmd *node);
-void		cmd_list_free(t_cmd *head);
 
 /* *********************************************** */
 /* ----------------:> EXECUTION <:---------------- */
@@ -128,10 +126,9 @@ void		exec_cmd(t_parser *parser);
 char		*if_not_path(t_parser *parser);
 /*cleanup*/
 void		free_parser(t_parser *parser);
-void		free_env(t_env *env);
-void		free_cmd(t_cmd *cmd);
-void		free_redir(t_redir *redir);
-void		free_all(t_parser *parser);
+void		free_redir_list(t_redir *redir);
+void		free_env_list(t_env *env);
+void		free_cmd_list(t_cmd *cmd);
 void		free_array(char **array);
 /*exec_all*/
 int			execute_all(t_parser *parser);

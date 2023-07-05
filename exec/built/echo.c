@@ -6,12 +6,17 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:31:44 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/03 16:33:45 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:53:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * is_option - function that checks if a string is an option
+ * @str: The string to check
+ * Return: 0 if the string is an option, 1 otherwise
+ */
 int	is_option(char *str)
 {
 	int	i;
@@ -29,6 +34,11 @@ int	is_option(char *str)
 	return (0);
 }
 
+/**
+ * ft_echo - function that prints the arguments to the standard output
+ * @parser: A pointer to the parser structure
+ * Return: void
+ */
 void	ft_echo(t_parser *parser)
 {
 	int		i;

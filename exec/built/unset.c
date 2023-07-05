@@ -6,12 +6,18 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 19:27:22 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 13:59:09 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 13:00:34 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * do_unset - function that removes an environment variable from the list
+ * @arg: The name of the variable to unset
+ * @env: A pointer to the head of the environment variable linked list
+ * Return: void
+ */
 void	do_unset(char *arg, t_env *env)
 {
 	t_env	*tmp;
@@ -28,6 +34,12 @@ void	do_unset(char *arg, t_env *env)
 	}
 }
 
+/**
+ * ft_unset - function that handles the unset command
+ * @cmd: A pointer to the command structure
+ * @parser: A pointer to the parser structure
+ * Return: void
+ */
 void	ft_unset(t_cmd *cmd, t_parser *parser)
 {
 	int		i;
@@ -45,31 +57,3 @@ void	ft_unset(t_cmd *cmd, t_parser *parser)
 	}
 	parser->exit_s = trig;
 }
-
-// void	ft_unset(t_cmd *cmd, t_env **env)
-// {
-// 	int		i;
-// 	t_env	*tmp;
-
-// 	i = 0;
-// 	while (cmd->args[i])
-// 	{
-// 		tmp = (*env)->next;
-// 		if (!is_correct(cmd->args[i]))
-// 			i++;
-// 		else
-// 		{
-// 			while (tmp)
-// 			{
-// 				if (!ft_strncmp(cmd->args[i], tmp->key, 
-// 				ft_strlen(cmd->args[i]) + 1))
-// 				{
-// 					env_del(env, tmp);
-// 					break ;
-// 				}
-// 				tmp = tmp->next;
-// 			}
-// 			i++;
-// 		}
-// 	}
-// }

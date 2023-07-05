@@ -6,12 +6,17 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 13:59:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:59:30 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * is_correct - checks if a word is a valid identifier for the export command
+ * @word: The word to be checked
+ * Return: 1 if the word is a valid identifier, 0 otherwise
+ */
 int	is_correct(char *word)
 {
 	int	i;
@@ -39,6 +44,12 @@ int	is_correct(char *word)
 	return (1);
 }
 
+/**
+ * set_value - function that sets the value of an environment variable
+ * @var: The variable string in the format "key=value"
+ * @env: A pointer to the head of the environment variable linked list
+ * Return: void
+ */
 void	set_value(char *var, t_env *env)
 {
 	t_env	*new_env;
@@ -67,6 +78,11 @@ void	set_value(char *var, t_env *env)
 	return ;
 }
 
+/**
+ * print_export - prints the export command for each environment variable
+ * @env: A pointer to the head of the environment variable linked list
+ * Return: void
+ */
 void	print_export(t_env *env)
 {
 	while (env && env->next)
@@ -79,6 +95,12 @@ void	print_export(t_env *env)
 	}
 }
 
+/**
+ * ft_export - function that handles the export command
+ * @cmd: A pointer to the command structure
+ * @parser: A pointer to the parser structure
+ * Return: void
+ */
 void	ft_export(t_cmd *cmd, t_parser *parser)
 {
 	int		i;

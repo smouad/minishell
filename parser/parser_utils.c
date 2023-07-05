@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 14:17:05 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:41:15 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ void	init_cmds(t_elems *elems, t_parser *parser)
 	}
 }
 
+/**
+ * rm_redir - removes redirect tokens from a linked list of elements
+ * @elems: A pointer to a pointer to the head element of the token list
+ */
 void	rm_redir(t_elems **elems)
 {
 	t_elems	*current;
@@ -81,6 +85,11 @@ void	rm_redir(t_elems **elems)
 	}
 }
 
+/**
+ * set_redir - function that sets up redirections for the commands in the parser
+ * @parser: A pointer to the parser structure
+ * @elems: The linked list of elements representing the tokens
+ */
 void	set_redir(t_parser *parser, t_elems *elems)
 {
 	t_elems	*current;

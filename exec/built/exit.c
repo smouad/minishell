@@ -6,12 +6,17 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:44:03 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/26 13:58:56 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:57:50 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * arg_not_digit - function that checks if an argument is not a numeric digit
+ * @arg: The argument to be checked
+ * Return: 1 if the argument is not a numeric digit, 0 otherwise
+ */
 int	arg_not_digit(char *arg)
 {
 	int	i;
@@ -34,6 +39,11 @@ int	arg_not_digit(char *arg)
 	return (0);
 }
 
+/**
+ * ft_exit - function that handles the exit command
+ * @parser: A pointer to the parser structure
+ * Return: void
+ */
 void	ft_exit(t_parser *parser)
 {
 	if (!parser->cmds->args[0])
@@ -56,5 +66,6 @@ void	ft_exit(t_parser *parser)
 		else
 			parser->exit_s = ft_atoi(parser->cmds->args[0]);
 	}
+	free_parser(parser);
 	exit(parser->exit_s);
 }

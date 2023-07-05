@@ -6,12 +6,18 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 09:38:45 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:50:22 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * get_wd_env - retrieves the current working directory and
+ * creates an environment variable string
+ * Return: The environment variable string representing
+ * the current working directory (PWD=cwd)
+ */
 char	*get_wd_env(void)
 {
 	char	*cwd_env;
@@ -22,6 +28,12 @@ char	*get_wd_env(void)
 	return (cwd_env);
 }
 
+/**
+ * go_home - function that changes the current directory to the home directory
+ * and updates the environment variables (PWD and OLDPWD)
+ * @env: A pointer to the environment structure
+ * Return: void
+ */
 void	go_home(t_env *env)
 {
 	char	cwd[1024];
@@ -43,6 +55,12 @@ void	go_home(t_env *env)
 	free_array(home);
 }
 
+/**
+ * cd_put_error - function that outputs an error message for the cd command
+ * @str: The argument that caused the error
+ * @parser: A pointer to the parser structure
+ * Return: void
+ */
 void	cd_put_error(char *str, t_parser *parser)
 {
 	write(2, "cd: ", 4);
@@ -52,6 +70,11 @@ void	cd_put_error(char *str, t_parser *parser)
 	parser->exit_s = 1;
 }
 
+/**
+ * ft_cd - function that handles the "cd" command to change the current directory
+ * @cmd: A pointer to the command structure containing the command arguments
+ * @parser: A pointer to the parser structure
+ */
 void	ft_cd(t_cmd *cmd, t_parser *parser)
 {
 	char	cwd[1024];

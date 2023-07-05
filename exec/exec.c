@@ -6,12 +6,18 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:54:58 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/03 15:58:46 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/05 13:12:58 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**
+ * put_error - Helper function to print error messages
+ * @cmd: The command causing the error
+ * @error: The error message
+ * Return: void
+ */
 void	put_error(char *cmd, char *error)
 {
 	write(2, "minishell: ", 11);
@@ -20,6 +26,11 @@ void	put_error(char *cmd, char *error)
 	write(2, "\n", 1);
 }
 
+/**
+ * get_cmd_path - Function to get the full path of the command
+ * @parser: A pointer to the parser structure
+ * Return: The commands full path, or NULL if not found or an error occurred
+ */
 char	*get_cmd_path(t_parser *parser)
 {
 	t_cmd		*cmd;
@@ -48,6 +59,11 @@ char	*get_cmd_path(t_parser *parser)
 	return (if_not_path(parser));
 }
 
+/**
+ * if_not_path - Function to get the command path if it is not a file path
+ * @parser: A pointer to the parser structure
+ * Return: The command path, or NULL if not found
+ */
 char	*if_not_path(t_parser *parser)
 {
 	char	*cmd_path;
