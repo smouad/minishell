@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/27 21:55:36 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/06 18:01:35 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <dirent.h>
+# include <limits.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>

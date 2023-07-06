@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 20:58:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:59:54 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/06 18:24:19 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
  */
 void	ft_pwd(t_parser *parser)
 {
-	char	cwd[1024];
+	char	cwd[PATH_MAX];
 
-	if (getcwd(cwd, 1024) == NULL)
+	if (getcwd(cwd, PATH_MAX) == NULL)
 	{
 		printf("minishell: pwd: failed\n");
 		parser->exit_s = 1;

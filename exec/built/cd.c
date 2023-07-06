@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 16:53:17 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/06 18:24:11 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 char	*get_wd_env(void)
 {
 	char	*cwd_env;
-	char	cwd[1024];
+	char	cwd[PATH_MAX];
 
-	getcwd(cwd, 1024);
+	getcwd(cwd, PATH_MAX);
 	cwd_env = ft_strjoin("PWD=", cwd);
 	return (cwd_env);
 }
@@ -36,12 +36,12 @@ char	*get_wd_env(void)
  */
 void	go_home(t_env *env)
 {
-	char	cwd[1024];
+	char	cwd[PATH_MAX];
 	char	*owd;
 	char	**home;
 	char	*env_cwd;
 
-	getcwd(cwd, 1024);
+	getcwd(cwd, PATH_MAX);
 	owd = ft_strjoin("OLDPWD=", cwd);
 	home = turn_env("HOME", env);
 	if (chdir(home[0]) == 0)
