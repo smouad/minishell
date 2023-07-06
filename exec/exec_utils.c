@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 13:09:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/06 14:50:47 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ int	is_file(char *cmd)
  */
 char	**get_path(t_env *env)
 {
+	char	**path;
 	env = env->next;
 	while (env)
 	{
 		if (!ft_strcmp("PATH", env->key))
-		{
 			return (ft_split(env->value, ":"));
-			break ;
-		}
 		env = env->next;
 	}
-	return (NULL);
+	path = (char **)malloc(sizeof(char *) * 1);
+	path[0] = NULL;
+	return (path);
 }
 
 /**
