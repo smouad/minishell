@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:50:22 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:53:17 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	cd_put_error(char *str, t_parser *parser)
  */
 void	ft_cd(t_cmd *cmd, t_parser *parser)
 {
-	char	cwd[1024];
+	char	cwd[PATH_MAX];
 	char	*owd;
 	char	*env_cwd;
 
-	getcwd(cwd, 1024);
+	getcwd(cwd, PATH_MAX);
 	owd = ft_strjoin("OLDPWD=", cwd);
 	if (!cmd->args[0])
 		go_home(parser->env);
