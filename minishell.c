@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 12:24:30 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/06 15:48:58 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	prinsipal(t_parser *parser)
 		command = readline(CYAN"minishell"RESET MAGENTA"[$]~>:"RESET);
 		if (command == NULL)
 			break ;
+		if (command[0] == 0)
+		{
+			free(command);
+			continue ;
+		}
 		if (ft_strlen(command) > 0)
 			add_history(command);
 		elems = analyser(command, parser);
@@ -29,6 +34,7 @@ void	prinsipal(t_parser *parser)
 		if (!elems || !elems->next)
 			continue ;
 		init_parser(elems, parser);
+		token_list_free(elems);
 		builtins(parser->cmds, parser);
 		free_cmd_list(parser->cmds);
 	}
@@ -45,4 +51,5 @@ int	main(int ac, char **av, char **env)
 	parser->env = get_env(env);
 	prinsipal(parser);
 	free_env_list(parser->env);
+	free(parser);
 }

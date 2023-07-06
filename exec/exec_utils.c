@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 13:43:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 14:50:47 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/06 15:48:06 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	is_file(char *cmd)
 char	**get_path(t_env *env)
 {
 	char	**path;
+
 	env = env->next;
 	while (env)
 	{

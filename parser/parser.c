@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 14:17:47 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/06 15:47:40 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,4 @@ void	init_parser(t_elems *elems, t_parser *parser)
 	init_cmds(elems, parser);
 	set_redir(parser, elems);
 	set_cmd_args(parser->cmds, elems);
-	token_list_free(elems);
 }

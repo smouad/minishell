@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:16:17 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:01:07 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/06 15:50:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ t_elems	*analyser(char *line, t_parser *parser)
 	set_env(elems, parser);
 	join_cmd(&elems);
 	rm_spaces(&elems);
-	if (pipe_syntax(elems, parser))
+	if ((elems->content[0] == '\0' && !elems->next) \
+	|| pipe_syntax(elems, parser))
 	{
 		token_list_free(elems);
 		return (NULL);
