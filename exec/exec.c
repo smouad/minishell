@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:54:58 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 14:15:26 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 16:39:05 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*if_not_path(t_parser *parser, t_cmd *cmds)
 	return (NULL);
 }
 
-void	exec_cmd(t_parser *parser, t_cmd *cmd)
+int	exec_cmd(t_parser *parser, t_cmd *cmd)
 {
 	char	**env;
 	int		status;
@@ -98,10 +98,7 @@ void	exec_cmd(t_parser *parser, t_cmd *cmd)
 
 	env = list_to_array(parser->env);
 	if (!get_cmd_path(parser, cmd))
-	{
-		free_array(env);
-		return ;
-	}
+		return (free_array(env), 1);
 	if (parser->cmd_nbr > 1)
 	{
 		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
@@ -119,5 +116,5 @@ void	exec_cmd(t_parser *parser, t_cmd *cmd)
 	}
 	waitpid(id, &status, 0);
 	parser->exit_s = WEXITSTATUS(status);
-	free_array(env);
+	return (free_array(env), 0);
 }

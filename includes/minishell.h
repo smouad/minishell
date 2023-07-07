@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 14:18:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 16:39:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int			is_file(char *cmd);
 char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
-void		exec_cmd(t_parser *parser, t_cmd *cmd);
+int			exec_cmd(t_parser *parser, t_cmd *cmd);
 char		*if_not_path(t_parser *parser, t_cmd *cmds);
 /*cleanup*/
 void		free_parser(t_parser *parser);

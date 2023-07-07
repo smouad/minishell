@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:14:38 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 09:28:23 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:06:55 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,6 @@ void	token_list_insert(t_elems **node, t_elems *new)
 		current = current->next;
 	current->next = new;
 }
-// {
-// 	t_elems	*current;
-
-// 	current = *head;
-// 	if (*head == NULL)
-// 		return ;
-// 	if (node == *head)
-// 	{
-// 		new->next = node->next;
-// 		node->next = new;
-// 		return ;
-// 	}
-// 	while (current->next != NULL && current->next != node)
-// 		current = current->next;
-// 	if (current->next == node)
-// 	{
-// 		new->next = node->next;
-// 		node->next = new;
-// 	}
-// }
 
 /**
  * token_list_free - function that frees the memory used by a token list
