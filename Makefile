@@ -30,7 +30,7 @@ OBJ	= ${SRC:.c=.o}
 %.o : %.c
 			${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME) : $(SRC) $(OBJ)
+$(NAME) : $(SRC) $(OBJ) Makefile
 	$(CC)  $(SRC) -o $(NAME) $(FLAGS)
 
 all : $(NAME)

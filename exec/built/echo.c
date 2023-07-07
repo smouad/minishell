@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:31:44 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:53:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 10:43:20 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ int	is_option(char *str)
  * @parser: A pointer to the parser structure
  * Return: void
  */
-void	ft_echo(t_parser *parser)
+void	ft_echo(t_parser *parser, t_cmd *cmd)
 {
 	int		i;
 	int		trigger;
-	t_cmd	*cmd;
 
 	i = 0;
-	cmd = parser->cmds;
 	trigger = 0;
 	while (cmd->args[i] && is_option(cmd->args[i]) == 0)
 	{

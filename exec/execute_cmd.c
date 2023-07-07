@@ -6,18 +6,55 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:30:12 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/30 13:45:08 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:57:28 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	builtins(t_cmd *cmd, t_parser *parser)
+void	close_pipes(int (*fd)[2], t_parser *parser)
+{
+	int	i;
+
+	i = 0;
+	while (i < parser->cmd_nbr - 1)
+	{
+		close(fd[i][0]);
+		close(fd[i][1]);
+		i++;
+	}
+}
+
+void	redirect_to_pipe(t_cmd *cmd, t_parser *parser, int (*fd)[2])
+{
+	if (cmd->index == 0)
+	{
+		if (dup2(fd[cmd->index][1], 1) == -1)
+			perror("dup2 error");
+	}
+	else
+	{
+		if (cmd->index == parser->cmd_nbr - 1)
+		{
+			dup2(fd[cmd->index - 1][0], 0);
+		}
+		else
+		{
+			dup2(fd[cmd->index - 1][0], 0);
+			dup2(fd[cmd->index][1], 1);
+		}
+	}
+	close_pipes(fd, parser);
+}
+
+void	builtins(t_cmd *cmd, t_parser *parser, int (*fd)[2])
 {
 	if (cmd->cmd != NULL && parser->env)
 	{
+		if (parser->cmd_nbr > 1)
+			redirect_to_pipe(cmd, parser, fd);
 		if (!ft_strcmp(cmd->cmd, "echo"))
-			ft_echo(parser);
+			ft_echo(parser, cmd);
 		else if (!ft_strcmp(cmd->cmd, "env"))
 			ft_env(cmd, parser);
 		else if (!ft_strcmp(cmd->cmd, "pwd"))
@@ -31,6 +68,8 @@ void	builtins(t_cmd *cmd, t_parser *parser)
 		else if (!ft_strcmp(cmd->cmd, "exit"))
 			ft_exit(parser);
 		else
-			exec_cmd(parser);
+			exec_cmd(parser, cmd);
+		if (parser->cmd_nbr > 1)
+			exit(0);
 	}
 }

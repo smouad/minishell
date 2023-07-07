@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 18:01:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:22:34 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,14 @@ typedef struct s_redir
 	struct s_redir	*next;
 }	t_redir;
 
-typedef struct s_fd
-{
-	int		in;
-	int		out;
-}	t_fd;
-
 typedef struct s_cmd
 {
+	int				index;
 	char			*cmd;
 	char			**args;
 	char			**full_cmd;
 	t_redir			*redir;
 	int				fd[2];
-	// t_fd			fd;
 	int				argc;
 	struct s_cmd	*next;
 }	t_cmd;

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:41:15 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:11:47 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_cmds(t_elems *elems, t_parser *parser)
 			elems = elems->next;
 		}
 		cms = &parser->cmds;
-		cmd_list_add(cms, cmd_new(NULL, argc));
+		cmd_list_add(cms, cmd_new(NULL, argc, (i - 1)));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:56:55 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/24 00:32:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:11:26 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @state: the cmd state
  * Return: a pointer to the newly created cmd element
  */
-t_cmd	*cmd_new(t_redir *redir, int argc)
+t_cmd	*cmd_new(t_redir *redir, int argc, int index)
 {
 	t_cmd	*cmds;
 
@@ -32,6 +32,7 @@ t_cmd	*cmd_new(t_redir *redir, int argc)
 	if (!cmds->args || !cmds->full_cmd)
 		return (NULL);
 	cmds->redir = redir;
+	cmds->index = index;
 	cmds->argc = argc;
 	cmds->next = NULL;
 	return (cmds);

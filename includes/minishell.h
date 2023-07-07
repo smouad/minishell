@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 14:17:29 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:18:35 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		redir_add(t_redir **lst, t_redir *new);
 void		redir_del(t_redir **head, t_redir *node);
 
 /* -----:> LIST CMD <:-----*/
-t_cmd		*cmd_new(t_redir *redir, int argc);
+t_cmd		*cmd_new(t_redir *redir, int argc, int index);
 void		cmd_list_add(t_cmd **lst, t_cmd *new);
 void		cmd_del(t_cmd **head, t_cmd *node);
 
@@ -103,9 +103,10 @@ t_env		*env_new(char *line);
 void		env_list_add(t_env **env, t_env *new);
 
 /* -----:> BUILTINS <:-----*/
-void		builtins(t_cmd *cmds, t_parser *parser);
+int			is_builtin(t_cmd *cmd);
+void		builtins(t_cmd *cmd, t_parser *parser, int (*fd)[2]);
 int			is_option(char *str);
-void		ft_echo(t_parser *parser);
+void		ft_echo(t_parser *parser, t_cmd *cmd);
 t_env		*get_env(char **env);
 void		ft_env(t_cmd *cmd, t_parser *parser);
 void		ft_pwd(t_parser *parser);
@@ -122,8 +123,8 @@ int			is_file(char *cmd);
 char		**get_path(t_env *env);
 int			list_size(t_env *env);
 char		**list_to_array(t_env *env);
-void		exec_cmd(t_parser *parser);
-char		*if_not_path(t_parser *parser);
+void		exec_cmd(t_parser *parser, t_cmd *cmd);
+char		*if_not_path(t_parser *parser, t_cmd *cmds);
 /*cleanup*/
 void		free_parser(t_parser *parser);
 void		free_redir_list(t_redir *redir);
@@ -133,5 +134,7 @@ void		free_array(char **array);
 /*exec_all*/
 int			execute_all(t_parser *parser);
 void		exec_cmd_list(t_parser *parser);
-
+void		close_pipes(int (*fd)[2], t_parser *parser);
+void		exec_commands(t_parser *parser);
+char		*get_cmd_path(t_parser *parser, t_cmd *cmd);
 #endif

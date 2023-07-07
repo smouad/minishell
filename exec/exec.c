@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:54:58 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 14:48:46 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/07 14:15:26 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ void	put_error(char *cmd, char *error)
  * @parser: A pointer to the parser structure
  * Return: The commands full path, or NULL if not found or an error occurred
  */
-char	*get_cmd_path(t_parser *parser)
+char	*get_cmd_path(t_parser *parser, t_cmd *cmd)
 {
-	t_cmd		*cmd;
 	struct stat	buf;
 
-	cmd = parser->cmds;
 	if (is_file(cmd->cmd))
 	{
 		if (access(cmd->cmd, F_OK) == 0 && stat(cmd->cmd, &buf) == 0)
@@ -56,7 +54,7 @@ char	*get_cmd_path(t_parser *parser)
 		put_error(cmd->cmd, ": No such file or directory");
 		return (parser->exit_s = 127, NULL);
 	}
-	return (if_not_path(parser));
+	return (if_not_path(parser, cmd));
 }
 
 /**
@@ -64,7 +62,7 @@ char	*get_cmd_path(t_parser *parser)
  * @parser: A pointer to the parser structure
  * Return: The command path, or NULL if not found
  */
-char	*if_not_path(t_parser *parser)
+char	*if_not_path(t_parser *parser, t_cmd *cmds)
 {
 	char	*cmd_path;
 	char	**path;
@@ -75,47 +73,51 @@ char	*if_not_path(t_parser *parser)
 	i = 0;
 	while (path[i])
 	{
-		cmd_file = ft_strjoin("/", parser->cmds->cmd);
+		cmd_file = ft_strjoin("/", cmds->cmd);
 		cmd_path = ft_strjoin(path[i], cmd_file);
 		free(cmd_file);
 		if (access(cmd_path, F_OK) == 0)
 		{
 			free_array(path);
-			free(cmd_path);
 			return (cmd_path);
 		}
 		free(cmd_path);
 		i++;
 	}
 	free_array(path);
-	put_error(parser->cmds->cmd, ": command not found");
+	put_error(cmds->cmd, ": command not found");
 	parser->exit_s = 127;
 	return (NULL);
 }
 
-void	exec_cmd(t_parser *parser)
+void	exec_cmd(t_parser *parser, t_cmd *cmd)
 {
 	char	**env;
 	int		status;
 	int		id;
 
 	env = list_to_array(parser->env);
-	if (!get_cmd_path(parser))
+	if (!get_cmd_path(parser, cmd))
 	{
 		free_array(env);
 		return ;
 	}
+	if (parser->cmd_nbr > 1)
+	{
+		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
+		free_array(env);
+		parser->exit_s = 0;
+		exit(parser->exit_s);
+	}
 	id = fork();
 	if (id == 0)
 	{
-		execve(get_cmd_path(parser), parser->cmds->full_cmd, env);
+		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
 		free_array(env);
 		parser->exit_s = 0;
 		exit(parser->exit_s);
 	}
 	waitpid(id, &status, 0);
 	parser->exit_s = WEXITSTATUS(status);
-	if (id == 0)
-		exit(parser->exit_s);
 	free_array(env);
 }

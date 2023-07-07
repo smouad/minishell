@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 15:47:40 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/07 12:14:54 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ void	set_env(t_elems *elems, t_parser *parser)
 		{
 			if (ft_strlen(elems->content) == 1)
 				return ;
-			free(elems->content);
 			if (ft_strcmp(elems->content + 1, "?") == 0)
+			{
+				free(elems->content);
 				elems->content = ft_itoa(parser->exit_s);
+			}
 			else if (ft_isdigit(elems->content[1]))
 				elems->content = ft_strdup("");
 			else
