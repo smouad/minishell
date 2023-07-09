@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 16:39:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/09 18:11:41 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,14 @@ void		free_array(char **array);
 int			execute_all(t_parser *parser);
 void		exec_cmd_list(t_parser *parser);
 void		close_pipes(int (*fd)[2], t_parser *parser);
-void		exec_commands(t_parser *parser);
+void		exec_commands(t_parser *parser, t_cmd *cmd);
 char		*get_cmd_path(t_parser *parser, t_cmd *cmd);
+/*pipe*/
+/*redir*/
+int			redirect_input(t_redir *redir);
+int			redirect_output(t_redir *redir);
+int			redirect_append(t_redir *redir);
+int			handle_redirection(t_redir *redir);
+void		handle_here_document(t_redir *redir);
+int			exec_redir(t_cmd *cmd);
 #endif

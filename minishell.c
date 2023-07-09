@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 14:14:38 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/09 15:47:45 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	prinsipal(t_parser *parser)
 			continue ;
 		init_parser(elems, parser);
 		token_list_free(elems);
-		exec_commands(parser);
+		exec_commands(parser, parser->cmds);
 		free_cmd_list(parser->cmds);
 	}
 }

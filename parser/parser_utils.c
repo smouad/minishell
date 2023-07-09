@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 11:11:47 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/09 18:47:40 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,32 @@ void	set_redir(t_parser *parser, t_elems *elems)
 		cmds = cmds->next;
 	}
 	rm_redir(&elems);
+}
+
+/**
+ * turn_env - function that turns the env variable into a string array
+ * @var: the env variable
+ * @env: the env list
+ * Return: the string array
+ */
+char	**turn_env(char *var, t_env *env)
+{
+	char	**value;
+
+	env = env->next;
+	while (env)
+	{
+		if (!ft_strncmp(var, env->key, ft_strlen(var) + 1))
+		{
+			if (env->value)
+				return (ft_split(env->value, " \t"));
+			else
+				break ;
+		}
+		env = env->next;
+	}
+	value = (char **)malloc(sizeof(char *) * 2);
+	value[0] = ft_strdup("");
+	value[1] = NULL;
+	return (value);
 }

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 14:22:34 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/09 18:26:46 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -73,6 +74,8 @@ typedef struct s_redir
 	char			*file;
 	t_token			type;
 	struct s_redir	*next;
+	int				old_infd;
+	int				old_outfd;
 }	t_redir;
 
 typedef struct s_cmd

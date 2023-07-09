@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:54:58 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 16:39:05 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/09 10:45:52 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,12 @@ int	exec_cmd(t_parser *parser, t_cmd *cmd)
 	{
 		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
 		free_array(env);
-		parser->exit_s = 0;
-		exit(parser->exit_s);
 	}
 	id = fork();
 	if (id == 0)
 	{
 		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
 		free_array(env);
-		parser->exit_s = 0;
-		exit(parser->exit_s);
 	}
 	waitpid(id, &status, 0);
 	parser->exit_s = WEXITSTATUS(status);

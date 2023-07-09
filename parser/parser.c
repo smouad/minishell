@@ -6,33 +6,11 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 17:07:19 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/09 18:47:33 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	**turn_env(char *var, t_env *env)
-{
-	char	**value;
-
-	env = env->next;
-	while (env)
-	{
-		if (!ft_strncmp(var, env->key, ft_strlen(var) + 1))
-		{
-			if (env->value)
-				return (ft_split(env->value, " \t"));
-			else
-				break ;
-		}
-		env = env->next;
-	}
-	value = (char **)malloc(sizeof(char *) * 2);
-	value[0] = ft_strdup("");
-	value[1] = NULL;
-	return (value);
-}
 
 void	insert_in(t_elems **elems, char **str)
 {
@@ -56,10 +34,23 @@ void	insert_in(t_elems **elems, char **str)
 	}
 }
 
-void	set_env(t_elems *elems, t_parser *parser)
+void	set_helper(t_elems *elems, t_parser *parser)
 {
 	char	**value;
 
+	value = turn_env(elems->content + 1, parser->env);
+	if (value)
+		insert_in(&elems, value);
+	else
+	{
+		free(elems->content);
+		elems->content = ft_strdup("");
+	}
+	free_array(value);
+}
+
+void	set_env(t_elems *elems, t_parser *parser)
+{
 	while (elems)
 	{
 		if (elems->type == VAR)
@@ -77,17 +68,7 @@ void	set_env(t_elems *elems, t_parser *parser)
 				elems->content = ft_strdup("");
 			}
 			else
-			{
-				value = turn_env(elems->content + 1, parser->env);
-				if (value)
-					insert_in(&elems, value);
-				else
-				{
-					free(elems->content);
-					elems->content = ft_strdup("");
-				}
-				free_array(value);
-			}
+				set_helper(elems, parser);
 		}
 		elems = elems->next;
 	}
