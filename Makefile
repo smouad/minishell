@@ -18,7 +18,7 @@ LEXER	= $(addprefix lexer/,	lexer.c list.c lexer_utils.c state.c \
 PARSER	= $(addprefix parser/,	parser.c cmd_list.c redir_list.c parser_utils.c)
 
 EXEC	= $(addprefix exec/,	clean_up.c execute_cmd.c exec.c exec_utils.c \
-								pipe.c redir.c redir_utils.c)
+								pipe.c pipe_utils.c redir.c redir_utils.c sig.c)
 
 BUILT	= $(addprefix exec/built/,	echo.c env.c pwd.c cd.c \
 								env_list.c export.c unset.c exit.c)

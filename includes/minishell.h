@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/09 18:11:41 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/10 16:22:33 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,10 @@ char		*get_cmd_path(t_parser *parser, t_cmd *cmd);
 int			redirect_input(t_redir *redir);
 int			redirect_output(t_redir *redir);
 int			redirect_append(t_redir *redir);
-int			handle_redirection(t_redir *redir);
+// int			handle_redirection(t_redir *redir);
 void		handle_here_document(t_redir *redir);
 int			exec_redir(t_cmd *cmd);
+void        wait_for_childs(int *arra, t_parser *parser);
+int         check_in(t_redir *redir);
+int         check_out(t_redir *redir);
 #endif

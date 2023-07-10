@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:57:02 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 15:37:12 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:29:22 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_redir	*redir_new(char *file, t_token type)
 		return (NULL);
 	redir->file = ft_strdup(file);
 	redir->type = type;
+	redir->old_infd = -1;
+	redir->old_outfd = -1;
 	redir->next = NULL;
 	return (redir);
 }

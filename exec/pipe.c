@@ -1,12 +1,12 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*	                                                                    */
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:47:43 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/09 18:50:18 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/10 16:00:14 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ void	rd_reset(t_cmd *cmds)
 		dup2(cmds->redir->old_outfd, STDOUT_FILENO);
 }
 
-void	wait_for_childs(int *arra, t_parser *parser)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < parser->cmd_nbr)
-	{
-		waitpid(arra[i], &status, 0);
-		i++;
-	}
-	parser->exit_s = WEXITSTATUS(status);
-}
-
 void	exec_util(t_cmd *cmds, t_parser *parser, int (*fd)[2], int *arra)
 {
 	int	id;
@@ -59,6 +45,10 @@ void	exec_util(t_cmd *cmds, t_parser *parser, int (*fd)[2], int *arra)
 		{
 			if (exec_redir(cmds) != -1)
 			{
+				if (check_in(cmds->redir))
+					cmds->redir->old_infd = dup(STDIN_FILENO);
+				if (check_out(cmds->redir))
+					cmds->redir->old_outfd = dup(STDOUT_FILENO);
 				builtins(cmds, parser, fd);
 				rd_reset(cmds);
 			}
@@ -72,16 +62,25 @@ void	exec_util(t_cmd *cmds, t_parser *parser, int (*fd)[2], int *arra)
 	wait_for_childs(arra, parser);
 }
 
+void	extention(t_cmd *cmds)
+{
+	cmds->redir->old_outfd = dup(STDOUT_FILENO);
+	cmds->redir->old_infd = dup(STDIN_FILENO);
+}
+
 void	exec_commands(t_parser *parser, t_cmd *cmds)
 {
-	int	fd[parser->cmd_nbr][2];
+	int	(*fd)[2];
 	int	*arra;
 
+	fd = malloc(sizeof(int) * parser->cmd_nbr + 1);
 	arra = malloc(sizeof(int) * parser->cmd_nbr);
 	if (parser->cmd_nbr > 1)
 		create_pipes(fd, parser);
 	if (parser->cmd_nbr == 1)
 	{
+		if (cmds->redir)
+			extention(cmds);
 		if (exec_redir(cmds) == -1)
 		{
 			parser->exit_s = 1;
@@ -93,4 +92,6 @@ void	exec_commands(t_parser *parser, t_cmd *cmds)
 	}
 	else
 		exec_util(cmds, parser, fd, arra);
+	free(fd);
+	free(arra);
 }

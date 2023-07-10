@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:08:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/09 18:25:50 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/10 16:02:25 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	exec_redir(t_cmd *cmd)
 	redir = cmd->redir;
 	if (!redir)
 		return (1);
-	redir->old_infd = -1;
-	redir->old_outfd = -1;
 	while (redir)
 	{
 		if (handle_redirection(redir) == -1)

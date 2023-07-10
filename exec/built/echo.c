@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:31:44 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/07 10:43:20 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/10 15:04:28 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	ft_echo(t_parser *parser, t_cmd *cmd)
 	}
 	while (cmd->args[i])
 	{
-		printf("%s", cmd->args[i]);
+		write(1, cmd->args[i], ft_strlen(cmd->args[i]));
 		i++;
 		if (cmd->args[i] != NULL && cmd->args[i][0])
-			printf(" ");
+			write(1, " ", 1);
 	}
 	if (trigger != 1)
-		printf("\n");
+		write(1, "\n", 1);
 	parser->exit_s = 0;
 }
