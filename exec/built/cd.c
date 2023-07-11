@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 18:24:11 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/11 15:24:44 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	go_home(t_env *env)
 	getcwd(cwd, PATH_MAX);
 	owd = ft_strjoin("OLDPWD=", cwd);
 	home = turn_env("HOME", env);
+	if (!home[0][0])
+	{
+		write(2, "minishell: cd: HOME not set\n", 28);
+		free(owd);
+		free_array(home);
+		return ;
+	}
 	if (chdir(home[0]) == 0)
 	{
 		env_cwd = get_wd_env();
@@ -63,6 +70,7 @@ void	go_home(t_env *env)
  */
 void	cd_put_error(char *str, t_parser *parser)
 {
+	write(2, "minishell: ", 11);
 	write(2, "cd: ", 4);
 	write(2, str, ft_strlen(str));
 	write(2, ": ", 2);

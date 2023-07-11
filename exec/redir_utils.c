@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 18:25:27 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/10 16:04:36 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/11 16:46:09 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	redirect_input(t_redir *redir)
 	redir->old_infd = dup(STDIN_FILENO);
 	if (fd == -1)
 	{
-		perror("open");
+		perror("minishell");
 		return (-1);
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
@@ -39,7 +39,7 @@ int	redirect_output(t_redir *redir)
 	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		perror("open");
+		perror("minishell");
 		return (-1);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
@@ -59,7 +59,7 @@ int	redirect_append(t_redir *redir)
 	fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		perror("open");
+		perror("minishell");
 		return (-1);
 	}
 	if (dup2(fd, STDOUT_FILENO) == -1)
@@ -79,7 +79,7 @@ void	handle_here_document(t_redir *redir)
 	fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		perror("open");
+		perror("minishell");
 		return ;
 	}
 	while (1)

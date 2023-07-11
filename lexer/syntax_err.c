@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:53 by msodor            #+#    #+#             */
-/*   Updated: 2023/06/25 16:58:55 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/11 15:30:48 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	quotes_syntax(t_elems *elems, t_parser *parser)
 	if ((count % 2) != 0 || (dcount % 2) != 0)
 	{
 		write(2, "minishell: ", 11);
-		write(2, "syntax error: unclosed quotes.\n", 31);
+		write(2, "unexpected EOF while looking for matching.\n", 44);
 		return (parser->exit_s = 2, 1);
 	}
 	return (0);

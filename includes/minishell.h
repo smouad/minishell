@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/10 16:22:33 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/10 20:21:01 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void		ft_cd(t_cmd *cmd, t_parser *parser);
 void		ft_exit(t_parser *parser);
 /*export*/
 void		ft_export(t_cmd *cmd, t_parser *parser);
-void		set_value(char *var, t_env *env);
+int 		set_value(char *var, t_env *env);
 int			is_correct(char *word);
 void		env_del(t_env **head, t_env *node);
 void		ft_unset(t_cmd *cmd, t_parser *parser);

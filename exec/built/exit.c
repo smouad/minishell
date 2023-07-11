@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:44:03 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:57:50 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/11 16:55:19 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	arg_not_digit(char *arg)
 		if (!ft_isdigit(arg[i]))
 		{
 			printf("exit\n");
+			write(2, "minishell: ", 11);
 			write(2, "exit: ", 6);
 			write(2, arg, ft_strlen(arg));
 			write(2, ": numeric argument required\n", 28);

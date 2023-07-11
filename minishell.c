@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/10 15:06:41 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/11 14:36:42 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	prinsipal(t_parser *parser)
 	{
 		command = readline(CYAN"minishell"RESET MAGENTA"[$]~>:"RESET);
 		if (command == NULL)
-			break ;
+			exit(parser->exit_s);
 		if (command[0] == 0)
 		{
 			free(command);

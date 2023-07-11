@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/05 12:59:30 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/11 21:14:14 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_correct(char *word)
 	i = 0;
 	if (!ft_isalpha(word[i]) && word[i] != '_')
 	{
-		write(2, "export: `", 9);
+		write(2, "minishell: `", 12);
 		write(2, word, ft_strlen(word));
 		write(2, "': not a valid identifier\n", 26);
 		return (0);
@@ -34,7 +34,7 @@ int	is_correct(char *word)
 	{
 		if (!ft_isalnum(word[i]) && word[i] != '_')
 		{
-			write(2, "export: `", 9);
+			write(2, "minishell: `", 12);
 			write(2, word, ft_strlen(word));
 			write(2, "': not a valid identifier\n", 26);
 			return (0);
@@ -44,38 +44,65 @@ int	is_correct(char *word)
 	return (1);
 }
 
+char	*get_key(char *var)
+{
+	int		i;
+	char	*key;
+
+	i = 0;
+	while (var[i] && var[i] != '=')
+		i++;
+	key = ft_substr(var, 0, i);
+	return (key);
+}
+
+char	*get_value(char *var)
+{
+	int		i;
+	char	*value;
+
+	i = 0;
+	while (var[i] && var[i] != '=')
+		i++;
+	if (var[i] == '=')
+		value = ft_substr(var, i + 1, ft_strlen(var) - i);
+	else
+		value = NULL;
+	return (value);
+}
+
 /**
  * set_value - function that sets the value of an environment variable
  * @var: The variable string in the format "key=value"
  * @env: A pointer to the head of the environment variable linked list
  * Return: void
  */
-void	set_value(char *var, t_env *env)
+int	set_value(char *var, t_env *env)
 {
-	t_env	*new_env;
+	char	*key;
+	char	*value;
 	t_env	*tmp;
 
-	new_env = env_new(var);
+	key = get_key(var);
+	value = get_value(var);
 	tmp = env;
-	while (tmp && tmp->next && new_env->value)
+	while (tmp && tmp->next && value)
 	{
 		tmp = tmp->next;
-		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key) + 1))
+		if (!ft_strcmp(key, tmp->key))
 		{
-			free(tmp->value);
-			tmp->value = new_env->value;
-			return ;
+			tmp->value = ft_strdup(value);
+			return (free(key), free(value), 1);
 		}
 	}
 	tmp = env;
-	while (tmp && tmp->next && !new_env->value)
+	while (tmp && tmp->next && !value)
 	{
 		tmp = tmp->next;
-		if (!ft_strncmp(new_env->key, tmp->key, ft_strlen(tmp->key) + 1))
-			return ;
+		if (!ft_strcmp(key, tmp->key))
+			return (free(key), 1);
 	}
-	env_list_add(&tmp, new_env);
-	return ;
+	return (env_list_add(&tmp, env_new(var)), free(key), free(value), 1);
 }
 
 /**
@@ -89,9 +116,25 @@ void	print_export(t_env *env)
 	{
 		env = env->next;
 		if (env->value)
-			printf("declare -x %s=\"%s\"\n", env->key, env->value);
+		{
+			write(1, "declare -x ", 11);
+			write(1, env->key, ft_strlen(env->key));
+			write(1, "=\"", 2);
+			while (*env->value)
+			{
+				if (*env->value == '\"' || *env->value == '$')
+					write(1, "\\", 1);
+				write(1, env->value, 1);
+				env->value++;
+			}
+			write(1, "\"\n", 2);
+		}
 		else
-			printf("declare -x %s\n", env->key);
+		{
+			write(1, "declare -x ", 11);
+			write(1, env->key, ft_strlen(env->key));
+			write(1, "\n", 1);
+		}
 	}
 }
 
