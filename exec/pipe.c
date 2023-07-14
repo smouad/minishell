@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*	                                                                    */
+/*		                                                                 */
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -70,8 +70,8 @@ void	extention(t_cmd *cmds)
 
 void	exec_commands(t_parser *parser, t_cmd *cmds)
 {
-	int	(*fd)[2];
 	int	*arra;
+	int	(*fd)[2];
 
 	fd = malloc(sizeof(int) * (parser->cmd_nbr * 2));
 	arra = malloc(sizeof(int) * parser->cmd_nbr);

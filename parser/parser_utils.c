@@ -36,9 +36,9 @@ void	cmd_nbr(t_elems *elems, t_parser *parser)
  */
 void	init_cmds(t_elems *elems, t_parser *parser)
 {
-	int			i;
-	int			argc;
-	t_cmd		**cms;
+	int		i;
+	int		argc;
+	t_cmd	**cms;
 
 	cmd_nbr(elems, parser);
 	i = 0;

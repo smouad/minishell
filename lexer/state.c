@@ -30,7 +30,8 @@ void	quote_state(t_elems **ptr)
 
 /**
  * dquote_state - function that updates the state of the elements between the
- * current element and the next double-quote element to be in the IN_DQUOTE state
+
+	* current element and the next double-quote element to be in the IN_DQUOTE state
  * @ptr: a pointer to a pointer to the current element of the token list
  */
 void	dquote_state(t_elems **ptr)

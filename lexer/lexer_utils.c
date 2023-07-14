@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:39:16 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/13 17:52:50 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:10:24 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void	set_token_var(char *line, t_elems *elem, int *i)
 	j = 0;
 	start = *i;
 	skip = start + 1;
-	while (ft_isalnum(line[skip + j]) || line[skip + j] == '_' \
-	|| (line[skip + j] == '?' && j == 0) || (line[skip + j] == '@' && j == 0))
+	while (ft_isalnum(line[skip + j]) || line[skip + j] == '_' || \
+	(line[skip + j] == '?' && j == 0) || (line[skip + j] == '@' && j == 0))
 	{
-		if ((line[skip + j] == '@' || line[skip + j] == '?' \
-		|| ft_isdigit(line[skip + j])) && j == 0)
+		if ((line[skip + j] == '@' || line[skip + j] == '?'
+				|| ft_isdigit(line[skip + j])) && j == 0)
 		{
 			j++;
 			break ;

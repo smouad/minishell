@@ -14,10 +14,10 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*dst;
-	size_t			slen;
-	size_t			i;
-	size_t			j;
+	char	*dst;
+	size_t	slen;
+	size_t	i;
+	size_t	j;
 
 	if (!s)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyser_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:00:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/11 21:11:04 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:10:05 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 int	is_joinable(t_elems *elems)
 {
 	if ((elems->state == IN_DQUOTE && elems->next->state == IN_DQUOTE \
-		&& elems->next->type != VAR && elems->type != VAR) || \
-		(elems->state == IN_QUOTE && elems->next->state == IN_QUOTE))
+	&& elems->next->type != VAR && elems->type != VAR) \
+	|| (elems->state == IN_QUOTE && elems->next->state == IN_QUOTE))
 		return (1);
 	return (0);
 }
@@ -68,8 +68,8 @@ void	rm_quotes(t_elems **elems)
 	temp = NULL;
 	while (current != NULL)
 	{
-		if ((current->type == DQUOTE || current->type == QUOTE) \
-		&& current->state == DEFAULT)
+		if ((current->type == DQUOTE || current->type == QUOTE)
+			&& current->state == DEFAULT)
 		{
 			temp = current->next;
 			token_del(elems, current);
@@ -116,8 +116,8 @@ void	type_cast(t_elems **elems)
 	head = *elems;
 	while (head)
 	{
-		if ((head->state == IN_DQUOTE && head->type != VAR) \
-		|| head->state == IN_QUOTE)
+		if ((head->state == IN_DQUOTE && head->type != VAR)
+			|| head->state == IN_QUOTE)
 			head->type = WORD;
 		head = head->next;
 	}

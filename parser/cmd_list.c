@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 /**
  * cmd_new - function that creates a new cmd element
  * @content: a pointer to the content string

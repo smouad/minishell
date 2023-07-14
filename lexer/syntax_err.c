@@ -30,8 +30,8 @@ void	put_syntax_err(char *elem)
  */
 int	is_redir(t_elems *elems)
 {
-	if (elems->type == REDIR_IN || elems->type == REDIR_OUT \
-	|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
+	if (elems->type == REDIR_IN || elems->type == REDIR_OUT
+		|| elems->type == HERE_DOC || elems->type == AREDIR_OUT)
 		return (1);
 	return (0);
 }
@@ -72,8 +72,8 @@ int	redir_syntax(t_elems *elems, t_parser *parser)
 {
 	while (elems && elems->next)
 	{
-		if (is_redir(elems) && elems->next->type != WORD \
-		&& elems->next->type != VAR)
+		if (is_redir(elems) && elems->next->type != WORD
+			&& elems->next->type != VAR)
 		{
 			put_syntax_err(elems->next->content);
 			return (parser->exit_s = 2, 1);

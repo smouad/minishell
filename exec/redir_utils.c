@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 18:25:27 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/14 12:05:51 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:13:46 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int redirect_input(t_redir *redir)
+int	redirect_input(t_redir *redir)
 {
-	int fd;
+	int	fd;
 
 	fd = open(redir->file, O_RDONLY);
 	redir->old_infd = dup(STDIN_FILENO);
@@ -32,29 +32,9 @@ int redirect_input(t_redir *redir)
 	return (0);
 }
 
-int redirect_output(t_redir *redir)
+int	redirect_append(t_redir *redir)
 {
-	int fd;
-
-	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("minishell");
-		return (-1);
-	}
-	if (dup2(fd, STDOUT_FILENO) == -1)
-	{
-		perror("dup2");
-		close(fd);
-		return (-1);
-	}
-	close(fd);
-	return (0);
-}
-
-int redirect_append(t_redir *redir)
-{
-	int fd;
+	int	fd;
 
 	fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
@@ -70,9 +50,21 @@ int redirect_append(t_redir *redir)
 	close(fd);
 	return (0);
 }
+t_elems set_tmp(char *line)
+{
+	t_elems tmp;
+
+	tmp.content = line;
+	tmp.next = NULL;
+	tmp.len = ft_strlen(line);
+	tmp.type = VAR;
+	tmp.state = 0;	
+	return (tmp);
+}
 void	exec_her(t_redir *redir, t_parser *parser, int fd[2])
 {
 	char	*line;
+	t_elems	tmp;
 
 	while (1)
 	{
@@ -81,29 +73,24 @@ void	exec_her(t_redir *redir, t_parser *parser, int fd[2])
 		{
 			if (line)
 				free(line);
-			break;
+			break ;
 		}
 		if (line && ft_strchr(line, '$') >= 0)
 		{
-			t_elems tmp;
-			tmp.content = line;
-			tmp.next = NULL;
-			tmp.len = ft_strlen(line);
-			tmp.type = VAR;
-			tmp.state = 0;
+			tmp = set_tmp(line);
 			set_env(&tmp, parser);
 			line = ft_strdup(tmp.content);
 			free(tmp.content);
 		}
 		if (!line)
-			break;
+			break ;
 		write(fd[1], line, ft_strlen(line));
 		write(fd[1], "\n", 1);
 		free(line);
 	}
 }
 
-int handle_here_document(t_redir *redir, t_parser *parser)
+int	handle_here_document(t_redir *redir, t_parser *parser)
 {
 	int	fd[2];
 
@@ -118,4 +105,3 @@ int handle_here_document(t_redir *redir, t_parser *parser)
 	close(fd[0]);
 	return (0);
 }
-

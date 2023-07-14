@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:08:47 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/14 11:35:35 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:10:59 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// int	redirect_output(t_redir *redir)
-// {
-// 	int	fd;
+int	redirect_output(t_redir *redir)
+{
+	int	fd;
 
-// 	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-// 	if (fd == -1)
-// 	{
-// 		perror("minishell");
-// 		return (-1);
-// 	}
-// 	if (dup2(fd, STDOUT_FILENO) == -1)
-// 	{
-// 		perror("dup2");
-// 		close(fd);
-// 		return (-1);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd == -1)
+	{
+		perror("minishell");
+		return (-1);
+	}
+	if (dup2(fd, STDOUT_FILENO) == -1)
+	{
+		perror("dup2");
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	return (0);
+}
 
 int	handle_redirection(t_redir *redir, t_parser *parser)
 {

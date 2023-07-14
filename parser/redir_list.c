@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 /**
  * redir_new - function that creates a new redir element
  * @fd: a pointer to the fd string

@@ -13,7 +13,8 @@
 #include "../includes/minishell.h"
 
 /**
- * lexer - a function that tokenizes a given input string and builds a token list
+ * lexer
+	- a function that tokenizes a given input string and builds a token list
  * @line: a pointer to the input string to be tokenized
  *
  * This function processes the input string and identifies tokens such as
