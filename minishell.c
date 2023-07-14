@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/14 14:15:38 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/14 16:16:37 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	signal_handler(int sig)
 	}
 }
 
+void	ctrl_d(t_parser *parser)
+{
+	write(1, "\n", 1);
+	exit(parser->exit_s);
+}
+
 void	prinsipal(t_parser *parser)
 {
 	t_elems		*elems;
@@ -33,9 +39,9 @@ void	prinsipal(t_parser *parser)
 
 	while (1)
 	{
-		command = readline(CYAN"minishell"RESET MAGENTA"[$]~>:"RESET);
+		command = readline("minishell[$]~>: ");
 		if (command == NULL)
-			exit(parser->exit_s);
+			ctrl_d(parser);
 		if (command[0] == 0)
 		{
 			free(command);

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/14 13:31:14 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:44:33 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ int		redir_syntax(t_elems *elems, t_parser *parser);
 int		pipe_syntax(t_elems *elems, t_parser *parser);
 int		is_redir(t_elems *elems);
 
-/* -----:> PRINT_TABLE <:-----*/
-char	*get_type_string(enum e_token type);
-char	*get_state_string(enum e_state state);
-void	print_table_row(t_elems *elem);
-void	print_table(t_elems *lst);
-
 /* ******************************************** */
 /* ----------------:> PARSER <:---------------- */
 /* ******************************************** */
@@ -106,7 +100,6 @@ t_env	*env_new(char *line);
 void	env_list_add(t_env **env, t_env *new);
 
 /* -----:> BUILTINS <:-----*/
-int		is_builtin(t_cmd *cmd);
 void	builtins(t_cmd *cmd, t_parser *parser, int (*fd)[2]);
 int		is_option(char *str);
 void	ft_echo(t_parser *parser, t_cmd *cmd);
@@ -135,8 +128,6 @@ void	free_env_list(t_env *env);
 void	free_cmd_list(t_cmd *cmd);
 void	free_array(char **array);
 /*exec_all*/
-int		execute_all(t_parser *parser);
-void	exec_cmd_list(t_parser *parser);
 void	close_pipes(int (*fd)[2], t_parser *parser);
 void	exec_commands(t_parser *parser, t_cmd *cmd);
 char	*get_cmd_path(t_parser *parser, t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:10:15 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/13 16:48:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 15:02:57 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
-# define BLACK "\033[30m"
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define BLUE "\033[34m"
-# define MAGENTA "\033[35m"
-# define CYAN "\033[36m"
-# define WHITE "\033[37m"
-# define RESET "\033[0m"
 
 typedef enum e_token
 {
