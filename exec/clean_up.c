@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_up.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:07:37 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/06 15:09:16 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/07/14 13:15:51 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	free_env_list(t_env *env)
 	{
 		tmp = env;
 		env = env->next;
-		free(tmp->key);
-		free(tmp->value);
+		if (tmp->key)
+			free(tmp->key);
+		if (tmp->value)
+			free(tmp->value);
 		free(tmp);
 	}
 }
@@ -80,7 +82,8 @@ void	free_cmd_list(t_cmd *cmd)
 	{
 		tmp = cmd;
 		cmd = cmd->next;
-		free(tmp->cmd);
+		if (tmp->cmd)
+			free(tmp->cmd);
 		free_array(tmp->args);
 		free_array(tmp->full_cmd);
 		free_redir_list(tmp->redir);

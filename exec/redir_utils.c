@@ -6,15 +6,15 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 18:25:27 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/11 16:46:09 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 12:05:51 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	redirect_input(t_redir *redir)
+int redirect_input(t_redir *redir)
 {
-	int	fd;
+	int fd;
 
 	fd = open(redir->file, O_RDONLY);
 	redir->old_infd = dup(STDIN_FILENO);
@@ -32,9 +32,9 @@ int	redirect_input(t_redir *redir)
 	return (0);
 }
 
-int	redirect_output(t_redir *redir)
+int redirect_output(t_redir *redir)
 {
-	int	fd;
+	int fd;
 
 	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
@@ -52,9 +52,9 @@ int	redirect_output(t_redir *redir)
 	return (0);
 }
 
-int	redirect_append(t_redir *redir)
+int redirect_append(t_redir *redir)
 {
-	int	fd;
+	int fd;
 
 	fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
@@ -70,29 +70,52 @@ int	redirect_append(t_redir *redir)
 	close(fd);
 	return (0);
 }
-
-void	handle_here_document(t_redir *redir)
+void	exec_her(t_redir *redir, t_parser *parser, int fd[2])
 {
-	int		fd;
 	char	*line;
 
-	fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("minishell");
-		return ;
-	}
 	while (1)
 	{
 		line = readline("> ");
-		if (!ft_strcmp(line, redir->file))
+		if (!ft_strcmp(redir->file, line))
 		{
-			free(line);
-			break ;
+			if (line)
+				free(line);
+			break;
 		}
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		if (line && ft_strchr(line, '$') >= 0)
+		{
+			t_elems tmp;
+			tmp.content = line;
+			tmp.next = NULL;
+			tmp.len = ft_strlen(line);
+			tmp.type = VAR;
+			tmp.state = 0;
+			set_env(&tmp, parser);
+			line = ft_strdup(tmp.content);
+			free(tmp.content);
+		}
+		if (!line)
+			break;
+		write(fd[1], line, ft_strlen(line));
+		write(fd[1], "\n", 1);
 		free(line);
 	}
-	close(fd);
 }
+
+int handle_here_document(t_redir *redir, t_parser *parser)
+{
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+	{
+		perror("minishell");
+		return (-1);
+	}
+	exec_her(redir, parser, fd);
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	return (0);
+}
+

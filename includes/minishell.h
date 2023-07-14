@@ -6,24 +6,26 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:29:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/10 20:21:01 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:31:14 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
+#define MINISHELL_H
 
-# include "header_utils.h"
+#include "header_utils.h"
 
-int			ft_atoi(const char *str);
-int			ft_isalnum(int c);
-int			ft_isalpha(int c);
-int			ft_isdigit(int c);
+void		signal_handler(int sig);
+void		rl_replace_line(const char *text, int clear_undo);
+int		 	ft_atoi(const char *str);
+int		 	ft_isalnum(int c);
+int		 	ft_isalpha(int c);
+int		 	ft_isdigit(int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_strchr(const char *str, int c);
+int		 	ft_strchr(const char *str, int c);
 size_t		ft_strlen(const char *str);
-int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
-int			ft_strcmp(const char *s1, const char *s2);
+int		 	ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int		 	ft_strcmp(const char *s1, const char *s2);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		**ft_split(char const *s, char *c);
 char		*ft_strdup(const char *s1);
@@ -46,12 +48,12 @@ void		dquote_state(t_elems **ptr);
 void		quote_state(t_elems **ptr);
 
 /* -----:> LEXER <:-----*/
-int			is_space(char c);
-int			special_char(char c);
+int		 	is_space(char c);
+int		 	special_char(char c);
 void		set_token_word(char *line, t_elems *elem, int *i);
 void		set_token_redir(char *line, t_elems *elem, int *i);
 void		set_token_var(char *line, t_elems *elem, int *i);
-t_elems		*lexer(char *line);
+t_elems		 *lexer(char *line);
 
 /* -----:> ANALYSER <:-----*/
 void		join_in_quote(t_elems **elems);
@@ -59,13 +61,13 @@ void		rm_quotes(t_elems **elems);
 void		join_cmd(t_elems **elems);
 void		type_cast(t_elems **elems);
 void		rm_spaces(t_elems **elems);
-t_elems		*analyser(char *line, t_parser *parser);
+t_elems		 *analyser(char *line, t_parser *parser);
 
 /* -----:> SYNTAX_ERR <:-----*/
-int			quotes_syntax(t_elems *elems, t_parser *parser);
-int			redir_syntax(t_elems *elems, t_parser *parser);
-int			pipe_syntax(t_elems *elems, t_parser *parser);
-int			is_redir(t_elems *elems);
+int			 quotes_syntax(t_elems *elems, t_parser *parser);
+int			 redir_syntax(t_elems *elems, t_parser *parser);
+int			 pipe_syntax(t_elems *elems, t_parser *parser);
+int			 is_redir(t_elems *elems);
 
 /* -----:> PRINT_TABLE <:-----*/
 char		*get_type_string(enum e_token type);
@@ -83,6 +85,7 @@ void		set_redir(t_parser *parser, t_elems *elems);
 void		set_env(t_elems *elems, t_parser *parser);
 void		set_cmd_args(t_cmd *cmds, t_elems *elems);
 void		init_parser(t_elems *elems, t_parser *parser);
+void		set_full_cmd(t_cmd *cmds, t_elems *elems);
 
 /* -----:> LIST REDIR <:-----*/
 t_redir		*redir_new(char *file, t_token type);
@@ -90,7 +93,7 @@ void		redir_add(t_redir **lst, t_redir *new);
 void		redir_del(t_redir **head, t_redir *node);
 
 /* -----:> LIST CMD <:-----*/
-t_cmd		*cmd_new(t_redir *redir, int argc, int index);
+t_cmd 		*cmd_new(t_redir *redir, int argc, int index);
 void		cmd_list_add(t_cmd **lst, t_cmd *new);
 void		cmd_del(t_cmd **head, t_cmd *node);
 
@@ -114,16 +117,16 @@ void		ft_cd(t_cmd *cmd, t_parser *parser);
 void		ft_exit(t_parser *parser);
 /*export*/
 void		ft_export(t_cmd *cmd, t_parser *parser);
-int 		set_value(char *var, t_env *env);
+int			set_value(char *var, t_env *env);
 int			is_correct(char *word);
 void		env_del(t_env **head, t_env *node);
 void		ft_unset(t_cmd *cmd, t_parser *parser);
 /*exec*/
 int			is_file(char *cmd);
 char		**get_path(t_env *env);
-int			list_size(t_env *env);
+int 		list_size(t_env *env);
 char		**list_to_array(t_env *env);
-int			exec_cmd(t_parser *parser, t_cmd *cmd);
+int 		exec_cmd(t_parser *parser, t_cmd *cmd);
 char		*if_not_path(t_parser *parser, t_cmd *cmds);
 /*cleanup*/
 void		free_parser(t_parser *parser);
@@ -132,20 +135,19 @@ void		free_env_list(t_env *env);
 void		free_cmd_list(t_cmd *cmd);
 void		free_array(char **array);
 /*exec_all*/
-int			execute_all(t_parser *parser);
+int execute_all(t_parser *parser);
 void		exec_cmd_list(t_parser *parser);
 void		close_pipes(int (*fd)[2], t_parser *parser);
 void		exec_commands(t_parser *parser, t_cmd *cmd);
-char		*get_cmd_path(t_parser *parser, t_cmd *cmd);
+char *get_cmd_path(t_parser *parser, t_cmd *cmd);
 /*pipe*/
 /*redir*/
-int			redirect_input(t_redir *redir);
-int			redirect_output(t_redir *redir);
-int			redirect_append(t_redir *redir);
-// int			handle_redirection(t_redir *redir);
-void		handle_here_document(t_redir *redir);
-int			exec_redir(t_cmd *cmd);
-void        wait_for_childs(int *arra, t_parser *parser);
-int         check_in(t_redir *redir);
-int         check_out(t_redir *redir);
+int redirect_input(t_redir *redir);
+int redirect_output(t_redir *redir);
+int redirect_append(t_redir *redir);
+int handle_here_document(t_redir *redir, t_parser *parser);
+int exec_redir(t_cmd *cmd, t_parser *parser);
+void		wait_for_childs(int *arra, t_parser *parser);
+int check_in(t_redir *redir);
+int check_out(t_redir *redir);
 #endif

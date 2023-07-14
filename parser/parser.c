@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 00:01:56 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/10 09:32:12 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 11:48:50 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	insert_in(t_elems **elems, char **str)
 	{
 		if (i == 0)
 		{
+			free((*elems)->content);
 			(*elems)->content = ft_strdup(str[i]);
 			(*elems)->type = WORD;
 			i++;
@@ -74,9 +75,28 @@ void	set_env(t_elems *elems, t_parser *parser)
 	}
 }
 
+void	set_full_cmd(t_cmd *cmds, t_elems *elems)
+{
+	int	i;
+
+	while (cmds)
+	{
+		i = 0;
+		elems = elems->next;
+		while (i < cmds->argc && elems && elems->type != PIPE)
+		{
+			cmds->full_cmd[i] = ft_strdup(elems->content);
+			i++;
+			elems = elems->next;
+		}
+		cmds->full_cmd[i] = NULL;
+		cmds = cmds->next;
+	}
+}
+
 void	set_cmd_args(t_cmd *cmds, t_elems *elems)
 {
-	int		i;
+	int	i;
 
 	while (cmds)
 	{
@@ -87,25 +107,16 @@ void	set_cmd_args(t_cmd *cmds, t_elems *elems)
 			if (i == 0)
 			{
 				cmds->cmd = ft_strdup(elems->content);
-				cmds->full_cmd[i] = ft_strdup(elems->content);
 				elems = elems->next;
 			}
 			if (elems && elems->type != PIPE)
 			{
 				cmds->args[i] = ft_strdup(elems->content);
-				cmds->full_cmd[++i] = ft_strdup(elems->content);
+				i++;
 				elems = elems->next;
 			}
 		}
 		cmds->args[i] = NULL;
-		cmds->full_cmd[i + 1] = NULL;
 		cmds = cmds->next;
 	}
-}
-
-void	init_parser(t_elems *elems, t_parser *parser)
-{
-	init_cmds(elems, parser);
-	set_redir(parser, elems);
-	set_cmd_args(parser->cmds, elems);
 }

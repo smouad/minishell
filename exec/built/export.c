@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 01:42:00 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/11 21:14:14 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:25:57 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,65 +44,18 @@ int	is_correct(char *word)
 	return (1);
 }
 
-char	*get_key(char *var)
+void	print_value(char *value)
 {
 	int		i;
-	char	*key;
 
 	i = 0;
-	while (var[i] && var[i] != '=')
-		i++;
-	key = ft_substr(var, 0, i);
-	return (key);
-}
-
-char	*get_value(char *var)
-{
-	int		i;
-	char	*value;
-
-	i = 0;
-	while (var[i] && var[i] != '=')
-		i++;
-	if (var[i] == '=')
-		value = ft_substr(var, i + 1, ft_strlen(var) - i);
-	else
-		value = NULL;
-	return (value);
-}
-
-/**
- * set_value - function that sets the value of an environment variable
- * @var: The variable string in the format "key=value"
- * @env: A pointer to the head of the environment variable linked list
- * Return: void
- */
-int	set_value(char *var, t_env *env)
-{
-	char	*key;
-	char	*value;
-	t_env	*tmp;
-
-	key = get_key(var);
-	value = get_value(var);
-	tmp = env;
-	while (tmp && tmp->next && value)
+	while (value[i])
 	{
-		tmp = tmp->next;
-		if (!ft_strcmp(key, tmp->key))
-		{
-			tmp->value = ft_strdup(value);
-			return (free(key), free(value), 1);
-		}
+		if (value[i] == '\"' || value[i] == '$')
+			write(1, "\\", 1);
+		write(1, &value[i], 1);
+		i++;
 	}
-	tmp = env;
-	while (tmp && tmp->next && !value)
-	{
-		tmp = tmp->next;
-		if (!ft_strcmp(key, tmp->key))
-			return (free(key), 1);
-	}
-	return (env_list_add(&tmp, env_new(var)), free(key), free(value), 1);
 }
 
 /**
@@ -120,13 +73,7 @@ void	print_export(t_env *env)
 			write(1, "declare -x ", 11);
 			write(1, env->key, ft_strlen(env->key));
 			write(1, "=\"", 2);
-			while (*env->value)
-			{
-				if (*env->value == '\"' || *env->value == '$')
-					write(1, "\\", 1);
-				write(1, env->value, 1);
-				env->value++;
-			}
+			print_value(env->value);
 			write(1, "\"\n", 2);
 		}
 		else

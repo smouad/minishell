@@ -43,7 +43,7 @@ void	exec_util(t_cmd *cmds, t_parser *parser, int (*fd)[2], int *arra)
 		id = fork();
 		if (id == 0)
 		{
-			if (exec_redir(cmds) != -1)
+			if (exec_redir(cmds, parser) != -1)
 			{
 				if (check_in(cmds->redir))
 					cmds->redir->old_infd = dup(STDIN_FILENO);
@@ -73,7 +73,7 @@ void	exec_commands(t_parser *parser, t_cmd *cmds)
 	int	(*fd)[2];
 	int	*arra;
 
-	fd = malloc(sizeof(int) * parser->cmd_nbr + 1);
+	fd = malloc(sizeof(int) * (parser->cmd_nbr * 2));
 	arra = malloc(sizeof(int) * parser->cmd_nbr);
 	if (parser->cmd_nbr > 1)
 		create_pipes(fd, parser);
@@ -81,7 +81,7 @@ void	exec_commands(t_parser *parser, t_cmd *cmds)
 	{
 		if (cmds->redir)
 			extention(cmds);
-		if (exec_redir(cmds) == -1)
+		if (exec_redir(cmds, parser) == -1)
 		{
 			parser->exit_s = 1;
 			rd_reset(cmds);

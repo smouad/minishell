@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:54:58 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/09 10:45:52 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:19:21 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,24 +93,27 @@ char	*if_not_path(t_parser *parser, t_cmd *cmds)
 int	exec_cmd(t_parser *parser, t_cmd *cmd)
 {
 	char	**env;
-	int		status;
 	int		id;
+	char	*cmd_path;
 
+	cmd_path = get_cmd_path(parser, cmd);
 	env = list_to_array(parser->env);
-	if (!get_cmd_path(parser, cmd))
-		return (free_array(env), 1);
+	if (!cmd_path)
+		return (free_array(env), free(cmd_path), 1);
 	if (parser->cmd_nbr > 1)
-	{
-		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
-		free_array(env);
-	}
+		execve(cmd_path, cmd->full_cmd, env);
 	id = fork();
+	signal(SIGINT, SIG_IGN);
 	if (id == 0)
 	{
-		execve(get_cmd_path(parser, cmd), cmd->full_cmd, env);
-		free_array(env);
+		signal(SIGINT, SIG_DFL);
+		execve(cmd_path, cmd->full_cmd, env);
 	}
-	waitpid(id, &status, 0);
-	parser->exit_s = WEXITSTATUS(status);
+	waitpid(id, &parser->exit_s, 0);
+	if (WIFEXITED(parser->exit_s))
+		parser->exit_s = WEXITSTATUS(parser->exit_s);
+	else if (WIFSIGNALED(parser->exit_s))
+		parser->exit_s = WTERMSIG(parser->exit_s) + 128;
+	signal(SIGINT, signal_handler);
 	return (free_array(env), 0);
 }

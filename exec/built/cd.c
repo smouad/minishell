@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 21:37:40 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/11 15:24:44 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/13 19:02:10 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ void	ft_cd(t_cmd *cmd, t_parser *parser)
 		}
 		else
 			cd_put_error(cmd->args[0], parser);
-		free(owd);
 	}
+	free(owd);
 }
