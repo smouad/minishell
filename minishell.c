@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:27:23 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/14 16:16:37 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 16:31:12 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ void	signal_handler(int sig)
 	}
 }
 
-void	ctrl_d(t_parser *parser)
-{
-	write(1, "\n", 1);
-	exit(parser->exit_s);
-}
-
 void	prinsipal(t_parser *parser)
 {
 	t_elems		*elems;
@@ -41,7 +35,7 @@ void	prinsipal(t_parser *parser)
 	{
 		command = readline("minishell[$]~>: ");
 		if (command == NULL)
-			ctrl_d(parser);
+			exit(parser->exit_s);
 		if (command[0] == 0)
 		{
 			free(command);

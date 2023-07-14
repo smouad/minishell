@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 18:25:27 by msodor            #+#    #+#             */
-/*   Updated: 2023/07/14 16:13:41 by msodor           ###   ########.fr       */
+/*   Updated: 2023/07/14 16:32:06 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,19 @@ int	redirect_append(t_redir *redir)
 	close(fd);
 	return (0);
 }
-t_elems set_tmp(char *line)
+
+t_elems	set_tmp(char *line)
 {
-	t_elems tmp;
+	t_elems	tmp;
 
 	tmp.content = line;
 	tmp.next = NULL;
 	tmp.len = ft_strlen(line);
 	tmp.type = VAR;
-	tmp.state = 0;	
+	tmp.state = 0;
 	return (tmp);
 }
+
 void	exec_her(t_redir *redir, t_parser *parser, int fd[2])
 {
 	char	*line;
